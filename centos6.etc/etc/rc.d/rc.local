@@ -1,0 +1,19 @@
+#!/bin/sh
+#
+# This script will be executed *after* all the other init scripts.
+# You can put your own initialization stuff in here if you don't
+# want to do the full Sys V style init stuff.
+
+touch /var/lock/subsys/local
+#To start dovecot
+service sendmail stop
+/usr/local/sbin/dovecot 
+/usr/local/sbin/dovecot -c /usr/local/etc/dovecot.alias/dovecot.conf
+/usr/local/sbin/dovecot -c /usr/local/etc/dovecot.virtual.md5/dovecot.conf 
+/usr/local/sbin/dovecot -c /usr/local/etc/dovecot.quarantine/dovecot.conf
+/usr/sbin/postfix -c /etc/postfix-fex start
+#/usr/sbin/postfix -c /etc/postfix.quarantine.ms3.3003 start
+/usr/sbin/postfix start
+service iptables stop
+/bin/chmod -R 777  /var/run/dovecot.virtual.md5
+/bin/chmod -R 777 /var/run/dovecot.alias

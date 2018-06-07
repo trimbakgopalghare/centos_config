@@ -1,0 +1,2 @@
+All *.conf files in this directory are merged into /etc/reader.conf
+by /usr/sbin/update-reader.conf.

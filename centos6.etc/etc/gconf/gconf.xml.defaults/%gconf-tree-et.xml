@@ -1,0 +1,271 @@
+<?xml version="1.0"?>
+<gconf>
+	<dir name="schemas">
+		<dir name="apps">
+			<dir name="gok">
+				<dir name="feedbacks">
+					<dir name="gokspeech">
+						<entry name="displayname">
+							<local_schema>
+							</local_schema>
+						</entry>
+					</dir>
+					<dir name="goksound2">
+						<entry name="displayname">
+							<local_schema>
+							</local_schema>
+						</entry>
+					</dir>
+					<dir name="goksound1">
+						<entry name="displayname">
+							<local_schema>
+							</local_schema>
+						</entry>
+					</dir>
+					<dir name="key_flashing">
+						<entry name="displayname">
+							<local_schema>
+							</local_schema>
+						</entry>
+					</dir>
+					<dir name="none">
+						<entry name="displayname">
+							<local_schema>
+							</local_schema>
+						</entry>
+					</dir>
+				</dir>
+				<dir name="actions">
+					<dir name="mousepointer">
+						<entry name="displayname">
+							<local_schema>
+							</local_schema>
+						</entry>
+					</dir>
+					<dir name="mousebutton5">
+						<entry name="displayname">
+							<local_schema>
+							</local_schema>
+						</entry>
+					</dir>
+					<dir name="mousebutton4">
+						<entry name="displayname">
+							<local_schema>
+							</local_schema>
+						</entry>
+					</dir>
+					<dir name="mousebutton3">
+						<entry name="displayname">
+							<local_schema>
+							</local_schema>
+						</entry>
+					</dir>
+					<dir name="mousebutton2">
+						<entry name="displayname">
+							<local_schema>
+							</local_schema>
+						</entry>
+					</dir>
+					<dir name="mousebutton1">
+						<entry name="displayname">
+							<local_schema>
+							</local_schema>
+						</entry>
+					</dir>
+					<dir name="switch5">
+						<entry name="displayname">
+							<local_schema>
+							</local_schema>
+						</entry>
+					</dir>
+					<dir name="switch4">
+						<entry name="displayname">
+							<local_schema>
+							</local_schema>
+						</entry>
+					</dir>
+					<dir name="switch3">
+						<entry name="displayname">
+							<local_schema>
+							</local_schema>
+						</entry>
+					</dir>
+					<dir name="switch2">
+						<entry name="displayname">
+							<local_schema>
+							</local_schema>
+						</entry>
+					</dir>
+					<dir name="switch1">
+						<entry name="displayname">
+							<local_schema>
+							</local_schema>
+						</entry>
+					</dir>
+				</dir>
+			</dir>
+			<dir name="compiz">
+				<dir name="plugins">
+					<dir name="switcher">
+						<dir name="screen0">
+							<dir name="options">
+								<entry name="icon">
+									<local_schema short_desc="Ikoon">
+										<longdesc>Show icon next to thumbnail</longdesc>
+									</local_schema>
+								</entry>
+								<entry name="brightness">
+									<local_schema short_desc="Heledus">
+										<longdesc>Amount of brightness in percent (0 - 100)</longdesc>
+									</local_schema>
+								</entry>
+							</dir>
+						</dir>
+					</dir>
+				</dir>
+			</dir>
+			<dir name="gnome-terminal">
+				<dir name="profiles">
+					<dir name="Default">
+						<entry name="visible_name">
+							<local_schema>
+							</local_schema>
+						</entry>
+					</dir>
+				</dir>
+			</dir>
+			<dir name="gweather">
+				<dir name="prefs">
+					<entry name="coordinates">
+						<local_schema>
+						</local_schema>
+					</entry>
+					<entry name="location4">
+						<local_schema>
+						</local_schema>
+					</entry>
+					<entry name="location3">
+						<local_schema>
+						</local_schema>
+					</entry>
+					<entry name="location2">
+						<local_schema>
+						</local_schema>
+					</entry>
+					<entry name="location1">
+						<local_schema>
+						</local_schema>
+					</entry>
+					<entry name="location0">
+						<local_schema>
+						</local_schema>
+					</entry>
+				</dir>
+			</dir>
+		</dir>
+		<dir name="desktop">
+			<dir name="gnome">
+				<dir name="keybindings">
+					<dir name="onscreenkeyboard">
+						<entry name="name">
+							<local_schema>
+							</local_schema>
+						</entry>
+					</dir>
+					<dir name="screenreader">
+						<entry name="name">
+							<local_schema>
+							</local_schema>
+						</entry>
+					</dir>
+					<dir name="magnifier">
+						<entry name="name">
+							<local_schema>
+							</local_schema>
+						</entry>
+					</dir>
+				</dir>
+			</dir>
+		</dir>
+		<dir name="system">
+			<dir name="gstreamer">
+				<dir name="0.10">
+					<dir name="audio">
+						<dir name="profiles">
+							<dir name="aac">
+								<entry name="description">
+									<local_schema>
+									</local_schema>
+								</entry>
+								<entry name="name">
+									<local_schema>
+									</local_schema>
+								</entry>
+							</dir>
+							<dir name="mp3">
+								<entry name="description">
+									<local_schema>
+									</local_schema>
+								</entry>
+								<entry name="name">
+									<local_schema>
+									</local_schema>
+								</entry>
+							</dir>
+							<dir name="mp2">
+								<entry name="description">
+									<local_schema>
+									</local_schema>
+								</entry>
+								<entry name="name">
+									<local_schema>
+									</local_schema>
+								</entry>
+							</dir>
+							<dir name="voicelossy">
+								<entry name="description">
+									<local_schema>
+									</local_schema>
+								</entry>
+								<entry name="name">
+									<local_schema>
+									</local_schema>
+								</entry>
+							</dir>
+							<dir name="voicelossless">
+								<entry name="description">
+									<local_schema>
+									</local_schema>
+								</entry>
+								<entry name="name">
+									<local_schema>
+									</local_schema>
+								</entry>
+							</dir>
+							<dir name="cdlossless">
+								<entry name="description">
+									<local_schema>
+									</local_schema>
+								</entry>
+								<entry name="name">
+									<local_schema>
+									</local_schema>
+								</entry>
+							</dir>
+							<dir name="cdlossy">
+								<entry name="description">
+									<local_schema>
+									</local_schema>
+								</entry>
+								<entry name="name">
+									<local_schema>
+									</local_schema>
+								</entry>
+							</dir>
+						</dir>
+					</dir>
+				</dir>
+			</dir>
+		</dir>
+	</dir>
+</gconf>

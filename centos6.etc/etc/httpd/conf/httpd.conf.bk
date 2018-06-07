@@ -1,0 +1,3212 @@
+#
+# This is the main Apache server configuration file.  It contains the
+# configuration directives that give the server its instructions.
+# See <URL:http://httpd.apache.org/docs/2.2/> for detailed information.
+# In particular, see
+# <URL:http://httpd.apache.org/docs/2.2/mod/directives.html>
+# for a discussion of each configuration directive.
+#
+#
+# Do NOT simply read the instructions in here without understanding
+# what they do.  They're here only as hints or reminders.  If you are unsure
+# consult the online docs. You have been warned.  
+#
+# The configuration directives are grouped into three basic sections:
+#  1. Directives that control the operation of the Apache server process as a
+#     whole (the 'global environment').
+#  2. Directives that define the parameters of the 'main' or 'default' server,
+#     which responds to requests that aren't handled by a virtual host.
+#     These directives also provide default values for the settings
+#     of all virtual hosts.
+#  3. Settings for virtual hosts, which allow Web requests to be sent to
+#     different IP addresses or hostnames and have them handled by the
+#     same Apache server process.
+#
+# Configuration and logfile names: If the filenames you specify for many
+# of the server's control files begin with "/" (or "drive:/" for Win32), the
+# server will use that explicit path.  If the filenames do *not* begin
+# with "/", the value of ServerRoot is prepended -- so "logs/foo.log"
+# with ServerRoot set to "/etc/httpd" will be interpreted by the
+# server as "/etc/httpd/logs/foo.log".
+#
+
+### Section 1: Global Environment
+#
+# The directives in this section affect the overall operation of Apache,
+# such as the number of concurrent requests it can handle or where it
+# can find its configuration files.
+#
+
+#
+# Don't give away too much information about all the subcomponents
+# we are running.  Comment out this line if you don't mind remote sites
+# finding out what major optional modules you are running
+ServerTokens OS
+
+#
+# ServerRoot: The top of the directory tree under which the server's
+# configuration, error, and log files are kept.
+#
+# NOTE!  If you intend to place this on an NFS (or otherwise network)
+# mounted filesystem then please read the LockFile documentation
+# (available at <URL:http://httpd.apache.org/docs/2.2/mod/mpm_common.html#lockfile>);
+# you will save yourself a lot of trouble.
+#
+# Do NOT add a slash at the end of the directory path.
+#
+ServerRoot "/etc/httpd"
+
+#
+# PidFile: The file in which the server should record its process
+# identification number when it starts.  Note the PIDFILE variable in
+# /etc/sysconfig/httpd must be set appropriately if this location is
+# changed.
+#
+PidFile run/httpd.pid
+
+#
+# Timeout: The number of seconds before receives and sends time out.
+#
+Timeout 60
+
+#
+# KeepAlive: Whether or not to allow persistent connections (more than
+# one request per connection). Set to "Off" to deactivate.
+#
+KeepAlive Off
+
+#
+# MaxKeepAliveRequests: The maximum number of requests to allow
+# during a persistent connection. Set to 0 to allow an unlimited amount.
+# We recommend you leave this number high, for maximum performance.
+#
+MaxKeepAliveRequests 100
+
+#
+# KeepAliveTimeout: Number of seconds to wait for the next request from the
+# same client on the same connection.
+#
+KeepAliveTimeout 15
+
+##
+## Server-Pool Size Regulation (MPM specific)
+## 
+
+# prefork MPM
+# StartServers: number of server processes to start
+# MinSpareServers: minimum number of server processes which are kept spare
+# MaxSpareServers: maximum number of server processes which are kept spare
+# ServerLimit: maximum value for MaxClients for the lifetime of the server
+# MaxClients: maximum number of server processes allowed to start
+# MaxRequestsPerChild: maximum number of requests a server process serves
+<IfModule prefork.c>
+StartServers       8
+MinSpareServers    5
+MaxSpareServers   20
+ServerLimit      256
+MaxClients       256
+MaxRequestsPerChild  4000
+</IfModule>
+
+# worker MPM
+# StartServers: initial number of server processes to start
+# MaxClients: maximum number of simultaneous client connections
+# MinSpareThreads: minimum number of worker threads which are kept spare
+# MaxSpareThreads: maximum number of worker threads which are kept spare
+# ThreadsPerChild: constant number of worker threads in each server process
+# MaxRequestsPerChild: maximum number of requests a server process serves
+<IfModule worker.c>
+StartServers         4
+MaxClients         300
+MinSpareThreads     25
+MaxSpareThreads     75 
+ThreadsPerChild     25
+MaxRequestsPerChild  0
+</IfModule>
+
+#
+# Listen: Allows you to bind Apache to specific IP addresses and/or
+# ports, in addition to the default. See also the <VirtualHost>
+# directive.
+#
+# Change this to Listen on specific IP addresses as shown below to 
+# prevent Apache from glomming onto all bound IP addresses (0.0.0.0)
+#
+#Listen 12.34.56.78:80
+Listen 80
+Listen 192.168.1.187:8080
+#
+# Dynamic Shared Object (DSO) Support
+#
+# To be able to use the functionality of a module which was built as a DSO you
+# have to place corresponding `LoadModule' lines at this location so the
+# directives contained in it are actually available _before_ they are used.
+# Statically compiled modules (those listed by `httpd -l') do not need
+# to be loaded here.
+#
+# Example:
+# LoadModule foo_module modules/mod_foo.so
+#
+LoadModule auth_basic_module modules/mod_auth_basic.so
+LoadModule auth_digest_module modules/mod_auth_digest.so
+LoadModule authn_file_module modules/mod_authn_file.so
+LoadModule authn_alias_module modules/mod_authn_alias.so
+LoadModule authn_anon_module modules/mod_authn_anon.so
+LoadModule authn_dbm_module modules/mod_authn_dbm.so
+LoadModule authn_default_module modules/mod_authn_default.so
+LoadModule authz_host_module modules/mod_authz_host.so
+LoadModule authz_user_module modules/mod_authz_user.so
+LoadModule authz_owner_module modules/mod_authz_owner.so
+LoadModule authz_groupfile_module modules/mod_authz_groupfile.so
+LoadModule authz_dbm_module modules/mod_authz_dbm.so
+LoadModule authz_default_module modules/mod_authz_default.so
+LoadModule ldap_module modules/mod_ldap.so
+LoadModule authnz_ldap_module modules/mod_authnz_ldap.so
+LoadModule include_module modules/mod_include.so
+LoadModule log_config_module modules/mod_log_config.so
+LoadModule logio_module modules/mod_logio.so
+LoadModule env_module modules/mod_env.so
+LoadModule ext_filter_module modules/mod_ext_filter.so
+LoadModule mime_magic_module modules/mod_mime_magic.so
+LoadModule expires_module modules/mod_expires.so
+LoadModule deflate_module modules/mod_deflate.so
+LoadModule headers_module modules/mod_headers.so
+LoadModule usertrack_module modules/mod_usertrack.so
+LoadModule setenvif_module modules/mod_setenvif.so
+LoadModule mime_module modules/mod_mime.so
+LoadModule dav_module modules/mod_dav.so
+LoadModule status_module modules/mod_status.so
+LoadModule autoindex_module modules/mod_autoindex.so
+LoadModule info_module modules/mod_info.so
+LoadModule dav_fs_module modules/mod_dav_fs.so
+LoadModule vhost_alias_module modules/mod_vhost_alias.so
+LoadModule negotiation_module modules/mod_negotiation.so
+LoadModule dir_module modules/mod_dir.so
+LoadModule actions_module modules/mod_actions.so
+LoadModule speling_module modules/mod_speling.so
+LoadModule userdir_module modules/mod_userdir.so
+LoadModule alias_module modules/mod_alias.so
+LoadModule substitute_module modules/mod_substitute.so
+LoadModule rewrite_module modules/mod_rewrite.so
+LoadModule proxy_module modules/mod_proxy.so
+LoadModule proxy_balancer_module modules/mod_proxy_balancer.so
+LoadModule proxy_ftp_module modules/mod_proxy_ftp.so
+LoadModule proxy_http_module modules/mod_proxy_http.so
+LoadModule proxy_ajp_module modules/mod_proxy_ajp.so
+LoadModule proxy_connect_module modules/mod_proxy_connect.so
+LoadModule cache_module modules/mod_cache.so
+LoadModule suexec_module modules/mod_suexec.so
+LoadModule disk_cache_module modules/mod_disk_cache.so
+LoadModule cgi_module modules/mod_cgi.so
+LoadModule version_module modules/mod_version.so
+#LoadModule pagespeed_alias_module modules/mod_pagespeed.so
+#
+# The following modules are not loaded by default:
+#
+#LoadModule asis_module modules/mod_asis.so
+#LoadModule authn_dbd_module modules/mod_authn_dbd.so
+#LoadModule cern_meta_module modules/mod_cern_meta.so
+#LoadModule cgid_module modules/mod_cgid.so
+#LoadModule dbd_module modules/mod_dbd.so
+#LoadModule dumpio_module modules/mod_dumpio.so
+#LoadModule filter_module modules/mod_filter.so
+#LoadModule ident_module modules/mod_ident.so
+#LoadModule log_forensic_module modules/mod_log_forensic.so
+#LoadModule unique_id_module modules/mod_unique_id.so
+#
+
+#
+# Load config files from the config directory "/etc/httpd/conf.d".
+#
+Include conf.d/*.conf
+
+#
+# ExtendedStatus controls whether Apache will generate "full" status
+# information (ExtendedStatus On) or just basic information (ExtendedStatus
+# Off) when the "server-status" handler is called. The default is Off.
+#
+#ExtendedStatus On
+
+#
+# If you wish httpd to run as a different user or group, you must run
+# httpd as root initially and it will switch.  
+#
+# User/Group: The name (or #number) of the user/group to run httpd as.
+#  . On SCO (ODT 3) use "User nouser" and "Group nogroup".
+#  . On HPUX you may not be able to use shared memory as nobody, and the
+#    suggested workaround is to create a user www and use that user.
+#  NOTE that some kernels refuse to setgid(Group) or semctl(IPC_SET)
+#  when the value of (unsigned)Group is above 60000; 
+#  don't use Group #-1 on these systems!
+#
+#User apache
+#Group apache
+User nobody
+Group nobody
+
+### Section 2: 'Main' server configuration
+#
+# The directives in this section set up the values used by the 'main'
+# server, which responds to any requests that aren't handled by a
+# <VirtualHost> definition.  These values also provide defaults for
+# any <VirtualHost> containers you may define later in the file.
+#
+# All of these directives may appear inside <VirtualHost> containers,
+# in which case these default settings will be overridden for the
+# virtual host being defined.
+#
+
+#
+# ServerAdmin: Your address, where problems with the server should be
+# e-mailed.  This address appears on some server-generated pages, such
+# as error documents.  e.g. admin@your-domain.com
+#
+ServerAdmin root@localhost
+
+#
+# ServerName gives the name and port that the server uses to identify itself.
+# This can often be determined automatically, but we recommend you specify
+# it explicitly to prevent problems during startup.
+#
+# If this is not set to valid DNS name for your host, server-generated
+# redirections will not work.  See also the UseCanonicalName directive.
+#
+# If your host doesn't have a registered DNS name, enter its IP address here.
+# You will have to access it by its address anyway, and this will make 
+# redirections work in a sensible way.
+#
+#ServerName www.example.com:80
+
+#
+# UseCanonicalName: Determines how Apache constructs self-referencing 
+# URLs and the SERVER_NAME and SERVER_PORT variables.
+# When set "Off", Apache will use the Hostname and Port supplied
+# by the client.  When set "On", Apache will use the value of the
+# ServerName directive.
+#
+UseCanonicalName Off
+
+#
+# DocumentRoot: The directory out of which you will serve your
+# documents. By default, all requests are taken from this directory, but
+# symbolic links and aliases may be used to point to other locations.
+#
+DocumentRoot "/var/www/html"
+
+#
+# Each directory to which Apache has access can be configured with respect
+# to which services and features are allowed and/or disabled in that
+# directory (and its subdirectories). 
+#
+# First, we configure the "default" to be a very restrictive set of 
+# features.  
+#
+<Directory />
+    Options FollowSymLinks
+    AllowOverride None
+</Directory>
+
+#
+# Note that from this point forward you must specifically allow
+# particular features to be enabled - so if something's not working as
+# you might expect, make sure that you have specifically enabled it
+# below.
+#
+
+#
+# This should be changed to whatever you set DocumentRoot to.
+#
+<Directory "/var/www/html">
+
+#
+# Possible values for the Options directive are "None", "All",
+# or any combination of:
+#   Indexes Includes FollowSymLinks SymLinksifOwnerMatch ExecCGI MultiViews
+#
+# Note that "MultiViews" must be named *explicitly* --- "Options All"
+# doesn't give it to you.
+#
+# The Options directive is both complicated and important.  Please see
+# http://httpd.apache.org/docs/2.2/mod/core.html#options
+# for more information.
+#
+    Options Indexes FollowSymLinks
+
+#
+# AllowOverride controls what directives may be placed in .htaccess files.
+# It can be "All", "None", or any combination of the keywords:
+#   Options FileInfo AuthConfig Limit
+#
+    AllowOverride None
+
+#
+# Controls who can get stuff from this server.
+#
+    Order allow,deny
+    Allow from all
+
+</Directory>
+
+#
+# UserDir: The name of the directory that is appended onto a user's home
+# directory if a ~user request is received.
+#
+# The path to the end user account 'public_html' directory must be
+# accessible to the webserver userid.  This usually means that ~userid
+# must have permissions of 711, ~userid/public_html must have permissions
+# of 755, and documents contained therein must be world-readable.
+# Otherwise, the client will only receive a "403 Forbidden" message.
+#
+# See also: http://httpd.apache.org/docs/misc/FAQ.html#forbidden
+#
+<IfModule mod_userdir.c>
+    #
+    # UserDir is disabled by default since it can confirm the presence
+    # of a username on the system (depending on home directory
+    # permissions).
+    #
+    UserDir disabled
+
+    #
+    # To enable requests to /~user/ to serve the user's public_html
+    # directory, remove the "UserDir disabled" line above, and uncomment
+    # the following line instead:
+    # 
+    #UserDir public_html
+
+</IfModule>
+
+#
+# Control access to UserDir directories.  The following is an example
+# for a site where these directories are restricted to read-only.
+#
+#<Directory /home/*/public_html>
+#    AllowOverride FileInfo AuthConfig Limit
+#    Options MultiViews Indexes SymLinksIfOwnerMatch IncludesNoExec
+#    <Limit GET POST OPTIONS>
+#        Order allow,deny
+#        Allow from all
+#    </Limit>
+#    <LimitExcept GET POST OPTIONS>
+#        Order deny,allow
+#        Deny from all
+#    </LimitExcept>
+#</Directory>
+
+#
+# DirectoryIndex: sets the file that Apache will serve if a directory
+# is requested.
+#
+# The index.html.var file (a type-map) is used to deliver content-
+# negotiated documents.  The MultiViews Option can be used for the 
+# same purpose, but it is much slower.
+#
+DirectoryIndex index.html index.html.var
+
+#
+# AccessFileName: The name of the file to look for in each directory
+# for additional configuration directives.  See also the AllowOverride
+# directive.
+#
+AccessFileName .htaccess
+
+#
+# The following lines prevent .htaccess and .htpasswd files from being 
+# viewed by Web clients. 
+#
+<Files ~ "^\.ht">
+    Order allow,deny
+    Deny from all
+    Satisfy All
+</Files>
+
+#
+# TypesConfig describes where the mime.types file (or equivalent) is
+# to be found.
+#
+TypesConfig /etc/mime.types
+
+#
+# DefaultType is the default MIME type the server will use for a document
+# if it cannot otherwise determine one, such as from filename extensions.
+# If your server contains mostly text or HTML documents, "text/plain" is
+# a good value.  If most of your content is binary, such as applications
+# or images, you may want to use "application/octet-stream" instead to
+# keep browsers from trying to display binary files as though they are
+# text.
+#
+DefaultType text/plain
+
+#
+# The mod_mime_magic module allows the server to use various hints from the
+# contents of the file itself to determine its type.  The MIMEMagicFile
+# directive tells the module where the hint definitions are located.
+#
+<IfModule mod_mime_magic.c>
+#   MIMEMagicFile /usr/share/magic.mime
+    MIMEMagicFile conf/magic
+</IfModule>
+
+#
+# HostnameLookups: Log the names of clients or just their IP addresses
+# e.g., www.apache.org (on) or 204.62.129.132 (off).
+# The default is off because it'd be overall better for the net if people
+# had to knowingly turn this feature on, since enabling it means that
+# each client request will result in AT LEAST one lookup request to the
+# nameserver.
+#
+HostnameLookups Off
+
+#
+# EnableMMAP: Control whether memory-mapping is used to deliver
+# files (assuming that the underlying OS supports it).
+# The default is on; turn this off if you serve from NFS-mounted 
+# filesystems.  On some systems, turning it off (regardless of
+# filesystem) can improve performance; for details, please see
+# http://httpd.apache.org/docs/2.2/mod/core.html#enablemmap
+#
+#EnableMMAP off
+
+#
+# EnableSendfile: Control whether the sendfile kernel support is 
+# used to deliver files (assuming that the OS supports it). 
+# The default is on; turn this off if you serve from NFS-mounted 
+# filesystems.  Please see
+# http://httpd.apache.org/docs/2.2/mod/core.html#enablesendfile
+#
+#EnableSendfile off
+
+#
+# ErrorLog: The location of the error log file.
+# If you do not specify an ErrorLog directive within a <VirtualHost>
+# container, error messages relating to that virtual host will be
+# logged here.  If you *do* define an error logfile for a <VirtualHost>
+# container, that host's errors will be logged there and not here.
+#
+ErrorLog logs/error_log
+
+#
+# LogLevel: Control the number of messages logged to the error_log.
+# Possible values include: debug, info, notice, warn, error, crit,
+# alert, emerg.
+#
+LogLevel warn
+
+#
+# The following directives define some format nicknames for use with
+# a CustomLog directive (see below).
+#
+LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" combined
+LogFormat "%h %l %u %t \"%r\" %>s %b" common
+LogFormat "%{Referer}i -> %U" referer
+LogFormat "%{User-agent}i" agent
+
+# "combinedio" includes actual counts of actual bytes received (%I) and sent (%O); this
+# requires the mod_logio module to be loaded.
+#LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\" %I %O" combinedio
+
+#
+# The location and format of the access logfile (Common Logfile Format).
+# If you do not define any access logfiles within a <VirtualHost>
+# container, they will be logged here.  Contrariwise, if you *do*
+# define per-<VirtualHost> access logfiles, transactions will be
+# logged therein and *not* in this file.
+#
+#CustomLog logs/access_log common
+
+#
+# If you would like to have separate agent and referer logfiles, uncomment
+# the following directives.
+#
+#CustomLog logs/referer_log referer
+#CustomLog logs/agent_log agent
+
+#
+# For a single logfile with access, agent, and referer information
+# (Combined Logfile Format), use the following directive:
+#
+CustomLog logs/access_log combined
+
+#
+# Optionally add a line containing the server version and virtual host
+# name to server-generated pages (internal error documents, FTP directory
+# listings, mod_status and mod_info output etc., but not CGI generated
+# documents or custom error documents).
+# Set to "EMail" to also include a mailto: link to the ServerAdmin.
+# Set to one of:  On | Off | EMail
+#
+ServerSignature On
+
+#
+# Aliases: Add here as many aliases as you need (with no limit). The format is 
+# Alias fakename realname
+#
+# Note that if you include a trailing / on fakename then the server will
+# require it to be present in the URL.  So "/icons" isn't aliased in this
+# example, only "/icons/".  If the fakename is slash-terminated, then the 
+# realname must also be slash terminated, and if the fakename omits the 
+# trailing slash, the realname must also omit it.
+#
+# We include the /icons/ alias for FancyIndexed directory listings.  If you
+# do not use FancyIndexing, you may comment this out.
+#
+Alias /icons/ "/var/www/icons/"
+
+<Directory "/var/www/icons">
+    Options Indexes MultiViews FollowSymLinks
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+</Directory>
+
+#
+# WebDAV module configuration section.
+# 
+<IfModule mod_dav_fs.c>
+    # Location of the WebDAV lock database.
+    DAVLockDB /var/lib/dav/lockdb
+</IfModule>
+
+#
+# ScriptAlias: This controls which directories contain server scripts.
+# ScriptAliases are essentially the same as Aliases, except that
+# documents in the realname directory are treated as applications and
+# run by the server when requested rather than as documents sent to the client.
+# The same rules about trailing "/" apply to ScriptAlias directives as to
+# Alias.
+#
+ScriptAlias /cgi-bin/ "/var/www/cgi-bin/"
+
+#
+# "/var/www/cgi-bin" should be changed to whatever your ScriptAliased
+# CGI directory exists, if you have that configured.
+#
+<Directory "/var/www/cgi-bin">
+    AllowOverride None
+    Options None
+    Order allow,deny
+    Allow from all
+</Directory>
+
+#
+# Redirect allows you to tell clients about documents which used to exist in
+# your server's namespace, but do not anymore. This allows you to tell the
+# clients where to look for the relocated document.
+# Example:
+# Redirect permanent /foo http://www.example.com/bar
+
+#
+# Directives controlling the display of server-generated directory listings.
+#
+
+#
+# IndexOptions: Controls the appearance of server-generated directory
+# listings.
+#
+IndexOptions FancyIndexing VersionSort NameWidth=* HTMLTable Charset=UTF-8
+
+#
+# AddIcon* directives tell the server which icon to show for different
+# files or filename extensions.  These are only displayed for
+# FancyIndexed directories.
+#
+AddIconByEncoding (CMP,/icons/compressed.gif) x-compress x-gzip
+
+AddIconByType (TXT,/icons/text.gif) text/*
+AddIconByType (IMG,/icons/image2.gif) image/*
+AddIconByType (SND,/icons/sound2.gif) audio/*
+AddIconByType (VID,/icons/movie.gif) video/*
+
+AddIcon /icons/binary.gif .bin .exe
+AddIcon /icons/binhex.gif .hqx
+AddIcon /icons/tar.gif .tar
+AddIcon /icons/world2.gif .wrl .wrl.gz .vrml .vrm .iv
+AddIcon /icons/compressed.gif .Z .z .tgz .gz .zip
+AddIcon /icons/a.gif .ps .ai .eps
+AddIcon /icons/layout.gif .html .shtml .htm .pdf
+AddIcon /icons/text.gif .txt
+AddIcon /icons/c.gif .c
+AddIcon /icons/p.gif .pl .py
+AddIcon /icons/f.gif .for
+AddIcon /icons/dvi.gif .dvi
+AddIcon /icons/uuencoded.gif .uu
+AddIcon /icons/script.gif .conf .sh .shar .csh .ksh .tcl
+AddIcon /icons/tex.gif .tex
+AddIcon /icons/bomb.gif core
+
+AddIcon /icons/back.gif ..
+AddIcon /icons/hand.right.gif README
+AddIcon /icons/folder.gif ^^DIRECTORY^^
+AddIcon /icons/blank.gif ^^BLANKICON^^
+
+#
+# DefaultIcon is which icon to show for files which do not have an icon
+# explicitly set.
+#
+DefaultIcon /icons/unknown.gif
+
+#
+# AddDescription allows you to place a short description after a file in
+# server-generated indexes.  These are only displayed for FancyIndexed
+# directories.
+# Format: AddDescription "description" filename
+#
+#AddDescription "GZIP compressed document" .gz
+#AddDescription "tar archive" .tar
+#AddDescription "GZIP compressed tar archive" .tgz
+
+#
+# ReadmeName is the name of the README file the server will look for by
+# default, and append to directory listings.
+#
+# HeaderName is the name of a file which should be prepended to
+# directory indexes. 
+ReadmeName README.html
+HeaderName HEADER.html
+
+#
+# IndexIgnore is a set of filenames which directory indexing should ignore
+# and not include in the listing.  Shell-style wildcarding is permitted.
+#
+IndexIgnore .??* *~ *# HEADER* README* RCS CVS *,v *,t
+
+#
+# DefaultLanguage and AddLanguage allows you to specify the language of 
+# a document. You can then use content negotiation to give a browser a 
+# file in a language the user can understand.
+#
+# Specify a default language. This means that all data
+# going out without a specific language tag (see below) will 
+# be marked with this one. You probably do NOT want to set
+# this unless you are sure it is correct for all cases.
+#
+# * It is generally better to not mark a page as 
+# * being a certain language than marking it with the wrong
+# * language!
+#
+# DefaultLanguage nl
+#
+# Note 1: The suffix does not have to be the same as the language
+# keyword --- those with documents in Polish (whose net-standard
+# language code is pl) may wish to use "AddLanguage pl .po" to
+# avoid the ambiguity with the common suffix for perl scripts.
+#
+# Note 2: The example entries below illustrate that in some cases 
+# the two character 'Language' abbreviation is not identical to 
+# the two character 'Country' code for its country,
+# E.g. 'Danmark/dk' versus 'Danish/da'.
+#
+# Note 3: In the case of 'ltz' we violate the RFC by using a three char
+# specifier. There is 'work in progress' to fix this and get
+# the reference data for rfc1766 cleaned up.
+#
+# Catalan (ca) - Croatian (hr) - Czech (cs) - Danish (da) - Dutch (nl)
+# English (en) - Esperanto (eo) - Estonian (et) - French (fr) - German (de)
+# Greek-Modern (el) - Hebrew (he) - Italian (it) - Japanese (ja)
+# Korean (ko) - Luxembourgeois* (ltz) - Norwegian Nynorsk (nn)
+# Norwegian (no) - Polish (pl) - Portugese (pt)
+# Brazilian Portuguese (pt-BR) - Russian (ru) - Swedish (sv)
+# Simplified Chinese (zh-CN) - Spanish (es) - Traditional Chinese (zh-TW)
+#
+AddLanguage ca .ca
+AddLanguage cs .cz .cs
+AddLanguage da .dk
+AddLanguage de .de
+AddLanguage el .el
+AddLanguage en .en
+AddLanguage eo .eo
+AddLanguage es .es
+AddLanguage et .et
+AddLanguage fr .fr
+AddLanguage he .he
+AddLanguage hr .hr
+AddLanguage it .it
+AddLanguage ja .ja
+AddLanguage ko .ko
+AddLanguage ltz .ltz
+AddLanguage nl .nl
+AddLanguage nn .nn
+AddLanguage no .no
+AddLanguage pl .po
+AddLanguage pt .pt
+AddLanguage pt-BR .pt-br
+AddLanguage ru .ru
+AddLanguage sv .sv
+AddLanguage zh-CN .zh-cn
+AddLanguage zh-TW .zh-tw
+
+#
+# LanguagePriority allows you to give precedence to some languages
+# in case of a tie during content negotiation.
+#
+# Just list the languages in decreasing order of preference. We have
+# more or less alphabetized them here. You probably want to change this.
+#
+LanguagePriority en ca cs da de el eo es et fr he hr it ja ko ltz nl nn no pl pt pt-BR ru sv zh-CN zh-TW
+
+#
+# ForceLanguagePriority allows you to serve a result page rather than
+# MULTIPLE CHOICES (Prefer) [in case of a tie] or NOT ACCEPTABLE (Fallback)
+# [in case no accepted languages matched the available variants]
+#
+ForceLanguagePriority Prefer Fallback
+
+#
+# Specify a default charset for all content served; this enables
+# interpretation of all content as UTF-8 by default.  To use the 
+# default browser choice (ISO-8859-1), or to allow the META tags
+# in HTML content to override this choice, comment out this
+# directive:
+#
+AddDefaultCharset UTF-8
+
+#
+# AddType allows you to add to or override the MIME configuration
+# file mime.types for specific file types.
+#
+#AddType application/x-tar .tgz
+
+#
+# AddEncoding allows you to have certain browsers uncompress
+# information on the fly. Note: Not all browsers support this.
+# Despite the name similarity, the following Add* directives have nothing
+# to do with the FancyIndexing customization directives above.
+#
+#AddEncoding x-compress .Z
+#AddEncoding x-gzip .gz .tgz
+
+# If the AddEncoding directives above are commented-out, then you
+# probably should define those extensions to indicate media types:
+#
+AddType application/x-compress .Z
+AddType application/x-gzip .gz .tgz
+
+#
+#   MIME-types for downloading Certificates and CRLs
+#
+AddType application/x-x509-ca-cert .crt
+AddType application/x-pkcs7-crl    .crl
+
+#
+# AddHandler allows you to map certain file extensions to "handlers":
+# actions unrelated to filetype. These can be either built into the server
+# or added with the Action directive (see below)
+#
+# To use CGI scripts outside of ScriptAliased directories:
+# (You will also need to add "ExecCGI" to the "Options" directive.)
+#
+#AddHandler cgi-script .cgi
+
+#
+# For files that include their own HTTP headers:
+#
+#AddHandler send-as-is asis
+
+#
+# For type maps (negotiated resources):
+# (This is enabled by default to allow the Apache "It Worked" page
+#  to be distributed in multiple languages.)
+#
+AddHandler type-map var
+
+#
+# Filters allow you to process content before it is sent to the client.
+#
+# To parse .shtml files for server-side includes (SSI):
+# (You will also need to add "Includes" to the "Options" directive.)
+#
+AddType text/html .shtml
+AddOutputFilter INCLUDES .shtml
+
+#
+# Action lets you define media types that will execute a script whenever
+# a matching file is called. This eliminates the need for repeated URL
+# pathnames for oft-used CGI file processors.
+# Format: Action media/type /cgi-script/location
+# Format: Action handler-name /cgi-script/location
+#
+
+#
+# Customizable error responses come in three flavors:
+# 1) plain text 2) local redirects 3) external redirects
+#
+# Some examples:
+#ErrorDocument 500 "The server made a boo boo."
+#ErrorDocument 404 /missing.html
+#ErrorDocument 404 "/cgi-bin/missing_handler.pl"
+#ErrorDocument 402 http://www.example.com/subscription_info.html
+#
+
+#
+# Putting this all together, we can internationalize error responses.
+#
+# We use Alias to redirect any /error/HTTP_<error>.html.var response to
+# our collection of by-error message multi-language collections.  We use 
+# includes to substitute the appropriate text.
+#
+# You can modify the messages' appearance without changing any of the
+# default HTTP_<error>.html.var files by adding the line:
+#
+#   Alias /error/include/ "/your/include/path/"
+#
+# which allows you to create your own set of files by starting with the
+# /var/www/error/include/ files and
+# copying them to /your/include/path/, even on a per-VirtualHost basis.
+#
+
+Alias /error/ "/var/www/error/"
+
+<IfModule mod_negotiation.c>
+<IfModule mod_include.c>
+    <Directory "/var/www/error">
+        AllowOverride None
+        Options IncludesNoExec
+        AddOutputFilter Includes html
+        AddHandler type-map var
+        Order allow,deny
+        Allow from all
+        LanguagePriority en es de fr
+        ForceLanguagePriority Prefer Fallback
+    </Directory>
+
+#    ErrorDocument 400 /error/HTTP_BAD_REQUEST.html.var
+#    ErrorDocument 401 /error/HTTP_UNAUTHORIZED.html.var
+#    ErrorDocument 403 /error/HTTP_FORBIDDEN.html.var
+#    ErrorDocument 404 /error/HTTP_NOT_FOUND.html.var
+#    ErrorDocument 405 /error/HTTP_METHOD_NOT_ALLOWED.html.var
+#    ErrorDocument 408 /error/HTTP_REQUEST_TIME_OUT.html.var
+#    ErrorDocument 410 /error/HTTP_GONE.html.var
+#    ErrorDocument 411 /error/HTTP_LENGTH_REQUIRED.html.var
+#    ErrorDocument 412 /error/HTTP_PRECONDITION_FAILED.html.var
+#    ErrorDocument 413 /error/HTTP_REQUEST_ENTITY_TOO_LARGE.html.var
+#    ErrorDocument 414 /error/HTTP_REQUEST_URI_TOO_LARGE.html.var
+#    ErrorDocument 415 /error/HTTP_UNSUPPORTED_MEDIA_TYPE.html.var
+#    ErrorDocument 500 /error/HTTP_INTERNAL_SERVER_ERROR.html.var
+#    ErrorDocument 501 /error/HTTP_NOT_IMPLEMENTED.html.var
+#    ErrorDocument 502 /error/HTTP_BAD_GATEWAY.html.var
+#    ErrorDocument 503 /error/HTTP_SERVICE_UNAVAILABLE.html.var
+#    ErrorDocument 506 /error/HTTP_VARIANT_ALSO_VARIES.html.var
+
+</IfModule>
+</IfModule>
+
+#
+# The following directives modify normal HTTP response behavior to
+# handle known problems with browser implementations.
+#
+BrowserMatch "Mozilla/2" nokeepalive
+BrowserMatch "MSIE 4\.0b2;" nokeepalive downgrade-1.0 force-response-1.0
+BrowserMatch "RealPlayer 4\.0" force-response-1.0
+BrowserMatch "Java/1\.0" force-response-1.0
+BrowserMatch "JDK/1\.0" force-response-1.0
+
+#
+# The following directive disables redirects on non-GET requests for
+# a directory that does not include the trailing slash.  This fixes a 
+# problem with Microsoft WebFolders which does not appropriately handle 
+# redirects for folders with DAV methods.
+# Same deal with Apple's DAV filesystem and Gnome VFS support for DAV.
+#
+BrowserMatch "Microsoft Data Access Internet Publishing Provider" redirect-carefully
+BrowserMatch "MS FrontPage" redirect-carefully
+BrowserMatch "^WebDrive" redirect-carefully
+BrowserMatch "^WebDAVFS/1.[0123]" redirect-carefully
+BrowserMatch "^gnome-vfs/1.0" redirect-carefully
+BrowserMatch "^XML Spy" redirect-carefully
+BrowserMatch "^Dreamweaver-WebDAV-SCM1" redirect-carefully
+
+#
+# Allow server status reports generated by mod_status,
+# with the URL of http://servername/server-status
+# Change the ".example.com" to match your domain to enable.
+#
+#<Location /server-status>
+#    SetHandler server-status
+#    Order deny,allow
+#    Deny from all
+#    Allow from .example.com
+#</Location>
+
+#
+# Allow remote server configuration reports, with the URL of
+#  http://servername/server-info (requires that mod_info.c be loaded).
+# Change the ".example.com" to match your domain to enable.
+#
+#<Location /server-info>
+#    SetHandler server-info
+#    Order deny,allow
+#    Deny from all
+#    Allow from .example.com
+#</Location>
+
+#
+# Proxy Server directives. Uncomment the following lines to
+# enable the proxy server:
+#
+#<IfModule mod_proxy.c>
+#ProxyRequests On
+#
+#<Proxy *>
+#    Order deny,allow
+#    Deny from all
+#    Allow from .example.com
+#</Proxy>
+
+#
+# Enable/disable the handling of HTTP/1.1 "Via:" headers.
+# ("Full" adds the server version; "Block" removes all outgoing Via: headers)
+# Set to one of: Off | On | Full | Block
+#
+#ProxyVia On
+
+#
+# To enable a cache of proxied content, uncomment the following lines.
+# See http://httpd.apache.org/docs/2.2/mod/mod_cache.html for more details.
+#
+#<IfModule mod_disk_cache.c>
+#   CacheEnable disk /
+#   CacheRoot "/var/cache/mod_proxy"
+#</IfModule>
+#
+
+#</IfModule>
+# End of proxy directives.
+
+### Section 3: Virtual Hosts
+#
+# VirtualHost: If you want to maintain multiple domains/hostnames on your
+# machine you can setup VirtualHost containers for them. Most configurations
+# use only name-based virtual hosts so the server doesn't need to worry about
+# IP addresses. This is indicated by the asterisks in the directives below.
+#
+# Please see the documentation at 
+# <URL:http://httpd.apache.org/docs/2.2/vhosts/>
+# for further details before you try to setup virtual hosts.
+#
+# You may use the command line option '-S' to verify your virtual host
+# configuration.
+
+#
+# Use name-based virtual hosting.
+#
+#NameVirtualHost *:80
+NameVirtualHost 192.168.1.187:80
+NameVirtualHost 192.168.1.187:443
+#Listen 8443
+#NameVirtualHost 192.168.1.187:8443
+#
+# NOTE: NameVirtualHost cannot be used without a port specifier 
+# (e.g. :80) if mod_ssl is being used, due to the nature of the
+# SSL protocol.
+#
+
+#
+# VirtualHost example:
+# Almost any Apache directive may go into a VirtualHost container.
+# The first VirtualHost section is used for requests without a known
+# server name.
+#
+#<VirtualHost *:80>
+#    ServerAdmin webmaster@dummy-host.example.com
+#    DocumentRoot /www/docs/dummy-host.example.com
+#    ServerName dummy-host.example.com
+#    ErrorLog logs/dummy-host.example.com-error_log
+#    CustomLog logs/dummy-host.example.com-access_log common
+#</VirtualHost>
+
+#ModPagespeed On
+#ModPagespeedInheritVHostConfig on
+#ModPagespeedFileCachePath "/var/cache/mod_pagespeed/"
+#ModPagespeedEnableFilters combine_css,combine_javascript
+#AddOutputFilterByType MOD_PAGESPEED_OUTPUT_FILTER text/html
+
+<VirtualHost 192.168.1.187:80>
+ ServerName test.amv4.qlc.net
+ ServerAlias www.test.amv4.qlc.net
+ #SSLEngine on
+ #SSLCertificateFile /etc/pki/tls/certs/ca.crt
+ #SSLCertificateKeyFile /etc/pki/tls/private/ca.key
+ DocumentRoot /web/qlc/trimbak.amv4.qlc.net/htdocs
+ #DocumentRoot /web/qlc/amv4.qa.qlc.net/htdocs 
+ ErrorLog /var/log/httpd/trimbak.amv4.qlc.net_error_log
+ TransferLog /var/log/httpd/trimbak.amv4.qlc.net_access_log
+       AddType application/x-httpd-php .php
+       AddType application/x-httpd-php .php3
+       AddType application/x-httpd-php .phtml
+       AddType application/x-httpd-php .html
+       AddType application/x-httpd-php .htm
+       AddType application/x-httpd-php .inc
+       AddType application/x-httpd-php .htx
+       RewriteEngine on
+       #RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI}
+	#<If "req('Host') != 'test.amv4.qlc.net'">
+
+         # RewriteEngine on
+         # Redirect permanent / https://test.amv4.qlc.net/
+         # </If>
+      <Directory "/web/qlc/trimbak.amv4.qlc.net/htdocs">
+	  #if ($host = 'test.amv4.qlc.net'){
+	  #}
+ #Redirect permanent /secure https://test.amv4.qlc.net/secure
+          Options Indexes FollowSymLinks
+          AllowOverride All
+        </Directory>
+# DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+        DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+        ExpiresActive on
+        ExpiresByType text/html A5
+        AddHandler cgi-script .cgi
+        AddDefaultCharset UTF-8
+        RewriteEngine on
+        RewriteRule /http-bind/ balancer://http-bind [P]
+        RewriteRule /http-bind balancer://http-bind [P]
+        <Proxy balancer://http-bind>
+         BalancerMember http://121.241.242.214:5280/http-bind/ timeout=900
+        </Proxy>
+        Options ExecCGI
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+        ServerAdmin server-team@qlc.net
+        DocumentRoot /web/qlc/doc.qlc.net/htdocs
+        ServerName dms.qa.qlc.net
+        ServerAlias www.dms.qa.qlc.net
+        ErrorLog /var/log/httpd/error_log-doc.qlc.net
+        #TransferLog /var/log/httpd/access_log-doc.qlc.net
+        #LogFormat "%h|%l|%u|%t|\"%r\"|%s|%b|\"%{Referer}i\"|\"%{User-Agent}i\"|%v"
+        LogFormat "%h %l %{USERID}e %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" envuid_combined
+        CustomLog /var/log/httpd/access_log-doc.qlc.net envuid_combined
+        ScriptAlias /cgi-bin/ /web/qlc/m.qlc.net/
+        DirectoryIndex index.htm index.html index.phtml index.phtm index.php3 index.php
+        AddType application/x-httpd-php .htm
+        AddType application/x-httpd-php .php
+        AddType application/x-httpd-php .php3
+        AddType application/x-httpd-php .phtml
+        AddType application/x-httpd-php .htx
+        AddType application/x-httpd-php .inc
+        AddType application/x-httpd-php .wml
+
+#        SetEnvIf Referer www\.amv4\.qlc\.net/ intra_site_referral
+        <Directory "/web/qlc/doc.qlc.net/htdocs">
+                Options Indexes MultiViews FollowSymLinks
+                AllowOverride All
+                Order allow,deny
+                Allow from all
+        </Directory>
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+        ServerAdmin server-team@qlc.net
+        DocumentRoot /web/qlc/dms.amv4.qlc.net/htdocs
+        ServerName dms.amv4.qlc.net
+        ServerAlias www.dms.amv4.qlc.net
+        ErrorLog /var/log/httpd/error_log-doc.qlc.net
+        #TransferLog /var/log/httpd/access_log-doc.qlc.net
+        #LogFormat "%h|%l|%u|%t|\"%r\"|%s|%b|\"%{Referer}i\"|\"%{User-Agent}i\"|%v"
+        LogFormat "%h %l %{USERID}e %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" envuid_combined
+        CustomLog /var/log/httpd/access_log-doc.qlc.net envuid_combined
+        ScriptAlias /cgi-bin/ /web/qlc/m.qlc.net/
+        DirectoryIndex index.htm index.html index.phtml index.phtm index.php3 index.php
+        AddType application/x-httpd-php .htm
+        AddType application/x-httpd-php .php
+        AddType application/x-httpd-php .php3
+        AddType application/x-httpd-php .phtml
+        AddType application/x-httpd-php .htx
+        AddType application/x-httpd-php .inc
+        AddType application/x-httpd-php .wml
+
+        #SetEnvIf Referer www\.amv4\.qlc\.net/ intra_site_referral
+        <Directory "/web/qlc/dms.amv4.qlc.net/htdocs">
+                Options Indexes MultiViews FollowSymLinks
+                AllowOverride All
+                Order allow,deny
+                Allow from all
+        </Directory>
+</VirtualHost>
+
+
+<VirtualHost 192.168.1.187:80>
+        ServerAdmin server-team@qlc.net
+        DocumentRoot /web/qlc/vtiger.crms.qlc.net/htdocs
+        ServerName vtiger.crms.qlc.net
+        ServerAlias www.vtiger.crms.qlc.net
+        ErrorLog /var/log/httpd/vtiger.crms.qlc.net-error_log
+        #TransferLog /var/log/httpd/access_log-doc.qlc.net
+        #LogFormat "%h|%l|%u|%t|\"%r\"|%s|%b|\"%{Referer}i\"|\"%{User-Agent}i\"|%v"
+        LogFormat "%h %l %{USERID}e %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" envuid_combined
+        CustomLog /var/log/httpd/access_log-vtiger.crms.qlc.net envuid_combined
+        ScriptAlias /cgi-bin/ /web/qlc/m.qlc.net/
+        DirectoryIndex index.htm index.html index.phtml index.phtm index.php3 index.php
+        AddType application/x-httpd-php .htm
+        AddType application/x-httpd-php .php
+        AddType application/x-httpd-php .php3
+        AddType application/x-httpd-php .phtml
+        AddType application/x-httpd-php .htx
+        AddType application/x-httpd-php .inc
+        AddType application/x-httpd-php .wml
+
+        #SetEnvIf Referer www\.amv4\.qlc\.net/ intra_site_referral
+        <Directory "/web/qlc/vtiger.crms.qlc.net/htdocs">
+                Options Indexes MultiViews FollowSymLinks
+                AllowOverride All
+                Order allow,deny
+                Allow from all
+        </Directory>
+</VirtualHost>
+
+# only office hosting
+# trimbak.gopalghare@qlc.in
+<VirtualHost 192.168.1.187:80>
+        ServerAdmin server-team@qlc.net
+        DocumentRoot /web/qlc/onlyoffice.qlc.net/htdocs
+        ServerName onlyoffice.qlc.net
+        ServerAlias www.onlyoffice.qlc.net
+        ErrorLog /var/log/httpd/onlyoffice.qlc.net_error_log
+        #TransferLog /var/log/httpd/onlyoffice.qlc.net_access_log
+        #LogFormat "%h|%l|%u|%t|\"%r\"|%s|%b|\"%{Referer}i\"|\"%{User-Agent}i\"|%v"
+        LogFormat "%h %l %{USERID}e %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" envuid_combined
+        CustomLog /var/log/httpd/onlyoffice.qlc.net_access_log envuid_combined
+        ScriptAlias /cgi-bin/ /web/qlc/m.qlc.net/
+        DirectoryIndex index.htm index.html index.phtml index.phtm index.php3 index.php
+        AddType application/x-httpd-php .htm
+        AddType application/x-httpd-php .php
+        AddType application/x-httpd-php .php3
+        AddType application/x-httpd-php .phtml
+        AddType application/x-httpd-php .htx
+        AddType application/x-httpd-php .inc
+        AddType application/x-httpd-php .wml
+
+        #SetEnvIf Referer www\.amv4\.qlc\.net/ intra_site_referral
+        <Directory "/web/qlc/onlyoffice.qlc.net/htdocs">
+                Options Indexes MultiViews FollowSymLinks
+                AllowOverride All
+                Order allow,deny
+                Allow from all
+        </Directory>
+</VirtualHost>
+
+# only office demo  hosting
+# trimbak.gopalghare@qlc.in
+<VirtualHost 192.168.1.187:80>
+        ServerAdmin server-team@qlc.net
+        DocumentRoot /web/qlc/office.qlc.net/htdocs
+        ServerName office.qlc.net
+        ServerAlias www.office.qlc.net
+        ErrorLog /var/log/httpd/office.qlc.net_error_log
+        #TransferLog /var/log/httpd/onlyoffice.qlc.net_access_log
+        #LogFormat "%h|%l|%u|%t|\"%r\"|%s|%b|\"%{Referer}i\"|\"%{User-Agent}i\"|%v"
+        LogFormat "%h %l %{USERID}e %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" envuid_combined
+        CustomLog /var/log/httpd/office.qlc.net_access_log envuid_combined
+        ScriptAlias /cgi-bin/ /web/qlc/office.qlc.net/
+        DirectoryIndex index.htm index.html index.phtml index.phtm index.php3 index.php
+        AddType application/x-httpd-php .htm
+        AddType application/x-httpd-php .php
+        AddType application/x-httpd-php .php3
+        AddType application/x-httpd-php .phtml
+        AddType application/x-httpd-php .htx
+        AddType application/x-httpd-php .inc
+        AddType application/x-httpd-php .wml
+
+        #SetEnvIf Referer www\.amv4\.qlc\.net/ intra_site_referral
+        <Directory "/web/qlc/office.qlc.net/htdocs">
+                Options Indexes MultiViews FollowSymLinks
+                AllowOverride All
+                Order allow,deny
+                Allow from all
+        </Directory>
+</VirtualHost>
+
+# only office suit demo  hosting
+# trimbak.gopalghare@qlc.in
+<VirtualHost 192.168.1.187:80>
+        ServerAdmin server-team@qlc.net
+        DocumentRoot /web/qlc/owncloud.qlc.net/htdocs
+        ServerName officesuit.qlc.net
+        ServerAlias www.officesuit.qlc.net
+        ErrorLog /var/log/httpd/officesuit.qlc.net_error_log
+        #TransferLog /var/log/httpd/onlyoffice.qlc.net_access_log
+        #LogFormat "%h|%l|%u|%t|\"%r\"|%s|%b|\"%{Referer}i\"|\"%{User-Agent}i\"|%v"
+        LogFormat "%h %l %{USERID}e %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" envuid_combined
+        CustomLog /var/log/httpd/officesuit.qlc.net_access_log envuid_combined
+        ScriptAlias /cgi-bin/ /web/qlc/officesuit.qlc.net/
+        DirectoryIndex index.htm index.html index.phtml index.phtm index.php3 index.php
+        AddType application/x-httpd-php .htm
+        AddType application/x-httpd-php .php
+        AddType application/x-httpd-php .php3
+        AddType application/x-httpd-php .phtml
+        AddType application/x-httpd-php .htx
+        AddType application/x-httpd-php .inc
+        AddType application/x-httpd-php .wml
+
+        #SetEnvIf Referer www\.amv4\.qlc\.net/ intra_site_referral
+        <Directory "/web/qlc/owncloud.qlc.net/htdocs">
+                Options Indexes MultiViews FollowSymLinks
+                AllowOverride All
+                Order allow,deny
+                Allow from all
+        </Directory>
+</VirtualHost>
+
+# only doc.qlc.net demo  hosting
+# Trimbak.Gopalghare@qlc.in
+<VirtualHost 192.168.1.187:80>
+        ServerAdmin server-team@qlc.net
+        DocumentRoot /web/qlc/doc.qlc.net/htdocs/officeSuit
+        ServerName officeEditor.qlc.net
+        ServerAlias www.officeEditor.qlc.net
+        ErrorLog /var/log/httpd/officeEditor.qlc.net_error_log
+        #TransferLog /var/log/httpd/onlyoffice.qlc.net_access_log
+        #LogFormat "%h|%l|%u|%t|\"%r\"|%s|%b|\"%{Referer}i\"|\"%{User-Agent}i\"|%v"
+        LogFormat "%h %l %{USERID}e %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" envuid_combined
+        CustomLog /var/log/httpd/officeEditor.qlc.net_access_log envuid_combined
+        ScriptAlias /cgi-bin/ /web/qlc/officeEditor.qlc.net/
+        DirectoryIndex index.htm index.html index.phtml index.phtm index.php3 index.php
+        AddType application/x-httpd-php .htm
+        AddType application/x-httpd-php .php
+        AddType application/x-httpd-php .php3
+        AddType application/x-httpd-php .phtml
+        AddType application/x-httpd-php .htx
+        AddType application/x-httpd-php .inc
+        AddType application/x-httpd-php .wml
+
+        #SetEnvIf Referer www\.amv4\.qlc\.net/ intra_site_referral
+        <Directory "/web/qlc/doc.qlc.net/htdocs/officeSuit">
+                Options Indexes MultiViews FollowSymLinks
+                AllowOverride All
+                Order allow,deny
+                Allow from all
+        </Directory>
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+        ServerAdmin server-team@qlc.net
+        DocumentRoot /var/www/onlyoffice/htdocs
+        ServerName office.qlc.net
+        ServerAlias www.office.qlc.net
+        ErrorLog /var/log/httpd/office.qlc.net_error_log
+        #TransferLog /var/log/httpd/onlyoffice.qlc.net_access_log
+        #LogFormat "%h|%l|%u|%t|\"%r\"|%s|%b|\"%{Referer}i\"|\"%{User-Agent}i\"|%v"
+        LogFormat "%h %l %{USERID}e %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" envuid_combined
+        CustomLog /var/log/httpd/office.qlc.net_access_log envuid_combined
+        #ScriptAlias /cgi-bin/ 
+        DirectoryIndex index.htm index.html index.phtml index.phtm index.php3 index.php
+        AddType application/x-httpd-php .htm
+        AddType application/x-httpd-php .php
+        AddType application/x-httpd-php .php3
+        AddType application/x-httpd-php .phtml
+        AddType application/x-httpd-php .htx
+        AddType application/x-httpd-php .inc
+        AddType application/x-httpd-php .wml
+
+        #SetEnvIf Referer www\.amv4\.qlc\.net/ intra_site_referral
+        <Directory "/var/www/onlyoffice/htdocs">
+                Options Indexes MultiViews FollowSymLinks
+                AllowOverride All
+                Order allow,deny
+                Allow from all
+        </Directory>
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+        ServerAdmin server-team@qlc.net
+        DocumentRoot /web/qlc/owncloud.qlc.net/htdocs/
+        ServerName owncloud.qlc.net
+        ServerAlias www.owncloud.qlc.net
+        ErrorLog /var/log/httpd/error_log-owncloud.qlc.net
+        TransferLog /var/log/httpd/access_log-owncloud.qlc.net
+        LogFormat "%h|%l|%u|%t|\"%r\"|%s|%b|\"%{Referer}i\"|\"%{User-Agent}i\"|%v"
+        ScriptAlias /cgi-bin/ /web/qlc/m.qlc.net/
+        DirectoryIndex index.htm index.html index.phtml index.phtm index.php3 index.php
+        AddType application/x-httpd-php .htm
+        AddType application/x-httpd-php .php
+        AddType application/x-httpd-php .php3
+        AddType application/x-httpd-php .phtml
+        AddType application/x-httpd-php .htx
+        AddType application/x-httpd-php .inc
+        AddType application/x-httpd-php .wml
+
+        #SetEnvIf Referer www\.amv4\.qlc\.net/ intra_site_referral
+        <Directory "/web/qlc/owncloud.qlc.net/htdocs">
+                Options Indexes MultiViews FollowSymLinks
+                AllowOverride All
+                Order allow,deny
+                Allow from all
+        </Directory>
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+ ServerName  amv4.qa.qlc.net
+ ServerAlias www.amv4.qa.qlc.net amv4s.qa.qlc.net
+ #<If "%{HTTP_HOST} = '">
+ RewriteCond "%{HTTP_HOST}" "!^amv4.qa.qlc.net" [NC]
+ RewriteCond "%{HTTP_HOST}" "!^$"
+ RewriteRule "^/?(.*)"      "http://amv4.qa.qlc.net/$1" [L,R,NE]
+# Redirect "/" "https://amv4.qa.qlc.net/"
+ #</If>
+ DocumentRoot /web/qlc/amv4.qa.qlc.net/htdocs
+ ErrorLog /var/log/httpd/amv4.qa.qlc.net_error_log
+ TransferLog /var/log/httpd/amv4.qa.qlc.net_access_log
+       AddType application/x-httpd-php .php
+       AddType application/x-httpd-php .php3
+       AddType application/x-httpd-php .phtml
+       AddType application/x-httpd-php .html
+       AddType application/x-httpd-php .htm
+       AddType application/x-httpd-php .inc
+       AddType application/x-httpd-php .htx
+
+      <Directory "/web/qlc/amv4.qa.qlc.net/htdocs">
+          Options Indexes FollowSymLinks
+          AllowOverride All
+        </Directory>
+# DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+        DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+        ExpiresActive on
+        ExpiresByType text/html A5
+        AddHandler cgi-script .cgi
+        AddDefaultCharset UTF-8
+        RewriteEngine on
+        RewriteRule /http-bind/ balancer://http-bind [P]
+        RewriteRule /http-bind balancer://http-bind [P]
+        <Proxy balancer://http-bind>
+              #  BalancerMember http://192.168.1.175:5280/http-bind/ timeout=900
+                 BalancerMember http://121.241.242.214:5280/http-bind/ timeout=900
+        </Proxy>
+        Options ExecCGI
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+ServerName roundcube9.qlc.net
+ServerAlias www.roundcube9.qlc.net roundcube9.qlc.net
+ServerAdmin webmaster@mailserve.net
+
+DocumentRoot /web/qlc/roundcube9.qlc.net/htdocs
+ErrorLog /var/log/httpd/roundcube9.qlc.net_error_log
+TransferLog /var/log/httpd/roundcube9.qlc.net_access_log
+    AddType application/x-httpd-php .php
+    AddType application/x-httpd-php .php3
+    AddType application/x-httpd-php .phtml
+    AddType application/x-httpd-php .html
+    AddType application/x-httpd-php .htm
+    AddType application/x-httpd-php .inc
+    AddType application/x-httpd-php .htx
+    Options ExecCGI FollowSymLinks Includes
+    AddType text/javascript .js
+        AddDefaultCharset UTF-8
+        RewriteEngine on
+   <Directory "/web/qlc/roundcube9.qlc.net/htdocs">
+       Options Indexes MultiViews FollowSymLinks
+       AllowOverride All
+       Order allow,deny
+       Allow from all
+   </Directory>
+        DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+        ExpiresActive on
+        ExpiresByType text/html A5
+        AddHandler cgi-script .cgi
+        AddDefaultCharset UTF-8
+        RewriteEngine on
+        RewriteRule /http-bind/ balancer://http-bind [P]
+        RewriteRule /http-bind balancer://http-bind [P]
+        <Proxy balancer://http-bind>
+                BalancerMember http://192.168.1.175:5280/http-bind/ timeout=900
+        </Proxy>
+        Header set Access-Control-Allow-Origin "*"
+Options ExecCGI
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+ ServerName  cal.qlc.net
+ ServerAlias www.cal.qlc.net
+ DocumentRoot /web/qlc/cal.qlc.net/htdocs
+ ErrorLog /var/log/httpd/cal.qlc.net_error_log
+ TransferLog /var/log/httpd/cal.qlc.net_access_log
+       AddType application/x-httpd-php .php
+       AddType application/x-httpd-php .php3
+       AddType application/x-httpd-php .phtml
+       AddType application/x-httpd-php .html
+       AddType application/x-httpd-php .htm
+       AddType application/x-httpd-php .inc
+       AddType application/x-httpd-php .htx
+
+      <Directory "/web/qlc/cal.qlc.net/htdocs">
+          Options Indexes FollowSymLinks
+          AllowOverride All
+        </Directory>
+# DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+        DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+        ExpiresActive on
+        ExpiresByType text/html A5
+        AddHandler cgi-script .cgi
+        AddDefaultCharset UTF-8
+        RewriteEngine on
+       # RewriteRule /http-bind/ balancer://http-bind [P]
+       # RewriteRule /http-bind balancer://http-bind [P]
+        #<Proxy balancer://http-bind>
+              #  BalancerMember http://192.168.1.175:5280/http-bind/ timeout=900
+              #   BalancerMember http://121.241.242.214:5280/http-bind/ timeout=900
+        #</Proxy>
+        Options ExecCGI
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+ ServerName  agendav.qlc.net
+ ServerAlias www.agendav.qlc.net
+ DocumentRoot /web/qlc/cal.qlc.net/davcal/web/public/
+ ErrorLog /var/log/httpd/agendav.qlc.net_error_log
+ TransferLog /var/log/httpd/agendav.qlc.net_access_log
+       AddType application/x-httpd-php .php
+       AddType application/x-httpd-php .php3
+       AddType application/x-httpd-php .phtml
+       AddType application/x-httpd-php .html
+       AddType application/x-httpd-php .htm
+       AddType application/x-httpd-php .inc
+       AddType application/x-httpd-php .htx
+
+      <Directory "/web/qlc/cal.qlc.net/davcal/web/public/">
+          Options Indexes FollowSymLinks
+          AllowOverride All
+        </Directory>
+# DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+        DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+        ExpiresActive on
+        ExpiresByType text/html A5
+        AddHandler cgi-script .cgi
+        AddDefaultCharset UTF-8
+        RewriteEngine on
+        RewriteRule /http-bind/ balancer://http-bind [P]
+        RewriteRule /http-bind balancer://http-bind [P]
+        <Proxy balancer://http-bind>
+              #  BalancerMember http://192.168.1.175:5280/http-bind/ timeout=900
+                 BalancerMember http://121.241.242.214:5280/http-bind/ timeout=900
+        </Proxy>
+        Options ExecCGI
+</VirtualHost>
+<VirtualHost 192.168.1.187:443>
+ ServerName test.amv4.qlc.net
+ ServerAlias www.test.amv4.qlc.net
+ SSLEngine on
+ SSLCertificateFile /etc/pki/tls/certs/ca.crt
+ SSLCertificateKeyFile /etc/pki/tls/private/ca.key
+ DocumentRoot /web/qlc/trimbak.amv4.qlc.net/htdocs
+ #DocumentRoot /web/qlc/amv4.qa.qlc.net/htdocs 
+ ErrorLog /var/log/httpd/trimbak.amv4.qlc.net_error_log
+ TransferLog /var/log/httpd/trimbak.amv4.qlc.net_access_log
+       AddType application/x-httpd-php .php
+       AddType application/x-httpd-php .php3
+       AddType application/x-httpd-php .phtml
+       AddType application/x-httpd-php .html
+       AddType application/x-httpd-php .htm
+       AddType application/x-httpd-php .inc
+       AddType application/x-httpd-php .htx
+
+#############
+# TYPES FIX #
+#############
+AddType text/css .css
+AddType text/javascript .js
+
+####################
+# GZIP COMPRESSION #
+####################
+SetOutputFilter DEFLATE
+AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml text/javascript application/x-javascript application/x-httpd-php
+BrowserMatch ^Mozilla/4 gzip-only-text/html
+BrowserMatch ^Mozilla/4\.0[678] no-gzip
+BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+BrowserMatch \bMSI[E] !no-gzip !gzip-only-text/html
+SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip
+Header append Vary User-Agent env=!dont-vary
+###################
+<FilesMatch "\.(jpg|jpeg|png|gif|swf)$">  
+  Header set Cache-Control "max-age=604800, public"
+</FilesMatch>
+###page speed ##########
+#ModPagespeedRewriteLevel PassThrough
+#ModPagespeedEnableFilters combine_css,extend_cache,rewrite_images
+#ModPagespeedEnableFilters rewrite_css,rewrite_javascript
+#######################
+      <Directory "/web/qlc/trimbak.amv4.qlc.net/htdocs">
+          Options Indexes FollowSymLinks
+          AllowOverride All
+        </Directory>
+# DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+        DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+        ExpiresActive on
+        ExpiresByType text/html A5
+        AddHandler cgi-script .cgi
+        AddDefaultCharset UTF-8
+        RewriteEngine on
+        RewriteRule /http-bind/ balancer://http-bind [P]
+        RewriteRule /http-bind balancer://http-bind [P]
+        <Proxy balancer://http-bind>
+         BalancerMember http://121.241.242.214:5280/http-bind/ timeout=900
+        </Proxy>
+        Options ExecCGI
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+ServerName api.mmv3.qlc.net
+ServerAlias www.api.mmv3.qlc.net
+ServerAdmin webmaster@mailserve.net
+DocumentRoot /web/qlc/api.mmv3.qlc.net/htdocs
+ErrorLog /var/log/httpd/api.mmv3.qlc.net_error_log
+TransferLog /var/log/httpd/api.mmv3.qlc.net_access_log
+
+LogFormat "%h %l %u %t \"%r\" %>s %b" common
+CustomLog logs/access_log common
+    AddType application/x-httpd-php .php
+    AddType application/x-httpd-php .php3
+    AddType application/x-httpd-php .phtml
+    AddType application/x-httpd-php .html
+    AddType application/x-httpd-php .htm
+    AddType application/x-httpd-php .inc
+    AddType application/x-httpd-php .htx
+
+    AddDefaultCharset UTF-8
+    RewriteEngine on
+
+    <Directory "/web/qlc/api.mmv3.qlc.net/htdocs">
+            Options Indexes MultiViews FollowSymLinks
+            AllowOverride All
+            Order allow,deny
+            Allow from all
+    </Directory>
+    DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+ServerName qa.mmv3.qlc.net
+ServerAlias www.qa.mmv3.qlc.net
+ServerAdmin webmaster@mailserve.net
+DocumentRoot /web/qlc/mmv3.qa.qlc.net/app/webroot
+ErrorLog /var/log/httpd/mmv3.qa.qlc.net_error_log
+TransferLog /var/log/httpd/mmv3.qa.qlc.net_access_log
+
+LogFormat "%h %l %u %t \"%r\" %>s %b" common
+CustomLog logs/access_log common
+    AddType application/x-httpd-php .php
+    AddType application/x-httpd-php .php3
+    AddType application/x-httpd-php .phtml
+    AddType application/x-httpd-php .html
+    AddType application/x-httpd-php .htm
+    AddType application/x-httpd-php .inc
+    AddType application/x-httpd-php .htx
+
+    AddDefaultCharset UTF-8
+    RewriteEngine on
+
+    <Directory "/web/qlc/mmv3.qa.qlc.net/app/webroot">
+            Options Indexes MultiViews FollowSymLinks 
+            AllowOverride All
+	    Order allow,deny
+       	    Allow from all
+    </Directory>
+    DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+ServerName trimbak.mmv3.qlc.net
+ServerAlias www.trimbak.mmv3.qlc.net
+ServerAdmin webmaster@mailserve.net
+DocumentRoot /web/qlc/trimbak.mmv3.qlc.net/app/webroot
+ErrorLog /var/log/httpd/trimbak.mmv3.qlc.net_error_log
+TransferLog /var/log/httpd/trimbak.mmv3.qlc.net_access_log
+
+LogFormat "%h %l %u %t \"%r\" %>s %b" common
+CustomLog logs/access_log common
+    AddType application/x-httpd-php .php
+    AddType application/x-httpd-php .php3
+    AddType application/x-httpd-php .phtml
+    AddType application/x-httpd-php .html
+    AddType application/x-httpd-php .htm
+    AddType application/x-httpd-php .inc
+    AddType application/x-httpd-php .htx
+
+    AddDefaultCharset UTF-8
+    RewriteEngine on
+
+    <Directory "/web/qlc/trimbak.mmv3.qlc.net/app/webroot">
+            Options Indexes MultiViews FollowSymLinks
+            AllowOverride All
+            Order allow,deny
+            Allow from all
+    </Directory>
+    DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+</VirtualHost>
+
+## Admin Timesgroup hosting.
+<VirtualHost 192.168.1.187:80>
+ServerName admin.timesgroup.qlc.net
+ServerAlias www.admin.timesgroup.qlc.net
+ServerAdmin webmaster@mailserve.net
+DocumentRoot /web/qlc/admin.timesgroup.qlc.net/app/webroot
+ErrorLog /var/log/httpd/admin.timesgroup.qlc.net_error_log
+TransferLog /var/log/httpd/admin.timesgroup.qlc.net_access_log
+
+LogFormat "%h %l %u %t \"%r\" %>s %b" common
+CustomLog logs/access_log common
+    AddType application/x-httpd-php .php
+    AddType application/x-httpd-php .php3
+    AddType application/x-httpd-php .phtml
+    AddType application/x-httpd-php .html
+    AddType application/x-httpd-php .htm
+    AddType application/x-httpd-php .inc
+    AddType application/x-httpd-php .htx
+
+    AddDefaultCharset UTF-8
+    RewriteEngine on
+
+    <Directory "/web/qlc/admin.timesgroup.qlc.net/app/webroot">
+            Options Indexes MultiViews FollowSymLinks
+            AllowOverride All
+            Order allow,deny
+            Allow from all
+    </Directory>
+    DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+</VirtualHost>
+##End
+
+<VirtualHost 192.168.1.187:80>
+ServerName amv3.qa.qlc.net
+ServerAlias www.amv3.qa.qlc.net amv3.qa.qlc.net
+ServerAdmin webmaster@mailserve.net
+
+#Redirect / http://www.facebook.com/
+
+DocumentRoot /web/qlc/amv3.qa.qlc.net/htdocs
+ErrorLog /var/log/httpd/amv3.qa.qlc.net_error_log
+TransferLog /var/log/httpd/amv3.qa.qlc.net_access_log
+    AddType application/x-httpd-php .php
+    AddType application/x-httpd-php .php3
+    AddType application/x-httpd-php .phtml
+    AddType application/x-httpd-php .html
+    AddType application/x-httpd-php .htm
+    AddType application/x-httpd-php .inc
+    AddType application/x-httpd-php .htx
+    Options ExecCGI FollowSymLinks Includes
+    AddType text/javascript .js
+        AddDefaultCharset UTF-8
+        RewriteEngine on
+   <Directory "/web/qlc/amv3.qa.qlc.net/htdocs">
+       Options Indexes MultiViews FollowSymLinks
+       AllowOverride All
+       Order allow,deny
+       Allow from all
+   </Directory>
+   DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+   	ExpiresActive on
+        ExpiresByType text/html A5
+        AddHandler cgi-script .cgi
+        AddDefaultCharset UTF-8
+        RewriteEngine on
+        RewriteRule /http-bind/ balancer://http-bind [P]
+        RewriteRule /http-bind balancer://http-bind [P]
+        <Proxy balancer://http-bind>
+                BalancerMember http://192.168.1.175:5280/http-bind/ timeout=900
+        </Proxy>
+        Options ExecCGI   	
+</VirtualHost>
+
+
+<VirtualHost 192.168.1.187:80>
+ServerName roundcube9.qlc.net
+ServerAlias www.roundcube9.qlc.net roundcube9.qlc.net
+ServerAdmin webmaster@mailserve.net
+
+DocumentRoot /web/qlc/roundcube9.qlc.net/htdocs
+ErrorLog /var/log/httpd/roundcube9.qlc.net_error_log
+TransferLog /var/log/httpd/roundcube9.qlc.net_access_log
+    AddType application/x-httpd-php .php
+    AddType application/x-httpd-php .php3
+    AddType application/x-httpd-php .phtml
+    AddType application/x-httpd-php .html
+    AddType application/x-httpd-php .htm
+    AddType application/x-httpd-php .inc
+    AddType application/x-httpd-php .htx
+    Options ExecCGI FollowSymLinks Includes
+    AddType text/javascript .js
+        AddDefaultCharset UTF-8
+        RewriteEngine on
+   <Directory "/web/qlc/roundcube9.qlc.net/htdocs">
+       Options Indexes MultiViews FollowSymLinks
+       AllowOverride All
+       Order allow,deny
+       Allow from all
+   </Directory>
+	DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+        ExpiresActive on
+        ExpiresByType text/html A5
+        AddHandler cgi-script .cgi
+        AddDefaultCharset UTF-8
+        RewriteEngine on
+        RewriteRule /http-bind/ balancer://http-bind [P]
+        RewriteRule /http-bind balancer://http-bind [P]
+        <Proxy balancer://http-bind>
+                BalancerMember http://192.168.1.175:5280/http-bind/ timeout=900
+        </Proxy>
+	Header set Access-Control-Allow-Origin "*"
+        Options ExecCGI
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+	ServerName chat.qlc.net
+	ServerAlias www.chat.qlc.net chat.qlc.net
+
+	ErrorLog /var/log/httpd/ejabberd.qlc.net_error_log
+	TransferLog /var/log/httpd/ejabberd.qlc.net_access_log
+
+	ProxyPass  /  http://192.168.1.175:5280/http-bind/
+	ProxyPassReverse  /   http://192.168.1.175:5280/http-bind/
+	Header set Access-Control-Allow-Origin "*"	
+</VirtualHost>	
+
+<VirtualHost 192.168.1.187:80>
+        ServerAdmin server-team@qlc.net
+        DocumentRoot /web/qlc/briefcase.qlc.net/htdocs
+        ServerName briefcase.qlc.net
+        ServerAlias www.briefcase.qlc.net
+        ErrorLog /var/log/httpd/error_log-briefcase.qlc.net
+        TransferLog /var/log/httpd/access_briefcase.qlc.net
+        LogFormat "%h|%l|%u|%t|\"%r\"|%s|%b|\"%{Referer}i\"|\"%{User-Agent}i\"|%v"
+        DirectoryIndex index.htm index.html index.phtml index.phtm index.php3 index.php
+        AddType application/x-httpd-php .htm
+        AddType application/x-httpd-php .php
+        AddType application/x-httpd-php .php3
+        AddType application/x-httpd-php .phtml
+        AddType application/x-httpd-php .htx
+        AddType application/x-httpd-php .inc
+        AddType application/x-httpd-php .wml
+	AddType application/etherpad 	.eplite
+
+        #SetEnvIf Referer www\.amv4\.qlc\.net/ intra_site_referral
+        <Directory "/web/qlc/briefcase.qlc.net/htdocs">
+                Options Indexes MultiViews FollowSymLinks
+                AllowOverride All
+                Order allow,deny
+                Allow from all
+        </Directory>
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+        ServerAdmin server-team@qlc.net
+        DocumentRoot /web/qlc/briefcase.qlc.net/htdocs/
+        ServerName briefcase-client.qlc.net
+        ServerAlias www.briefcase-client.qlc.net
+        ErrorLog /var/log/httpd/error_log-briefcase.qlc.net
+        TransferLog /var/log/httpd/access_briefcase.qlc.net
+        LogFormat "%h|%l|%u|%t|\"%r\"|%s|%b|\"%{Referer}i\"|\"%{User-Agent}i\"|%v"
+        DirectoryIndex index.htm index.html index.phtml index.phtm index.php3 index.php
+        AddType application/x-httpd-php .htm
+        AddType application/x-httpd-php .php
+        AddType application/x-httpd-php .php3
+        AddType application/x-httpd-php .phtml
+        AddType application/x-httpd-php .htx
+        AddType application/x-httpd-php .inc
+        AddType application/x-httpd-php .wml
+	AddType application/etherpad    .eplite
+
+        #SetEnvIf Referer www\.amv4\.qlc\.net/ intra_site_referral
+        <Directory "/web/qlc/briefcase.qlc.net/htdocs">
+                Options Indexes MultiViews FollowSymLinks
+                AllowOverride All
+                Order allow,deny
+                Allow from all
+        </Directory>
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+        ServerAdmin server-team@qlc.net
+        DocumentRoot /web/qlc/m.qlc.net/htdocs/
+        ServerName m.qlc.net
+        ServerAlias www.m.qlc.net 
+        ErrorLog /var/log/httpd/error_log-m.qlc.net
+        TransferLog /var/log/httpd/access_log-m.qlc.net
+        LogFormat "%h|%l|%u|%t|\"%r\"|%s|%b|\"%{Referer}i\"|\"%{User-Agent}i\"|%v"
+        ScriptAlias /cgi-bin/ /web/qlc/m.qlc.net/
+        DirectoryIndex index.htm index.html index.phtml index.phtm index.php3 index.php
+        AddType application/x-httpd-php .htm
+        AddType application/x-httpd-php .php
+        AddType application/x-httpd-php .php3
+        AddType application/x-httpd-php .phtml
+        AddType application/x-httpd-php .htx
+        AddType application/x-httpd-php .inc
+        AddType application/x-httpd-php .wml
+        <Directory "/web/qlc/m.qlc.net/htdocs">
+                Options Indexes MultiViews FollowSymLinks
+                AllowOverride All
+                Order allow,deny
+                Allow from all
+        </Directory>
+</VirtualHost>
+
+
+<VirtualHost 192.168.1.187:80>
+ServerName cent.amv3.qlc.net
+ServerAlias www.cent.amv3.qlc.net amv3.qlc.net
+ServerAdmin webmaster@mailserve.net
+
+#Redirect / http://www.facebook.com/
+
+DocumentRoot /web/qlc/cent.amv3.qlc.net/htdocs
+ErrorLog /var/log/httpd/cent_amv3_error_log
+TransferLog /var/log/httpd/cent_amv3_access_log
+    AddType application/x-httpd-php .php
+    AddType application/x-httpd-php .php3
+    AddType application/x-httpd-php .phtml
+    AddType application/x-httpd-php .html
+    AddType application/x-httpd-php .htm
+    AddType application/x-httpd-php .inc
+    AddType application/x-httpd-php .htx
+    Options ExecCGI FollowSymLinks Includes
+    AddType text/javascript .js
+
+        AddDefaultCharset UTF-8
+        RewriteEngine on
+
+   <Directory "/web/qlc/cent.amv3.qlc.net/htdocs">
+       Options Indexes MultiViews FollowSymLinks
+       AllowOverride All
+       Order allow,deny
+       Allow from all
+   </Directory>
+
+    DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+ServerName cent.mm.qlc.net
+ServerAlias www.cent.mm.qlc.net
+ServerAdmin webmaster@mailserve.net 
+DocumentRoot /web/qlc/cent.mm.qlc.net/app/webroot
+ErrorLog /var/log/httpd/cent.mm.qlc.net_error_log
+TransferLog /var/log/httpd/cent.mm.qlc.net_access_log
+    
+LogFormat "%h %l %u %t \"%r\" %>s %b" common
+CustomLog logs/access_log common
+    
+
+    AddType application/x-httpd-php .php
+    AddType application/x-httpd-php .php3
+    AddType application/x-httpd-php .phtml
+    AddType application/x-httpd-php .html
+    AddType application/x-httpd-php .htm
+    AddType application/x-httpd-php .inc
+    AddType application/x-httpd-php .htx
+
+    <Directory "/web/qlc/cent.mm.qlc.net/app/webroot">
+            Options Indexes FollowSymLinks
+            AllowOverride All
+            php_admin_flag safe_mode on
+    </Directory>
+
+    DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+ServerName dms.qlc.net
+ServerAlias www.dms.qlc.net dms.qlc.net
+ServerAdmin webmaster@mailserve.net
+DocumentRoot /web/qlc/docman.qlc.net/htdocs
+ErrorLog /var/log/httpd/dms_error_log
+TransferLog /var/log/httpd/dms_access_log
+    AddType application/x-httpd-php .php
+    AddType application/x-httpd-php .php3
+    AddType application/x-httpd-php .phtml
+    AddType application/x-httpd-php .html
+    AddType application/x-httpd-php .htm
+    AddType application/x-httpd-php .inc
+    AddType application/x-httpd-php .htx
+    Options ExecCGI FollowSymLinks Includes
+    AddType text/javascript .js
+
+        AddDefaultCharset UTF-8
+        RewriteEngine on
+
+    DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+ServerName amv4.qlc.net
+ServerAlias www.amv4.qlc.net amv4.qlc.net
+ServerAdmin webmaster@mailserve.net
+DocumentRoot /web/qlc/amv4.qlc.net/htdocs
+ErrorLog /var/log/httpd/cent_amv4_error_log
+TransferLog /var/log/httpd/cent_amv4_access_log
+    AddType application/x-httpd-php .php
+    AddType application/x-httpd-php .php3
+    AddType application/x-httpd-php .phtml
+    AddType application/x-httpd-php .html
+    AddType application/x-httpd-php .htm
+    AddType application/x-httpd-php .inc
+    AddType application/x-httpd-php .htx
+    Options ExecCGI FollowSymLinks Includes
+    AddType text/javascript .js
+
+        AddDefaultCharset UTF-8
+        RewriteEngine on
+
+    DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+</VirtualHost>
+
+
+<VirtualHost 192.168.1.187:80>
+        ServerAdmin server-team@qlc.net
+        DocumentRoot /web/qlc/owncloud5.qlc.net/htdocs/
+        ServerName owncloud5.qlc.net
+        ServerAlias www.owncloud5.qlc.net
+        ErrorLog /var/log/httpd/error_log-owncloud.qlc.net
+        TransferLog /var/log/httpd/access_log-owncloud.qlc.net
+        LogFormat "%h|%l|%u|%t|\"%r\"|%s|%b|\"%{Referer}i\"|\"%{User-Agent}i\"|%v"
+        ScriptAlias /cgi-bin/ /web/qlc/m.qlc.net/
+        DirectoryIndex index.htm index.html index.phtml index.phtm index.php3 index.php
+        AddType application/x-httpd-php .htm
+        AddType application/x-httpd-php .php
+        AddType application/x-httpd-php .php3
+        AddType application/x-httpd-php .phtml
+        AddType application/x-httpd-php .htx
+        AddType application/x-httpd-php .inc
+        AddType application/x-httpd-php .wml
+
+        #SetEnvIf Referer www\.amv4\.qlc\.net/ intra_site_referral
+        <Directory "/web/qlc/owncloud5.qlc.net/htdocs">
+                Options Indexes MultiViews FollowSymLinks
+                AllowOverride All
+                Order allow,deny
+                Allow from all
+        </Directory>
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+        ServerAdmin server-team@qlc.net
+        ServerName etherpad.qlc.net
+        ServerAlias www.etherpad.qlc.net
+
+	ErrorLog /var/log/httpd/error_log_etherpad
+        TransferLog /var/log/httpd/access_log_etherpad
+	LogFormat "%h|%l|%u|%t|\"%r\"|%s|%b|\"%{Referer}i\"|\"%{User-Agent}i\"|%v"
+
+	<IfModule mod_proxy.c>
+	    #RewriteEngine On
+	    #RewriteRule /p/*$ http://etherpad.qlc.net/ [NC,L]
+	    #RewriteCond %{REQUEST_URI} !^/p/
+	    #RewriteCond %{REQUEST_URI} !^/static/
+	    #RewriteCond %{REQUEST_URI} !^/pluginfw/
+	    #RewriteCond %{REQUEST_URI} !^/javascripts/
+	    #RewriteCond %{REQUEST_URI} !^/socket.io/
+	    #RewriteCond %{REQUEST_URI} !^/ep/
+	    #RewriteCond %{REQUEST_URI} !^/minified/
+	    #RewriteCond %{REQUEST_URI} !^/api/
+	    #RewriteCond %{REQUEST_URI} !^/ro/
+	    #RewriteCond %{REQUEST_URI} !^/error/
+	    #RewriteCond %{REQUEST_URI} !^/jserror
+    	    #RewriteCond %{REQUEST_URI} !/favicon.ico
+	    #RewriteCond %{REQUEST_URI} !/robots.txt
+	    #RewriteRule ^/+(.+)$ http://etherpad.qlc.net/p/$1 [L]
+
+	    ProxyVia On
+            ProxyRequests Off
+            ProxyPass / http://localhost:9001/
+            ProxyPassReverse / http://localhost:9001/
+            ProxyPreserveHost on
+            <Proxy *>
+                Options FollowSymLinks MultiViews
+                AllowOverride All
+                Order allow,deny
+                allow from all
+            </Proxy>
+        </IfModule>			
+
+	ServerSignature Off
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+        ServerAdmin server-team@qlc.net
+        DocumentRoot /web/qlc/fengoffice.qlc.net/htdocs/
+        ServerName fengoffice.qlc.net
+        ServerAlias www.fengoffice.qlc.net
+        ErrorLog /var/log/httpd/error_log_fengoffice
+        TransferLog /var/log/httpd/access_log_fengoffice
+        LogFormat "%h|%l|%u|%t|\"%r\"|%s|%b|\"%{Referer}i\"|\"%{User-Agent}i\"|%v"
+        DirectoryIndex index.htm index.html index.phtml index.phtm index.php3 index.php
+        AddType application/x-httpd-php .htm
+        AddType application/x-httpd-php .php
+        AddType application/x-httpd-php .php3
+        AddType application/x-httpd-php .phtml
+        AddType application/x-httpd-php .htx
+        AddType application/x-httpd-php .inc
+        AddType application/x-httpd-php .wml
+        <Directory "/web/qlc/fengoffice.qlc.net/htdocs">
+                Options Indexes MultiViews FollowSymLinks
+                AllowOverride All
+                Order allow,deny
+                Allow from all
+        </Directory>
+</VirtualHost>
+
+<IfDefine IgnoreBlockComment>
+<VirtualHost 192.168.1.187:80>
+    ServerName etherpad.manager.qlc.net
+    DocumentRoot /web/qlc/etherpad.manager.qlc.net/public_html
+
+    SetEnv CONFIGURATION /web/qlc/etherpad.manager.qlc.net/configuration
+
+    <Directory "/web/qlc/etherpad.manager.qlc.net/public_html/">
+        Options FollowSymLinks
+        AllowOverride None
+        Order allow,deny
+        Allow from all
+    </Directory>
+
+    RewriteEngine On
+    RewriteRule ^/editor$ /editor/ [R]
+
+    <Proxy http://localhost:9001/>
+        Order allow,deny
+        Allow from all
+    </Proxy>
+
+    ProxyPass /editor/ http://localhost:9001/
+    ProxyPassReverse /editor/ http://localhost:9001/
+
+    <Directory "/web/qlc/etherpad.manager.qlc.net/public_html/includes">
+        Options None
+        AllowOverride None
+        Order deny,allow
+        Allow from all
+    </Directory>
+
+    ProxyPreserveHost on
+</VirtualHost>
+</IfDefine>
+
+<VirtualHost 192.168.1.187:80>
+        ServerAdmin server-team@qlc.net
+        DocumentRoot /web/qlc/owncloudv4.qlc.net/htdocs/
+        ServerName owncloudv4.qlc.net
+        ServerAlias www.owncloudv4.qlc.net
+        ErrorLog /var/log/httpd/error_log-owncloudv4.qlc.net
+        TransferLog /var/log/httpd/access_log-owncloudv4.qlc.net
+        LogFormat "%h|%l|%u|%t|\"%r\"|%s|%b|\"%{Referer}i\"|\"%{User-Agent}i\"|%v"
+        DirectoryIndex index.htm index.html index.phtml index.phtm index.php3 index.php
+        AddType application/x-httpd-php .htm
+        AddType application/x-httpd-php .php
+        AddType application/x-httpd-php .php3
+        AddType application/x-httpd-php .phtml
+        AddType application/x-httpd-php .htx
+        AddType application/x-httpd-php .inc
+        AddType application/x-httpd-php .wml
+        <Directory "/web/qlc/owncloudv4.qlc.net/htdocs">
+                Options Indexes MultiViews FollowSymLinks
+                AllowOverride All
+                Order allow,deny
+                Allow from all
+        </Directory>
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+        ServerAdmin server-team@qlc.net
+        DocumentRoot /web/qlc/owncloud.final.qlc.net/htdocs/
+        ServerName owncloud.final.qlc.net
+        ServerAlias www.owncloud.final.qlc.net
+        ErrorLog /var/log/httpd/error_log-owncloud.final.qlc.net
+        TransferLog /var/log/httpd/access_log-owncloud.final.qlc.net
+        LogFormat "%h|%l|%u|%t|\"%r\"|%s|%b|\"%{Referer}i\"|\"%{User-Agent}i\"|%v"
+        DirectoryIndex index.htm index.html index.phtml index.phtm index.php3 index.php
+        AddType application/x-httpd-php .htm
+        AddType application/x-httpd-php .php
+        AddType application/x-httpd-php .php3
+        AddType application/x-httpd-php .phtml
+        AddType application/x-httpd-php .htx
+        AddType application/x-httpd-php .inc
+        AddType application/x-httpd-php .wml
+        <Directory "/web/qlc/owncloud.final.qlc.net/htdocs">
+                Options Indexes MultiViews FollowSymLinks
+                AllowOverride All
+                Order allow,deny
+                Allow from all
+        </Directory>
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+        ServerAdmin server-team@qlc.net
+        DocumentRoot /web/qlc/owncloud.final.qlc.net/htdocs/
+        ServerName owncloud.http.qlc.net
+        ServerAlias www.owncloud.http.qlc.net
+        ErrorLog /var/log/httpd/error_log-owncloud.final.qlc.net
+        TransferLog /var/log/httpd/access_log-owncloud.final.qlc.net
+        LogFormat "%h|%l|%u|%t|\"%r\"|%s|%b|\"%{Referer}i\"|\"%{User-Agent}i\"|%v"
+        DirectoryIndex index.htm index.html index.phtml index.phtm index.php3 index.php
+        AddType application/x-httpd-php .htm
+        AddType application/x-httpd-php .php
+        AddType application/x-httpd-php .php3
+        AddType application/x-httpd-php .phtml
+        AddType application/x-httpd-php .htx
+        AddType application/x-httpd-php .inc
+        AddType application/x-httpd-php .wml
+
+	#SetEnvIf Referer "www\.amv4\.qlc\.net/" linked_from_here
+	#SetEnvIf Referer "amv4\.qlc\.net/" linked_from_here
+
+	#SetEnvIf Request_URI "\.(gif*)|(jpg*)|(png*)|(css*)|(js*)|(ico*)|(eot)|(svg)|(php*)$" linked_from_here
+	#SetEnvIf Request_URI "(query_string *=*)" linked_from_here
+	#SetEnvIf Request_URI "\.*$" linked_from_here
+	#SetEnvIf Request_URI "\.jpg$" linked_from_here
+	#SetEnvIf Request_URI "\.js$" linked_from_here
+	#SetEnvIf Request_URI "\.css$" linked_from_here
+	#SetEnvIf Request_URI "\.svg$" linked_from_here
+	#SetEnvIf Request_URI "\.png$" linked_from_here
+	
+
+	#SetEnvIf REFERER "^$" linked_from_here
+        <Directory "/web/qlc/owncloud.final.qlc.net/htdocs">
+                Options Indexes MultiViews FollowSymLinks
+                AllowOverride All
+		Order allow,deny
+                Allow from all
+
+                #Order deny,allow
+                #Allow from all
+		#Deny from all
+   		#Allow from env=linked_from_here
+
+		#AuthName "MySQL authenticated zone"
+		#AuthType Basic
+
+    		#AuthMYSQLEnable on
+		#AuthMySQLHost localhost
+		#AuthMySQLPort 3306
+		#AuthMySQLUser mailserve
+		#AuthMySQLPassword mail1234
+		#AuthMySQLDB mailserve_v03
+		#AuthMySQLUserTable http_document_users
+		#AuthMySQLNameField user_name
+		#AuthMySQLPasswordField user_passwd
+		#AuthMySQLPwEncryption none
+		#Auth_MySQL_Encryption_Types Plaintext Crypt_DES
+		#require valid-user
+        </Directory>
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+        ServerAdmin server-team@qlc.net
+        DocumentRoot /web/qlc/owncloudv4.qlc.net/htdocs
+        ServerName owncloud.amv3.qlc.net
+        ServerAlias www.owncloud.amv3.qlc.net
+        ErrorLog /var/log/httpd/error_log-owncloud.final.qlc.net
+        TransferLog /var/log/httpd/access_log-owncloud.final.qlc.net
+        LogFormat "%h|%l|%u|%t|\"%r\"|%s|%b|\"%{Referer}i\"|\"%{User-Agent}i\"|%v"
+        DirectoryIndex index.htm index.html index.phtml index.phtm index.php3 index.php
+        AddType application/x-httpd-php .htm
+        AddType application/x-httpd-php .php
+        AddType application/x-httpd-php .php3
+        AddType application/x-httpd-php .phtml
+        AddType application/x-httpd-php .htx
+        AddType application/x-httpd-php .inc
+        AddType application/x-httpd-php .wml
+        <Directory "/web/qlc/owncloudv4.qlc.net/htdocs">
+                Options Indexes MultiViews FollowSymLinks
+                AllowOverride All
+                Order allow,deny
+                Allow from all
+        </Directory>
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+        ServerAdmin server-team@qlc.net
+        DocumentRoot /web/qlc/sumit.cent.amv3.qlc.net/htdocs
+        ServerName sumit.cent.amv3.qlc.net
+        ServerAlias www.sumit.cent.amv3.qlc.net
+        ErrorLog /var/log/httpd/error_log-sumit.cent.amv3.qlc.net
+        TransferLog /var/log/httpd/access_log-sumit.cent.amv3.qlc.net
+        LogFormat "%h|%l|%u|%t|\"%r\"|%s|%b|\"%{Referer}i\"|\"%{User-Agent}i\"|%v"
+        DirectoryIndex index.htm index.html index.phtml index.phtm index.php3 index.php
+        AddType application/x-httpd-php .htm
+        AddType application/x-httpd-php .php
+        AddType application/x-httpd-php .php3
+        AddType application/x-httpd-php .phtml
+        AddType application/x-httpd-php .htx
+        AddType application/x-httpd-php .inc
+        AddType application/x-httpd-php .wml
+        <Directory "/web/qlc/sumit.cent.amv3.qlc.net/htdocs">
+                Options Indexes MultiViews FollowSymLinks
+                AllowOverride All
+                Order allow,deny
+                Allow from all
+        </Directory>
+</VirtualHost>
+
+
+<VirtualHost 192.168.1.187:80>
+        ServerAdmin server-team@qlc.net
+        DocumentRoot /web/qlc/codeigniter.qlc.net/
+        ServerName codeigniter.qlc.net
+        ServerAlias www.codeigniter.qlc.net
+        ErrorLog /var/log/httpd/error_log-codeigniter.qlc.net
+        TransferLog /var/log/httpd/access_log-codeigniter.qlc.net
+        LogFormat "%h|%l|%u|%t|\"%r\"|%s|%b|\"%{Referer}i\"|\"%{User-Agent}i\"|%v"
+        DirectoryIndex index.htm index.html index.phtml index.phtm index.php3 index.php
+        AddType application/x-httpd-php .htm
+        AddType application/x-httpd-php .php
+        AddType application/x-httpd-php .php3
+        AddType application/x-httpd-php .phtml
+        AddType application/x-httpd-php .htx
+        AddType application/x-httpd-php .inc
+        AddType application/x-httpd-php .wml
+        <Directory "/web/qlc/codeigniter.qlc.net">
+                Options Indexes MultiViews FollowSymLinks
+                AllowOverride All
+                Order allow,deny
+                Allow from all
+        </Directory>
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+ServerName wordpress.qlc.net
+ServerAlias www.wordpress.qlc.net
+ServerAdmin webmaster@mailserve.net
+DocumentRoot /web/qlc/wordpress.qlc.net/htdocs
+ErrorLog /var/log/httpd/wordpress.qlc.net_error_log
+TransferLog /var/log/httpd/wordpress.qlc.net_access_log
+
+LogFormat "%h %l %u %t \"%r\" %>s %b" common
+CustomLog logs/access_log common
+
+    AddType application/x-httpd-php .php
+    AddType application/x-httpd-php .php3
+    AddType application/x-httpd-php .phtml
+    AddType application/x-httpd-php .html
+    AddType application/x-httpd-php .htm
+    AddType application/x-httpd-php .inc
+    AddType application/x-httpd-php .htx
+
+    <Directory "/web/qlc/wordpress.qlc.net/htdocs/">
+            Options Indexes FollowSymLinks
+            AllowOverride All
+            php_admin_flag safe_mode on
+    </Directory>
+
+    DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+ServerName ganesh1.report.qlc.net
+ServerAlias www.ganesh1.report.qlc.net
+ServerAdmin webmaster@mailserve.net
+DocumentRoot /web/qlc/ganesh.report.qlc.net/app/webroot
+ErrorLog /var/log/httpd/ganesh1.report.qlc.net_error_log
+TransferLog /var/log/httpd/ganesh.report.qlc.net_access_log
+
+LogFormat "%h %l %u %t \"%r\" %>s %b" common
+CustomLog logs/access_log common
+
+
+    AddType application/x-httpd-php .php
+    AddType application/x-httpd-php .php3
+    AddType application/x-httpd-php .phtml
+    AddType application/x-httpd-php .html
+    AddType application/x-httpd-php .htm
+    AddType application/x-httpd-php .inc
+    AddType application/x-httpd-php .htx
+
+    <Directory "/web/qlc/ganesh.report.qlc.net/app/webroot">
+            Options Indexes FollowSymLinks
+            AllowOverride All
+            php_admin_flag safe_mode on
+    </Directory>
+
+    DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+</VirtualHost>
+
+
+
+<VirtualHost 192.168.1.187:80>
+ServerName svn.kalyani1.qlc.net
+ServerAlias www.svn.kalyani1.qlc.net
+ServerAdmin webmaster@mailserve.net
+DocumentRoot /web/qlc/svn.kalyani.qlc.net/app/webroot
+ErrorLog /var/log/httpd/svn.kalyani.qlc.net_error_log
+TransferLog /var/log/httpd/svn.kalyani.qlc.net_access_log
+
+LogFormat "%h %l %u %t \"%r\" %>s %b" common
+CustomLog logs/access_log common
+
+
+    AddType application/x-httpd-php .php
+    AddType application/x-httpd-php .php3
+    AddType application/x-httpd-php .phtml
+    AddType application/x-httpd-php .html
+    AddType application/x-httpd-php .htm
+    AddType application/x-httpd-php .inc
+    AddType application/x-httpd-php .htx
+
+    <Directory "/web/qlc/svn.kalyani.qlc.net/app/webroot">
+            Options Indexes FollowSymLinks
+            AllowOverride All
+            php_admin_flag safe_mode on
+    </Directory>
+
+    DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+ ServerName webmail.timesgroup.net
+ ServerAlias www.webmail.timesgroup.net
+ DocumentRoot /web/qlc/webmail.timesgroup.net/htdocs
+ ErrorLog /var/log/httpd/webmail.timesgroup.net_error_log
+ TransferLog /var/log/httpd/webmail.timesgroup.net_access_log
+       AddType application/x-httpd-php .php
+       AddType application/x-httpd-php .php3
+       AddType application/x-httpd-php .phtml
+       AddType application/x-httpd-php .html
+       AddType application/x-httpd-php .htm
+       AddType application/x-httpd-php .inc
+       AddType application/x-httpd-php .htx
+
+      <Directory "/web/qlc/trimbak/webmail.timesgroup.net/htdocs">
+          Options Indexes FollowSymLinks
+          AllowOverride All
+        </Directory>
+ DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+ ServerName svn.webmail1.timesgroup.net
+ ServerAlias www.svn.webmail1.timesgroup.net
+ DocumentRoot /web/qlc/svn.webmail.timesgroup.net/htdocs
+ ErrorLog /var/log/httpd/svn.webmail.timesgroup.net_error_log
+ TransferLog /var/log/httpd/svn.webmail.timesgroup.net_access_log
+       AddType application/x-httpd-php .php
+       AddType application/x-httpd-php .php3
+       AddType application/x-httpd-php .phtml
+       AddType application/x-httpd-php .html
+       AddType application/x-httpd-php .htm
+       AddType application/x-httpd-php .inc
+       AddType application/x-httpd-php .htx
+
+      <Directory "/web/qlc/svn.webmail.timesgroup.net/htdocs">
+          Options Indexes FollowSymLinks
+          AllowOverride All
+        </Directory>
+ DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+</VirtualHost>
+
+#<VirtualHost 192.168.1.187:80>
+# ServerName perl.qlc.net
+# ServerAlias www.perl.qlc.net
+# DocumentRoot /web/qlc/perl.qlc.net/htdocs
+# ErrorLog /var/log/httpd/perl.qlc.net_error_log
+# TransferLog /var/log/httpd/perl.qlc.net_access_log
+
+       #AddType application/x-httpd-php .php
+       #AddType application/x-httpd-php .php3
+       #AddType application/x-httpd-php .phtml
+       #AddType application/x-httpd-php .html
+       #AddType application/x-httpd-php .htm
+       #AddType application/x-httpd-php .inc
+       #AddType application/x-httpd-php .htx
+
+ #     <Directory "/web/qlc/perl.qlc.net/htdocs">
+#	<FilesMatch "\.mhtml$|\.pl$|\.html$">
+#		Options		+ExecCGI
+#		AddHandler	cgi-script .cgi .pl .html
+#		SetHandler	perl-script		
+		#PerlHandler	ModPerl::Registry
+		#PerlHandler 	SOAP::Apache
+		#PerlSendHeader	On 
+#	</FilesMatch>
+ #     </Directory>
+ #DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+#</VirtualHost>
+
+#<VirtualHost 192.168.1.187:80>
+# ServerName sieve.qlc.net
+# ServerAlias www.sieve.qlc.net
+# DocumentRoot /web/qlc/sieve.qlc.net/htdocs
+# ErrorLog /var/log/httpd/sieve.qlc.net_error_log
+# TransferLog /var/log/httpd/sieve.qlc.net_access_log
+
+       #AddType application/x-httpd-php .php
+       #AddType application/x-httpd-php .php3
+       #AddType application/x-httpd-php .phtml
+       #AddType application/x-httpd-php .html
+       #AddType application/x-httpd-php .htm
+       #AddType application/x-httpd-php .inc
+       #AddType application/x-httpd-php .htx
+
+ #     <Directory "/web/qlc/sieve.qlc.net/htdocs">
+  #      <FilesMatch "\.mhtml$|\.pl$|\.html$">
+   #             Options         +ExecCGI
+    #            AddHandler      cgi-script .cgi .pl .html
+     #           SetHandler      perl-script
+                #PerlHandler     ModPerl::Registry
+                #PerlHandler    SOAP::Apache
+      #          PerlSendHeader  On
+       # </FilesMatch>
+      #</Directory>
+# DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+#</VirtualHost>
+
+#<VirtualHost 192.168.1.187:80>
+ #ServerName mason.qlc.net
+ #ServerAlias www.mason.qlc.net
+ #DocumentRoot /web/qlc/mason.qlc.net/htdocs
+ #ErrorLog /var/log/httpd/mason.qlc.net_error_log
+ #TransferLog /var/log/httpd/mason.qlc.net_access_log
+
+      #PerlSwitches -I/web/qlc/mason.qlc.net/lib
+      #PerlModule	Apprentice	
+      #PerlModule directive not allowed in a <FilesMatch> block
+      #PerlSetVar      	MasonCompRoot   /web/qlc/mason.qlc.net/htdocs
+      #PerlSetVar      	MasonDataDir    /web/qlc/mason.qlc.net/mason-data
+      #PerlSetVar      	MasonArgsMethod CGI
+			
+      #PerlSetVar      	MasonAllowGlobals  $Schema
+      #PerlAddVar      	MasonAllowGlobals  $User
+      #<Directory /web/qlc/mason.qlc.net/htdocs>	 		
+	#<FilesMatch "\.mhtml$|\.html$">
+	#<Location /web/qlc/mason.qlc.net/htdocs>
+		#SetHandler	perl-script
+		#PerlHandler 	HTML::Mason::ApacheHandler
+		#PerlSetVar      MasonCompRoot   /web/qlc/mason.qlc.net/htdocs
+      		#PerlSetVar      MasonDataDir    /web/qlc/mason.qlc.net/mason-data
+                #PerlSendHeader  On
+                #Options         +ExecCGI
+                #AddHandler      cgi-script .cgi .pl .html
+                #SetHandler      perl-script
+		#PerlHandler 	HTML::Mason::ApacheHandler
+                #PerlHandler     ModPerl::Registry
+		#SetHandler      perl-script
+                #PerlHandler     HTML::Mason::ApacheHandler
+                #PerlSetVar      MasonCompRoot   /web/qlc/mason.qlc.net/htdocs
+                #PerlSetVar      MasonDataDir    /web/qlc/mason.qlc.net/mason-data
+                #PerlSetVar      MasonArgsMethod CGI
+		#PerlSetVar      MasonAllowGlobals  $Schema
+		#PerlSetVar      MasonAllowGlobals  $User
+
+	#</Location>
+	#</FilesMatch>
+     #</Directory>	
+#</VirtualHost>
+
+
+<VirtualHost 192.168.1.187:80>
+ServerName curl.local.qlc.net
+ServerAlias www.curl.local.qlc.net
+ServerAdmin webmaster@mailserve.net
+DocumentRoot /web/qlc/curl.local.qlc.net/
+ErrorLog /var/log/httpd/curl.local.qlc.net_error_log
+TransferLog /var/log/httpd/curl.local.qlc.net_access_log
+
+LogFormat "%h %l %u %t \"%r\" %>s %b" common
+CustomLog logs/access_log common
+    AddType application/x-httpd-php .php
+    AddType application/x-httpd-php .php3
+    AddType application/x-httpd-php .phtml
+    AddType application/x-httpd-php .html
+    AddType application/x-httpd-php .htm
+    AddType application/x-httpd-php .inc
+    AddType application/x-httpd-php .htx
+
+    AddDefaultCharset UTF-8
+    RewriteEngine on
+
+    <Directory "/web/qlc/curl.local.qlc.net/app/webroot">
+            Options Indexes MultiViews FollowSymLinks
+            AllowOverride All
+            Order allow,deny
+            Allow from all
+    </Directory>
+    DirectoryIndex index.phtml index.htm index.html index.php3 index.php to_be_delete.php
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+ServerName elgg.qlc.net
+ServerAlias www.elgg.qlc.net
+ServerAdmin webmaster@mailserve.net
+DocumentRoot /web/qlc/elgg.qlc.net/htdocs
+ErrorLog /var/log/httpd/elgg.qlc.net_error_log
+TransferLog /var/log/httpd/elgg.qlc.net_access_log
+
+LogFormat "%h %l %u %t \"%r\" %>s %b" common
+CustomLog logs/access_log common
+    AddType application/x-httpd-php .php
+    AddType application/x-httpd-php .php3
+    AddType application/x-httpd-php .phtml
+    AddType application/x-httpd-php .html
+    AddType application/x-httpd-php .htm
+    AddType application/x-httpd-php .inc
+    AddType application/x-httpd-php .htx
+
+    AddDefaultCharset UTF-8
+    RewriteEngine on
+
+    <Directory "/web/qlc/elgg.qlc.net/htdocs">
+            Options Indexes MultiViews FollowSymLinks
+            AllowOverride All
+            Order allow,deny
+            Allow from all
+    </Directory>
+    DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+ServerName etherpad-lite.qlc.net
+ServerAlias www.etherpad-lite.qlc.net
+ServerAdmin webmaster@mailserve.net
+DocumentRoot /web/qlc/etherpad-lite.qlc.net/htdocs
+ErrorLog /var/log/httpd/etherpad-lite_error_log
+TransferLog /var/log/httpd/etherpad-lite.net_access_log
+
+LogFormat "%h %l %u %t \"%r\" %>s %b" common
+CustomLog logs/access_log common
+    AddType application/x-httpd-php .php
+    AddType application/x-httpd-php .php3
+    AddType application/x-httpd-php .phtml
+    AddType application/x-httpd-php .html
+    AddType application/x-httpd-php .htm
+    AddType application/x-httpd-php .inc
+    AddType application/x-httpd-php .htx
+
+    AddDefaultCharset UTF-8
+    RewriteEngine on
+
+    <Directory "/web/qlc/etherpad-lite.qlc.net/htdocs">
+            Options Indexes MultiViews FollowSymLinks
+            AllowOverride All
+            Order allow,deny
+            Allow from all
+    </Directory>
+    DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+ServerName manage-services.qlc.net
+ServerAlias www.manage-services.qlc.net
+ServerAdmin webmaster@mailserve.net
+DocumentRoot /web/qlc/manage-services.qlc.net/htdocs
+ErrorLog /var/log/httpd/manage-services.qlc.net_error_log
+TransferLog /var/log/httpd/manage-services.qlc.net_access_log
+
+LogFormat "%h %l %u %t \"%r\" %>s %b" common
+CustomLog logs/access_log common
+    AddType application/x-httpd-php .php
+    AddType application/x-httpd-php .php3
+    AddType application/x-httpd-php .phtml
+    AddType application/x-httpd-php .html
+    AddType application/x-httpd-php .htm
+    AddType application/x-httpd-php .inc
+    AddType application/x-httpd-php .htx
+
+    AddDefaultCharset UTF-8
+    RewriteEngine on
+
+    <Directory "/web/qlc/manage-services.qlc.net/htdocs">
+            Options Indexes MultiViews FollowSymLinks
+            AllowOverride All
+            Order allow,deny
+            Allow from all
+    </Directory>
+    DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+ServerName perlmvc.qlc.net
+ServerAlias www.perlmvc.qlc.net	
+    
+	DocumentRoot /web/qlc/perlmvccgiapp/htdocs/app1/
+    	ErrorLog /var/log/httpd/app1_error.log
+    	# Possible values include: debug, info, notice, warn, error, crit, alert, emerg.
+    	LogLevel debug
+    	CustomLog /var/log/httpd/app1_access.log combined
+
+    	Alias /app1/ /web/qlc/perlmvccgiapp/htdocs/app1/
+    	<Directory /web/qlc/perlmvccgiapp/htdocs/app1>
+        	AllowOverride None
+        	Options -Indexes -MultiViews -FollowSymLinks
+        	Order allow,deny
+        	Allow from all
+    	</Directory>
+
+    	ScriptAlias /cgi-bin/ /web/qlc/perlmvccgiapp/cgi-bin/
+    	<Directory /web/qlc/perlmvccgiapp/cgi-bin>
+        	AllowOverride None
+        	Options +ExecCGI -MultiViews +SymLinksIfOwnerMatch
+        	AddHandler cgi-script cgi pl
+        	Order allow,deny
+        	Allow from all
+    	</Directory>
+</VirtualHost>
+
+
+<VirtualHost 192.168.1.187:80>
+        ServerName mmv3.help.qlc.net
+        ServerAdmin web@qlc.net
+        DocumentRoot /web/qlc/mmv3.help.qlc.net/htdocs
+        ErrorLog /var/log/httpd/doc_error_log
+
+        LogFormat "%h %l %u %t \"%r\" %>s %b \"%{Referer}i\" \"%{User-Agent}i\"" combined
+        CustomLog /var/log/httpd/doc_combined_log combined
+
+        php_admin_value include_path .:/web/qlc/mmv3.help.qlc.net/htdocs/inc
+
+        <Directory /web/qlc/mmv3.help.qlc.net/htdocs/html/>
+              DirectoryIndex Introduction.html index.htm index.html index.php3 index.php 
+        </Directory>
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+ ServerName webmail.maaki.in
+ ServerAlias www.webmail.maaki.in
+ DocumentRoot /web/qlc/trimbak.amv4.qlc.net/htdocs
+ ErrorLog /var/log/httpd/trimbak.amv4.qlc.net_error_log
+ TransferLog /var/log/httpd/trimbak.amv4.qlc.net_access_log
+       AddType application/x-httpd-php .php
+       AddType application/x-httpd-php .php3
+       AddType application/x-httpd-php .phtml
+       AddType application/x-httpd-php .html
+       AddType application/x-httpd-php .htm
+       AddType application/x-httpd-php .inc
+       AddType application/x-httpd-php .htx
+
+      <Directory "/web/qlc/trimbak.amv4.qlc.net/htdocs">
+          Options Indexes FollowSymLinks
+          AllowOverride All
+        </Directory>
+# DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+        DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+        ExpiresActive on
+        ExpiresByType text/html A5
+        AddHandler cgi-script .cgi
+        AddDefaultCharset UTF-8
+        RewriteEngine on
+        RewriteRule /http-bind/ balancer://http-bind [P]
+        RewriteRule /http-bind balancer://http-bind [P]
+        <Proxy balancer://http-bind>
+         BalancerMember http://121.241.242.214:5280/http-bind/ timeout=900
+        </Proxy>
+        Options ExecCGI
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+ ServerName webmail.masteringlinux.org
+ ServerAlias www.webmail.masteringlinux.org
+ DocumentRoot /web/qlc/trimbak.amv4.qlc.net/htdocs
+ ErrorLog /var/log/httpd/trimbak.amv4.qlc.net_error_log
+ TransferLog /var/log/httpd/trimbak.amv4.qlc.net_access_log
+       AddType application/x-httpd-php .php
+       AddType application/x-httpd-php .php3
+       AddType application/x-httpd-php .phtml
+       AddType application/x-httpd-php .html
+       AddType application/x-httpd-php .htm
+       AddType application/x-httpd-php .inc
+       AddType application/x-httpd-php .htx
+
+      <Directory "/web/qlc/trimbak.amv4.qlc.net/htdocs">
+          Options Indexes FollowSymLinks
+          AllowOverride All
+        </Directory>
+# DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+        DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+        ExpiresActive on
+        ExpiresByType text/html A5
+        AddHandler cgi-script .cgi
+        AddDefaultCharset UTF-8
+        RewriteEngine on
+        RewriteRule /http-bind/ balancer://http-bind [P]
+        RewriteRule /http-bind balancer://http-bind [P]
+        <Proxy balancer://http-bind>
+         BalancerMember http://121.241.242.214:5280/http-bind/ timeout=900
+        </Proxy>
+        Options ExecCGI
+</VirtualHost>
+<VirtualHost 192.168.1.187:80>
+ ServerName webmail.varad.in
+ ServerAlias www.webmail.varad.in
+ DocumentRoot /web/qlc/trimbak.amv4.qlc.net/htdocs
+ ErrorLog /var/log/httpd/trimbak.amv4.qlc.net_error_log
+ TransferLog /var/log/httpd/trimbak.amv4.qlc.net_access_log
+       AddType application/x-httpd-php .php
+       AddType application/x-httpd-php .php3
+       AddType application/x-httpd-php .phtml
+       AddType application/x-httpd-php .html
+       AddType application/x-httpd-php .htm
+       AddType application/x-httpd-php .inc
+       AddType application/x-httpd-php .htx
+
+      <Directory "/web/qlc/trimbak.amv4.qlc.net/htdocs">
+          Options Indexes FollowSymLinks
+          AllowOverride All
+        </Directory>
+# DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+        DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+        ExpiresActive on
+        ExpiresByType text/html A5
+        AddHandler cgi-script .cgi
+        AddDefaultCharset UTF-8
+        RewriteEngine on
+        RewriteRule /http-bind/ balancer://http-bind [P]
+        RewriteRule /http-bind balancer://http-bind [P]
+        <Proxy balancer://http-bind>
+         BalancerMember http://121.241.242.214:5280/http-bind/ timeout=900
+        </Proxy>
+        Options ExecCGI
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+ ServerName webmail.qlc.in
+ ServerAlias www.webmail.qlc.in
+ DocumentRoot /web/qlc/trimbak.amv4.qlc.net/htdocs
+ ErrorLog /var/log/httpd/trimbak.amv4.qlc.net_error_log
+ TransferLog /var/log/httpd/trimbak.amv4.qlc.net_access_log
+       AddType application/x-httpd-php .php
+       AddType application/x-httpd-php .php3
+       AddType application/x-httpd-php .phtml
+       AddType application/x-httpd-php .html
+       AddType application/x-httpd-php .htm
+       AddType application/x-httpd-php .inc
+       AddType application/x-httpd-php .htx
+
+      <Directory "/web/qlc/trimbak.amv4.qlc.net/htdocs">
+          Options Indexes FollowSymLinks
+          AllowOverride All
+        </Directory>
+# DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+        DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+        ExpiresActive on
+        ExpiresByType text/html A5
+        AddHandler cgi-script .cgi
+        AddDefaultCharset UTF-8
+        RewriteEngine on
+        RewriteRule /http-bind/ balancer://http-bind [P]
+        RewriteRule /http-bind balancer://http-bind [P]
+        <Proxy balancer://http-bind>
+         BalancerMember http://121.241.242.214:5280/http-bind/ timeout=900
+        </Proxy>
+        Options ExecCGI
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+ ServerName webmail.medallcorp.in
+ ServerAlias www.webmail.medallcorp.in
+ DocumentRoot /web/qlc/trimbak.amv4.qlc.net/htdocs
+ ErrorLog /var/log/httpd/trimbak.amv4.qlc.net_error_log
+ TransferLog /var/log/httpd/trimbak.amv4.qlc.net_access_log
+       AddType application/x-httpd-php .php
+       AddType application/x-httpd-php .php3
+       AddType application/x-httpd-php .phtml
+       AddType application/x-httpd-php .html
+       AddType application/x-httpd-php .htm
+       AddType application/x-httpd-php .inc
+       AddType application/x-httpd-php .htx
+
+      <Directory "/web/qlc/trimbak.amv4.qlc.net/htdocs">
+          Options Indexes FollowSymLinks
+          AllowOverride All
+        </Directory>
+# DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+        DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+        ExpiresActive on
+        ExpiresByType text/html A5
+        AddHandler cgi-script .cgi
+        AddDefaultCharset UTF-8
+        RewriteEngine on
+        RewriteRule /http-bind/ balancer://http-bind [P]
+        RewriteRule /http-bind balancer://http-bind [P]
+        <Proxy balancer://http-bind>
+         BalancerMember http://121.241.242.214:5280/http-bind/ timeout=900
+        </Proxy>
+        Options ExecCGI
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+ ServerName  amv4.qa.qlc.net 
+ ServerAlias www.amv4.qa.qlc.net
+ DocumentRoot /web/qlc/amv4.qa.qlc.net/htdocs
+ ErrorLog /var/log/httpd/amv4.qa.qlc.net_error_log
+ TransferLog /var/log/httpd/amv4.qa.qlc.net_access_log
+       AddType application/x-httpd-php .php
+       AddType application/x-httpd-php .php3
+       AddType application/x-httpd-php .phtml
+       AddType application/x-httpd-php .html
+       AddType application/x-httpd-php .htm
+       AddType application/x-httpd-php .inc
+       AddType application/x-httpd-php .htx
+
+      <Directory "/web/qlc/amv4.qa.qlc.net/htdocs">
+          Options Indexes FollowSymLinks
+          AllowOverride All
+        </Directory>
+# DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+        DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+        ExpiresActive on
+        ExpiresByType text/html A5
+        AddHandler cgi-script .cgi
+        AddDefaultCharset UTF-8
+        RewriteEngine on
+        RewriteRule /http-bind/ balancer://http-bind [P]
+        RewriteRule /http-bind balancer://http-bind [P]
+        <Proxy balancer://http-bind>
+              #  BalancerMember http://192.168.1.175:5280/http-bind/ timeout=900
+   	 	 BalancerMember http://121.241.242.214:5280/http-bind/ timeout=900	
+        </Proxy>
+        Options ExecCGI
+</VirtualHost>
+<VirtualHost 192.168.1.187:80>
+ ServerName rc_1.qlc.net
+ ServerAlias www.rc_1.qlc.net
+ DocumentRoot /web/qlc/rc_1.qlc.net/htdocs
+ ErrorLog /var/log/httpd/rc_1.qlc.net_error_log
+ TransferLog /var/log/httpd/amv4.qa.qlc.net_access_log
+       AddType application/x-httpd-php .php
+       AddType application/x-httpd-php .php3
+       AddType application/x-httpd-php .phtml
+       AddType application/x-httpd-php .html
+       AddType application/x-httpd-php .htm
+       AddType application/x-httpd-php .inc
+       AddType application/x-httpd-php .htx
+
+      <Directory "/web/qlc/rc_1.qlc.net/htdocs">
+          Options Indexes FollowSymLinks
+          AllowOverride All
+        </Directory>
+# DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+        DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+        ExpiresActive on
+        ExpiresByType text/html A5
+        AddHandler cgi-script .cgi
+        AddDefaultCharset UTF-8
+        RewriteEngine on
+        RewriteRule /http-bind/ balancer://http-bind [P]
+        RewriteRule /http-bind balancer://http-bind [P]
+        <Proxy balancer://http-bind>
+              #  BalancerMember http://192.168.1.175:5280/http-bind/ timeout=900
+                 BalancerMember http://121.241.242.214:5280/http-bind/ timeout=900
+        </Proxy>
+        Options ExecCGI
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+ ServerName trimbak.amv3.qlc.net
+ ServerAlias www.trimbak.amv3.qlc.net
+ DocumentRoot /web/qlc/trimbak.amv3.qlc.net/htdocs
+ ErrorLog /var/log/httpd/trimbak.amv3.qlc.net_error_log
+ TransferLog /var/log/httpd/trimbak.amv3.qlc.net_access_log
+       AddType application/x-httpd-php .php
+       AddType application/x-httpd-php .php3
+       AddType application/x-httpd-php .phtml
+       AddType application/x-httpd-php .html
+       AddType application/x-httpd-php .htm
+       AddType application/x-httpd-php .inc
+       AddType application/x-httpd-php .htx
+
+      <Directory "/web/qlc/trimbak.amv3.qlc.net/htdocs">
+          Options Indexes FollowSymLinks
+          AllowOverride All
+        </Directory>
+# DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+        DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+        ExpiresActive on
+        ExpiresByType text/html A5
+        AddHandler cgi-script .cgi
+        AddDefaultCharset UTF-8
+        RewriteEngine on
+        RewriteRule /http-bind/ balancer://http-bind [P]
+        RewriteRule /http-bind balancer://http-bind [P]
+        <Proxy balancer://http-bind>
+              #  BalancerMember http://192.168.1.175:5280/http-bind/ timeout=900
+                 BalancerMember http://121.241.242.214:5280/http-bind/ timeout=900
+        </Proxy>
+        Options ExecCGI
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+ ServerName  chwala.qlc.net
+ ServerAlias www.chwala.qlc.net
+ DocumentRoot /web/qlc/amv4.qa.qlc.net/kolab-chwala/public_html 
+ ErrorLog /var/log/httpd/chwala_error_log
+ TransferLog /var/log/httpd/chwala_access_log
+       AddType application/x-httpd-php .php
+       AddType application/x-httpd-php .php3
+       AddType application/x-httpd-php .phtml
+       AddType application/x-httpd-php .html
+       AddType application/x-httpd-php .htm
+       AddType application/x-httpd-php .inc
+       AddType application/x-httpd-php .htx
+
+      <Directory "/web/qlc/amv4.qa.qlc.net/kolab-chwala/public_html">
+          Options Indexes FollowSymLinks
+          AllowOverride All
+        </Directory>
+        DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+        ExpiresActive on
+        ExpiresByType text/html A5
+        AddHandler cgi-script .cgi
+        AddDefaultCharset UTF-8
+        RewriteEngine on
+        RewriteRule /http-bind/ balancer://http-bind [P]
+        RewriteRule /http-bind balancer://http-bind [P]
+        Options ExecCGI
+</VirtualHost>
+<VirtualHost 192.168.1.187:80>
+        ServerAdmin server-team@qlc.in
+        DocumentRoot /web/qlc/mobile.qlc.net/htdocs/
+        ServerName mobile.priority.qlc.net
+        ServerAlias mobile.qlc.net www.mobile.priority.qlc.net
+        ErrorLog /var/log/httpd/error_log-mobile.qlc.net
+        TransferLog /var/log/httpd/access_log-mobile.priority.qlc.net
+        LogFormat "%h|%l|%u|%t|\"%r\"|%s|%b|\"%{Referer}i\"|\"%{User-Agent}i\"|%v"
+        ScriptAlias /cgi-bin/ /web/qlc/mobile.qlc.net/
+        DirectoryIndex index.htm index.html index.phtml index.phtm index.php3 index.php
+        AddType application/x-httpd-php .htm
+        AddType application/x-httpd-php .php
+        AddType application/x-httpd-php .php3
+        AddType application/x-httpd-php .phtml
+        AddType application/x-httpd-php .htx
+        AddType application/x-httpd-php .inc
+        AddType application/x-httpd-php .wml
+        <Directory "/web/qlc/mobile.qlc.net/htdocs">
+                Options Indexes MultiViews FollowSymLinks
+                AllowOverride All
+                Order allow,deny
+                Allow from all
+        </Directory>
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+ServerName qa.mmv4.qlc.net
+ServerAlias www.qa.mmv4.qlc.net
+ServerAdmin webmaster@mailserve.net
+DocumentRoot /web/qlc/qa.mmv4.qlc.net/app/webroot
+ErrorLog /var/log/httpd/qa.mmv4.qlc.net_error_log
+TransferLog /var/log/httpd/qa.mmv4.qlc.net_access_log
+
+LogFormat "%h %l %u %t \"%r\" %>s %b" common
+CustomLog logs/access_log common
+    AddType application/x-httpd-php .php
+    AddType application/x-httpd-php .php3
+    AddType application/x-httpd-php .phtml
+    AddType application/x-httpd-php .html
+    AddType application/x-httpd-php .htm
+    AddType application/x-httpd-php .inc
+    AddType application/x-httpd-php .htx
+
+    AddDefaultCharset UTF-8
+    RewriteEngine on
+
+    <Directory "/web/qlc/qa.mmv4.qlc.net/app/webroot">
+            Options Indexes MultiViews FollowSymLinks
+            AllowOverride All
+            Order allow,deny
+            Allow from all
+    </Directory>
+    DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+</VirtualHost>
+<VirtualHost 192.168.1.187:80>
+ServerName svn.mmv4.qlc.net
+ServerAlias www.svn.mmv4.qlc.net
+ServerAdmin webmaster@mailserve.net
+DocumentRoot /web/qlc/svn.mmv4.qlc.net/app/webroot
+ErrorLog /var/log/httpd/svn.mmv4.qlc.net_error_log
+TransferLog /var/log/httpd/svn.mmv4.qlc.net_access_log
+
+LogFormat "%h %l %u %t \"%r\" %>s %b" common
+CustomLog logs/access_log common
+    AddType application/x-httpd-php .php
+    AddType application/x-httpd-php .php3
+    AddType application/x-httpd-php .phtml
+    AddType application/x-httpd-php .html
+    AddType application/x-httpd-php .htm
+    AddType application/x-httpd-php .inc
+    AddType application/x-httpd-php .htx
+
+    AddDefaultCharset UTF-8
+    RewriteEngine on
+
+    <Directory "/web/qlc/svn.mmv4.qlc.net/app/webroot">
+            Options Indexes MultiViews FollowSymLinks
+            AllowOverride All
+            Order allow,deny
+            Allow from all
+    </Directory>
+    DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+</VirtualHost>
+<VirtualHost 192.168.1.187:80>
+        ServerName chathistoryv3.qlc.net
+        ServerAlias www.chathistoryv3.qlc.net chathistoryv3.qlc.net
+        ServerAdmin webmaster@mailserve.net
+        DocumentRoot /web/qlc/chathistoryv3.qlc.co.in/htdocs
+        ErrorLog logs/error_log
+        TransferLog logs/access_log
+        AddType application/x-httpd-php .php
+        AddType application/x-httpd-php .php3
+        AddType application/x-httpd-php .phtml
+        AddType application/x-httpd-php .html
+        AddType application/x-httpd-php .htm
+        AddType application/x-httpd-php .inc
+        AddType application/x-httpd-php .htx
+        Options ExecCGI FollowSymLinks Includes
+        DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+ServerName svn.mmv4.qlc.net
+ServerAlias www.svn.mmv4.qlc.net
+ServerAdmin webmaster@mailserve.net
+DocumentRoot /web/qlc/svn.mmv4.qlc.net/app/webroot
+ErrorLog /var/log/httpd/svn.mmv4.qlc.net_error_log
+TransferLog /var/log/httpd/svn.mmv4.qlc.net_access_log
+
+LogFormat "%h %l %u %t \"%r\" %>s %b" common
+CustomLog logs/access_log common
+    AddType application/x-httpd-php .php
+    AddType application/x-httpd-php .php3
+    AddType application/x-httpd-php .phtml
+    AddType application/x-httpd-php .html
+    AddType application/x-httpd-php .htm
+    AddType application/x-httpd-php .inc
+    AddType application/x-httpd-php .htx
+
+    AddDefaultCharset UTF-8
+    RewriteEngine on
+
+    <Directory "/web/qlc/svn.mmv4.qlc.net/app/webroot">
+            Options Indexes MultiViews FollowSymLinks
+            AllowOverride All
+            Order allow,deny
+            Allow from all
+    </Directory>
+    DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+        ServerName chatserve.qlc.net
+        ServerAlias chatv3.qlc.net chatv4.qlc.net chatv3.net
+        ServerAdmin webmaster@mailserve.net
+        DocumentRoot /web/qlc/chatservev3.qlc.co.in/htdocs
+        ErrorLog logs/error_log
+        TransferLog logs/access_log
+        AddType application/x-httpd-php .php
+        AddType application/x-httpd-php .php3
+        AddType application/x-httpd-php .phtml
+        AddType application/x-httpd-php .html
+        AddType application/x-httpd-php .htm
+        AddType application/x-httpd-php .inc
+        AddType application/x-httpd-php .htx
+        AddType text/javascript .js
+        <Directory /web/qlc/chatservev3.qlc.co.in/htdocs>
+                Options  +Indexes +Multiviews
+        </Directory>
+        AddDefaultCharset UTF-8
+        RewriteEngine on
+        RewriteRule /http-bind/ balancer://http-bind [P]
+        RewriteRule /http-bind balancer://http-bind [P]
+        <Proxy balancer://http-bind>
+                BalancerMember http://121.241.242.214:5280/http-bind/ timeout=3000
+        </Proxy>
+        DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+        ServerName qav3-webmail.qlc.net
+        ServerAlias www.qav3-webmail.qlc.net
+        ServerAdmin webmaster@mailserve.net
+        DocumentRoot /web/qlc/quarantine/qav3-webmail.qlc.co.in/htdocs
+
+        ErrorLog /var/log/httpd/qav3-webmail.qlc.net_error_log
+        TransferLog /var/log/httpd/qav3-webmail.qlc.net_access_log
+
+        AddType application/x-httpd-php .php
+        AddType application/x-httpd-php .php3
+        AddType application/x-httpd-php .phtml
+        AddType application/x-httpd-php .html
+        AddType application/x-httpd-php .htm
+        AddType application/x-httpd-php .inc
+        AddType application/x-httpd-php .htx
+
+        Options ExecCGI FollowSymLinks Includes
+        DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+        ServerName qav3.qlc.net
+        ServerAlias www.qav3.qlc.net
+        ServerAdmin webmaster@mailserve.net
+        DocumentRoot /web/qlc/qav3.qlc.co.in/htdocs
+
+        ErrorLog /var/log/httpd/qav3.qlc.co.in_error_log
+        TransferLog /var/log/httpd/qav3.qlc.co.in_access_log
+
+        AddType application/x-httpd-php .php
+        AddType application/x-httpd-php .php3
+        AddType application/x-httpd-php .phtml
+        AddType application/x-httpd-php .html
+        AddType application/x-httpd-php .htm
+        AddType application/x-httpd-php .inc
+        AddType application/x-httpd-php .htx
+
+        Options ExecCGI FollowSymLinks Includes
+        DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+ServerAdmin server-alerts@qlc.in
+DocumentRoot /web/qlc/smsv3.postmaster.co.in/htdocs
+ServerName smsv3.qlc.net
+ServerAlias www.smsv3.qlc.net
+ErrorLog /var/log/httpd/smsv3.postmaster.co.in_error_log
+TransferLog /var/log/httpd/mailserve-access_log
+LogFormat "%h|%l|%u|%t|\"%r\"|%s|%b|\"%{Referer}i\"|\"%{User-Agent}i\"|%v"
+CustomLog /var/log/httpd/smsv3.postmaster.co.in_access_log combined
+ScriptAlias /cgi-bin/ /web/qlc/smsv3.postmaster.co.in/cgi-bin/
+DirectoryIndex index.htm index.html index.phtml index.phtm index.php3 index.php
+AddType application/x-httpd-php .htm
+AddType application/x-httpd-php .php
+AddType application/x-httpd-php .php3
+AddType application/x-httpd-php .phtml
+AddType application/x-httpd-php .htx
+AddType application/x-httpd-php .inc
+AddType application/x-httpd-php .wml
+ErrorDocument 403 /error/noindex.html
+ExpiresActive on
+ExpiresByType text/html A5
+
+<Directory /web/qlc/smsv3.postmaster.co.in>
+    Options FollowSymLinks
+    AllowOverride all
+    Order allow,deny
+    Allow from all
+</Directory>
+</VirtualHost>
+
+<VirtualHost 192.168.1.187:80>
+ServerName trimbak.mm.qlc.net
+ServerAlias www.trimbak.mm.qlc.net
+ServerAdmin webmaster@mailserve.net
+#SSLEngine on
+#SSLCertificateFile /etc/pki/tls/certs/ca.crt
+#SSLCertificateKeyFile /etc/pki/tls/private/ca.key
+DocumentRoot /web/qlc/trimbak.mm.qlc.net/cakephp-2.9.1/app/webroot
+ErrorLog /var/log/httpd/trimbak.mm.qlc.net_error_log
+TransferLog /var/log/httpd/trimbak.mm.qlc.net_access_log
+
+LogFormat "%h %l %u %t \"%r\" %>s %b" common
+CustomLog logs/access_log common
+    AddType application/x-httpd-php .php
+    AddType application/x-httpd-php .php3
+    AddType application/x-httpd-php .phtml
+    AddType application/x-httpd-php .html
+    AddType application/x-httpd-php .htm
+    AddType application/x-httpd-php .inc
+    AddType application/x-httpd-php .htx
+
+    AddDefaultCharset UTF-8
+    RewriteEngine on
+
+    <Directory "/web/qlc/trimbak.mm.qlc.net/cakephp-2.9.1/app/webroot">
+            Options Indexes MultiViews FollowSymLinks
+            AllowOverride All
+            Order allow,deny
+            Allow from all
+    </Directory>
+    DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+</VirtualHost>

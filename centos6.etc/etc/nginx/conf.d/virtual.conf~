@@ -1,0 +1,77 @@
+#
+# A virtual host using mix of IP-, name-, and port-based configuration
+#
+
+#server {
+#    listen       8000;
+#    listen       somename:8080;
+#    server_name  somename  alias  another.alias;
+
+#    location / {
+#        root   html;
+#        index  index.html index.htm;
+#    }
+#}
+
+server {
+
+     listen          192.168.1.187:80;
+     server_name      test.amv4.qlc.net;
+     root            /web/qlc/trimbak.amv4.qlc.net/htdocs;
+     index            index.php index.html index.htm apc.php;
+     client_max_body_size 30M;
+     error_log  /var/log/nginx/ssl_error.log warn;
+# Deny all attempts to access hidden files such as .htaccess, .htpasswd, .DS_Store (Mac).
+location ~ ^/(README(.md)?|INSTALL|LICENSE|CHANGELOG|UPGRADING)$ {
+            deny all;
+        }
+
+	location ~ ^/(bin|SQL|config|logs)/ {
+            deny all;
+        }
+
+	location ~^/program/(include|lib|localization|steps)/ {
+	    deny all;
+	}
+
+
+        location ~ ^/http-bind { 
+   	 proxy_buffering off; 
+     	 tcp_nodelay on; 
+   	 proxy_read_timeout 180; 
+   	 proxy_connect_timeout 65; 
+   	 proxy_pass http://121.241.242.214:5280; 
+  }
+
+	location ~ /\. {
+            deny all;
+            access_log off;
+            log_not_found off;
+        }
+
+        location ~ \.php$ {
+                expires off;
+                try_files $uri =404;
+                fastcgi_split_path_info ^(.+\.php)(/.+)$;
+
+                include fastcgi_params;
+                fastcgi_index index.php;
+                fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+		fastcgi_read_timeout 600s;
+                fastcgi_intercept_errors on;
+                fastcgi_pass 127.0.0.1:9090;
+	}
+         location /nginx_status {
+       		  stub_status on;
+      		   access_log   off;
+        	   allow 127.0.0.1 ;
+	         deny all;
+        	 }
+
+	location /apc_status{
+		stub_status on;
+		access_log off;
+		allow 127.0.0.1;
+		deny all;
+		}
+}

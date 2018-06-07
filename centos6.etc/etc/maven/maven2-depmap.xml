@@ -1,0 +1,30 @@
+<dependencies>
+
+<dependency>
+    <maven>
+        <groupId>org.eclipse.jdt</groupId>
+        <artifactId>core</artifactId>
+        <version>4.5.2</version>
+    </maven>
+    <jpp>
+        <groupId>JPP</groupId>
+        <artifactId>jdtcore</artifactId>
+        <version>4.5.2</version>
+    </jpp>
+</dependency>
+
+<dependency>
+    <maven>
+        <groupId>postgresql</groupId>
+        <artifactId>postgresql</artifactId>
+        <version>8.4.704</version>
+    </maven>
+    <jpp>
+        <groupId>JPP</groupId>
+        <artifactId>postgresql-jdbc</artifactId>
+        <version>8.4.704</version>
+    </jpp>
+</dependency>
+
+</dependencies>
+

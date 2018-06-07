@@ -1,0 +1,16 @@
+MYSQLServer     localhost
+MYSQLPort       3306
+MYSQLUser       mailserve
+MYSQLPassword   mail1234
+MYSQLDatabase   mailserve_v03
+MYSQLCrypt      md5
+
+MYSQLGetPW       (select `ClientUser`.`password` as Password FROM `mailserve_v03`.`ftp_accounts` AS `FtpAccount` LEFT JOIN `mailserve_v03`.`client_users` AS `ClientUser` ON (`ClientUser`.`id` = `FtpAccount`.`client_user_id`) LEFT JOIN `mailserve_v03`.`client_domains` AS `UserClientDomain` ON (`UserClientDomain`.`id` = `ClientUser`.`client_domain_id`) LEFT JOIN `mailserve_v03`.`client_domains` AS `ClientDomain` ON (`ClientDomain`.`id` = `FtpAccount`.`client_domain_id`) WHERE if(ClientUser.client_domain_id = 0, ClientUser.email_address, concat(ClientUser.email_address,'@',UserClientDomain.name)) =  '\L' and `FtpAccount`.`account_type` = 0) limit 1
+
+MYSQLGetUID     (select `FtpAccount`.`uid` as Uid FROM `mailserve_v03`.`ftp_accounts` AS `FtpAccount` LEFT JOIN `mailserve_v03`.`client_users` AS `ClientUser` ON (`ClientUser`.`id` = `FtpAccount`.`client_user_id`) LEFT JOIN `mailserve_v03`.`client_domains` AS `UserClientDomain` ON (`UserClientDomain`.`id` = `ClientUser`.`client_domain_id`) LEFT JOIN `mailserve_v03`.`client_domains` AS `ClientDomain` ON (`ClientDomain`.`id` = `FtpAccount`.`client_domain_id`) WHERE if(ClientUser.client_domain_id = 0, ClientUser.email_address, concat(ClientUser.email_address,'@',UserClientDomain.name)) =  '\L') limit 1
+
+MYSQLGetGID     (select `FtpAccount`.`gid` as Gid FROM `mailserve_v03`.`ftp_accounts` AS `FtpAccount` LEFT JOIN `mailserve_v03`.`client_users` AS `ClientUser` ON (`ClientUser`.`id` = `FtpAccount`.`client_user_id`) LEFT JOIN `mailserve_v03`.`client_domains` AS `UserClientDomain` ON (`UserClientDomain`.`id` = `ClientUser`.`client_domain_id`) LEFT JOIN `mailserve_v03`.`client_domains` AS `ClientDomain` ON (`ClientDomain`.`id` = `FtpAccount`.`client_domain_id`) WHERE if(ClientUser.client_domain_id = 0, ClientUser.email_address, concat(ClientUser.email_address,'@',UserClientDomain.name)) =  '\L') limit 1
+
+MYSQLGetDir     (select `FtpAccount`.`home_dir` as HomeDir FROM `mailserve_v03`.`ftp_accounts` AS `FtpAccount` LEFT JOIN `mailserve_v03`.`client_users` AS `ClientUser` ON (`ClientUser`.`id` = `FtpAccount`.`client_user_id`) LEFT JOIN `mailserve_v03`.`client_domains` AS `UserClientDomain` ON (`UserClientDomain`.`id` = `ClientUser`.`client_domain_id`) LEFT JOIN `mailserve_v03`.`client_domains` AS `ClientDomain` ON (`ClientDomain`.`id` = `FtpAccount`.`client_domain_id`) WHERE if(ClientUser.client_domain_id = 0, ClientUser.email_address, concat(ClientUser.email_address,'@',UserClientDomain.name)) =  '\L') limit 1
+
+MySQLGetQTASZ   (select `FtpAccount`.`quota` /(1000 * 1024 )  as QuotaSize FROM `mailserve_v03`.`ftp_accounts` AS `FtpAccount` LEFT JOIN `mailserve_v03`.`client_users` AS `ClientUser` ON (`ClientUser`.`id` = `FtpAccount`.`client_user_id`) LEFT JOIN `mailserve_v03`.`client_domains` AS `UserClientDomain` ON (`UserClientDomain`.`id` = `ClientUser`.`client_domain_id`) LEFT JOIN `mailserve_v03`.`client_domains` AS `ClientDomain` ON (`ClientDomain`.`id` = `FtpAccount`.`client_domain_id`) WHERE if(ClientUser.client_domain_id = 0, ClientUser.email_address, concat(ClientUser.email_address,'@',UserClientDomain.name)) =  '\L') limit 1

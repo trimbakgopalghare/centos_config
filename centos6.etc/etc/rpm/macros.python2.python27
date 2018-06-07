@@ -1,0 +1,25 @@
+# define these macros in a way which will expand them to correct values even for non-scl-build, assuming 's/python27//'
+%python27__python2 /opt/rh/python27/root/usr/bin/python2
+%python27__python %python27__python2
+%python27python2_sitelib %(%{?scl:scl enable python27 '}%{python27__python2} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib())"%{?scl:'})
+%python27python_sitelib %python27python2_sitelib
+%python27python2_sitearch %(%{?scl:scl enable python27 '}%{python27__python2} -c "from distutils.sysconfig import get_python_lib; print(get_python_lib(1))"%{?scl:'})
+%python27python_sitearch %python27python2_sitearch
+%python27python2_version %(%{?scl:scl enable python27 '}%{python27__python2} -c "import sys; sys.stdout.write(sys.version[:3])"%{?scl:'})
+%python27python_version %python27python2_version
+
+# these macros won't be needed if doing non-scl build, so define them in a way that won't overwrite system ones
+%python27_os_install_post \
+    /usr/lib/rpm/brp-scl-compress %{_scl_root} \
+    %{!?__debug_package:/usr/lib/rpm/redhat/brp-strip %{__strip} \
+    /usr/lib/rpm/redhat/brp-strip-comment-note %{__strip} %{__objdump} \
+    } \
+    /usr/lib/rpm/redhat/brp-strip-static-archive %{__strip} \
+    %{!?_turn_off_bytecompile:scl enable python27 '/usr/lib/rpm/redhat/brp-python-bytecompile-with-scl-python %python27__python2 %{?_python_bytecompile_errors_terminate_build} %{_scl_root}'} \
+    /usr/lib/rpm/redhat/brp-python-hardlink
+
+%python27_python_provides /usr/lib/rpm/pythondeps-scl.sh --provides %{?scl:python27-}
+%python27_python_requires /usr/lib/rpm/pythondeps-scl.sh --requires %{?scl:python27-}
+
+
+%_python_bytecompile_errors_terminate_build 1

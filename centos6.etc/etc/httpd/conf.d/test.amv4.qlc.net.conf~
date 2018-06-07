@@ -1,0 +1,36 @@
+<VirtualHost 192.168.1.187:443>
+ ServerName test.amv4.qlc.net
+ ServerAlias www.test.amv4.qlc.net
+ SSLEngine on
+ SSLCertificateFile /etc/pki/tls/certs/ca.crt
+ SSLCertificateKeyFile /etc/pki/tls/private/ca.key
+ DocumentRoot /web/qlc/trimbak.amv4.qlc.net/htdocs
+ #DocumentRoot /web/qlc/amv4.qa.qlc.net/htdocs 
+ ErrorLog /var/log/httpd/trimbak.amv4.qlc.net_error_log
+ TransferLog /var/log/httpd/trimbak.amv4.qlc.net_access_log
+       AddType application/x-httpd-php .php
+       AddType application/x-httpd-php .php3
+       AddType application/x-httpd-php .phtml
+       AddType application/x-httpd-php .html
+       AddType application/x-httpd-php .htm
+       AddType application/x-httpd-php .inc
+       AddType application/x-httpd-php .htx
+
+      <Directory "/web/qlc/trimbak.amv4.qlc.net/htdocs">
+          Options Indexes FollowSymLinks
+          AllowOverride All
+        </Directory>
+# DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+        DirectoryIndex index.phtml index.htm index.html index.php3 index.php
+        ExpiresActive on
+        ExpiresByType text/html A5
+        AddHandler cgi-script .cgi
+        AddDefaultCharset UTF-8
+        RewriteEngine on
+        RewriteRule /http-bind/ balancer://http-bind [P]
+        RewriteRule /http-bind balancer://http-bind [P]
+        <Proxy balancer://http-bind>
+         BalancerMember http://121.241.242.214:5280/http-bind/ timeout=900
+        </Proxy>
+        Options ExecCGI
+</VirtualHost>

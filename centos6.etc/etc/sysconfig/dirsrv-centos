@@ -1,0 +1,22 @@
+# This file is sourced by dirsrv upon startup to set
+# the default environment for a single specific  directory
+# server instances.  To set defaults for all instances, edit
+# the file in the same directory called dirsrv.
+
+# These settings are used by the start-dirsrv and
+# start-slapd scripts (as well as their associates stop
+# and restart scripts).  Do not edit them unless you know
+# what you are doing.
+
+
+
+SERVER_DIR=/usr/lib64/dirsrv ; export SERVER_DIR
+SERVERBIN_DIR=/usr/sbin ; export SERVERBIN_DIR
+CONFIG_DIR=/etc/dirsrv/slapd-centos ; export CONFIG_DIR
+INST_DIR=/usr/lib64/dirsrv/slapd-centos ; export INST_DIR
+RUN_DIR=/var/run/dirsrv ; export RUN_DIR
+DS_ROOT= ; export DS_ROOT
+PRODUCT_NAME=slapd ; export PRODUCT_NAME
+
+# Put custom instance specific settings below here.
+# if using systemd, omit the "; export VARNAME" at the end

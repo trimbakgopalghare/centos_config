@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=ORBit Socket Housekeeping
+Exec=/usr/bin/linc-cleanup-sockets
+NoDisplay=true
+StartupNotify=false

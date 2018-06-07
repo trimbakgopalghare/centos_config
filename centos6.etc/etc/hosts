@@ -1,0 +1,260 @@
+127.0.0.1		localhost.localdomain localhost
+::1		localhost6.localdomain6 	localhost6
+#192.168.1.187	qlc.net				www.qlc.net
+192.168.1.187	centos.qlc.in			www.centos.qlc.in localhost
+#121.241.242.211	amv3.qlc.co.in		www.amv3.qlc.co.in
+#121.241.242.211	mmv3.qlc.co.in		www.mmv3.qlc.co.in
+192.168.1.187	davical.qlc.net			www.davical.qlc.net
+192.168.1.185	agendav.qlc.net			www.agendav.qlc.net
+192.168.1.185	amv3blog.qlc.net		www.amv3blog.qlc.net
+192.168.1.187	dummy-host.example.com
+192.168.1.185	amv3.fetchmail.qlc.in		www.amv3.fetchmail.qlc.in
+192.168.1.185	owncloud.frmpankaj.qlc.net	www.owncloud.frmpankaj.qlc.net
+192.168.1.185   amv3.sumit.qlc.net		www.amv3.sumit.qlc.net
+192.168.1.187	owncloud.qlc.net		www.owncloud.qlc.net
+#192.168.1.185	owncloud.frmpankaj.qlc.net	www.owncloud.frmpankaj.qlc.net
+#121.241.242.211	mmv3.qlc.co.in		www.mmv3.qlc.co.in
+#121.241.242.211 amv3.qlc.co.in			www.amv3.qlc.co.in
+192.168.1.187	sumit.cent.amv3.qlc.net		www.sumit.cent.amv3.qlc.net
+192.168.1.55	svn.amol.qlc.net		www.svn.amol.qlc.net
+192.168.1.187	qa.mmv3.qlc.net			www.qa.mmv3.qlc.net
+192.168.1.187	amv3.qa.qlc.net                 www.amv3.qa.qlc.net
+192.168.1.187	ganesh1.report.qlc.net		www.ganesh1.report.qlc.net
+192.168.1.175   svn.kalyani1.qlc.net  		www.svn.kalyani1.qlc.net
+192.168.1.187   svn.webmail1.timesgroup.net   	www.svn.webmail1.timesgroup.net
+192.168.1.187   webmail1.timesgroup.net       	www.webmail1.timesgroup.net
+#115.112.229.232	amv3.qlc.co.in		www.amv3.qlc.co.in
+192.168.1.55	amol.owncloud.net		www.amol.owncloud.net
+192.168.1.185	owncloud.sumit.qlc.net		www.owncloud.sumit.qlc.net
+192.168.1.187	perl.qlc.net			www.perl.qlc.net
+192.168.1.187	curl.local.qlc.net		www.curl.local.qlc.net
+192.168.1.55	new.cakephp.net			www.new.cakephp.net
+192.168.1.187	elgg.qlc.net			www.elgg.qlc.net
+192.168.1.187	etherpad-lite.qlc.net		www.etherpad-lite.qlc.net
+192.168.1.187	owncloud5.qlc.net		www.owncloud5.qlc.net
+192.168.1.187	perlmvc.qlc.net			www.perlmvc.qlc.net
+192.168.1.175	svn.kalyani.amv3.qlc.net	www.svn.kalyani.amv3.qlc.net
+192.168.1.187	manage-services.qlc.net		www.manage-services.qlc.net
+192.168.1.55	amv3.amol.qlc.net		www.amv3.amol.qlc.net
+192.168.1.64    sogo.qlc.net			www.sogo.qlc.net
+192.168.1.187	amol.amv3.qlc.net		www.amol.amv3.qlc.net
+192.168.1.187	amol.mmv3.qlc.net		www.amol.mmv3.qlc.net
+192.168.1.187	roundcube9.qlc.net		www.roundcube9.qlc.net
+192.168.1.187	chat.qlc.net			www.chat.qlc.net
+#192.168.1.188	mmblade.qlc.net			www.mmblade.qlc.net
+192.168.1.187	dms.qa.qlc.net			www.dms.qa.qlc.net
+192.168.1.55 	helpdesk.test2.qlc.net		www.helpdesk.test2.qlc.net
+#192.168.1.187 mytest.org	www.mytest.org
+#192.168.1.188	manage-servicesv3.qlc.net	www.manage-servicesv3.qlc.net
+#192.168.1.188   sievev3.qlc.net                 www.sievev3.qlc.net
+#192.168.1.188   manage-servicesv4.qlc.net       www.manage-servicesv4.qlc.net
+192.168.1.184   qav4-webmail.qlc.net		www.qav4-webmail.qlc.net
+192.168.1.184   qav3-alerts.qlc.net		www.qav3-alerts.qlc.net
+192.168.1.184   qav3.qlc.net			www.qav3.qlc.net
+#192.168.1.187	amol.owncloud5.qlc.net		www.amol.owncloud5.qlc.net
+#192.168.1.187	amol.owncloud5-client.qlc.net	www.amol.owncloud5-client.qlc.net
+192.168.1.187	api.mmv3.qlc.net		www.api.mmv3.qlc.net
+192.168.1.175	testing.qlc.net			www.testing.qlc.net
+192.168.1.175   demo.qlc.net                    www.demo.qlc.net
+192.168.1.55	mmv3.new.qlc.net		www.mmv3.new.qlc.net
+192.168.1.175	ivin.amv3.qlc.net		www.ivin.amv3.qlc.net
+192.168.1.55	rest.api.qlc.net		www.rest.api.qlc.net
+192.168.1.185	mangesh.mmv3.qlc.net		www.mangesh.mmv3.qlc.net
+192.168.1.187	amol.owncloud6.qlc.net		www.amol.owncloud6.qlc.net
+192.168.1.175	ivin.amv3.qlc.net		www.ivin.amv3.qlc.net
+192.168.1.175	ivin.owncloud6.qlc.net		www.ivin.owncloud6.qlc.net
+192.168.1.175	ivin.cakephpold.qlc.net		www.ivin.cakephpold.qlc.net
+192.168.1.187  	webmail.timesgroup.net           www.webmail.timesgroup.net
+192.168.1.185  	webadmin.timesgroup.com          www.webadmin.timesgroup.com
+192.168.1.187  	mmv3.help.qlc.net		mmv3.help.qlc.net
+#192.168.1.184  	test.qlc.net             	www.test.qlc.net
+#192.168.1.93  	roundcube.qlc.net			www.roundcube.qlc.net
+192.168.1.187 	test.amv4.qlc.net              www.test.amv4.qlc.net
+192.168.1.187 	amv4.qa.qlc.net                    www.amv4.qa.qlc.net
+192.168.1.187   trimbak.mmv3.qlc.net           www.trimbak.mmv3.qlc.net
+192.168.1.186 	web_hosting.qlc.co.in 		www.web_hosting.qlc.co.in
+
+
+#192.168.1.188   sievev4.qlc.net			www.sievev4.qlc.net
+#192.168.1.187   sievev3.qlc.net  		www.sievev3.qlc.net
+#192.168.1.188 blade8.qlc.net  www.sievev3.qlc.net sievev3.qlc.net blade8
+#192.168.1.162 roundcube.qlc.net   www.roundcube.qlc.net
+#192.168.1.188 mobile.priority.qlc.net www.mobile.priority.qlc.net
+192.168.1.187 mobile.qlc.net          www.mobile.qlc.net
+192.168.1.187 rc_1.qlc.net   	      www.rc_1.qlc.net
+#192.168.1.188 webmail.maaki.in        www.webmail.maaki.in
+192.168.1.187 webmail.masteringlinux.org webmail.masteringlinux.org
+192.168.1.187 blade7.qlc.co.in
+192.168.1.187 qa.mmv4.qlc.net  www.qa.mmv4.qlc.net
+192.168.1.187 ivinmmv4.qlc.net.centos www.ivinmmv4.qlc.net.centos
+#192.168.1.185 chathistoryv3.qlc.net www.chathistoryv3.qlc.net
+192.168.1.184 mailserve2.0dev.qlc.net www.mailserve2.0dev.qlc.net
+192.168.1.187 svn.mmv4.qlc.net www.svn.mmv4.qlc.net
+192.168.1.62 sogo.qlc.net www.sogo.qlc.net
+192.168.1.187 workflow.net www.workflow.net
+192.168.1.187 kolab.webadmin.qlc.net www.kolab.webadmin.qlc.net
+192.168.1.187 trimbak.amv3.qlc.net www.trimbak.amv3.qlc.net
+192.168.1.185 jagruti.adressbook.qlc.net www.jagruti.adressbook.qlc.net
+192.168.1.187 test.induction.qlc.net	www.test.induction.qlc.net
+192.168.1.187 defecttrack.qlc.net	www.defecttrack.qlc.net
+192.168.1.185 dummy.qlc.net
+192.168.1.185  nitin.mlm.qlc.net
+192.168.1.55 jagruti.roundcube.qlc.net www.jagruti.roundcube.qlc.net
+192.168.1.55 roundcube.qlc.net www.roundcube.qlc.net
+192.168.1.187 chatserve.qlc.net www.chatserve.qlc.net
+192.168.1.185 jagruti.amv4.qlc.net
+192.168.1.62  dav.qlc.net www.dav.qlc.net
+192.168.1.185 amv4.1.0.2.qlc.net
+192.168.1.185 avinash.qlc.net www.avinash.qlc.net
+#115.112.229.234 anywheremail.qlc.co.in www.anywheremail.qlc.co.in
+192.168.1.184 mailpush.190902014.qlc.net   www.mailpush.190902014.qlc.net
+192.168.1.184 mailserve2.0start1.qlc.net www.mailserve2.0start1.qlc.net
+192.168.1.184 mailserve2.0start3.qlc.net www.mailserve2.0start3.qlc.net
+192.168.1.184 mailserve2.0start2.qlc.net www.mailserve2.0start2.qlc.net
+192.168.1.185 svn.qlc.net www.svn.qlc.net
+192.168.1.185 jagruti.mmv4.qlc.net www.jagruti.mmv4.qlc.net
+192.168.1.55  ni3.mmv4.qlc.net www.ni3.mmv4.qlc.net
+192.168.1.187 cal.qlc.net cal.qlc.net
+192.168.1.187 agendav.qlc.net www.agendav.qlc.net
+192.168.1.185 amv4.11.qlc.net amv4.11.qlc.net
+192.168.1.185 amv4.svn.qlc.net amv4.svn.qlc.net
+192.168.1.187 chwala.qlc.net www.chwala.qlc.net
+#192.168.1.187 dms.qlc.net www.dms.qlc.net
+192.168.1.187 briefcase.qlc.net www.briefcase.qlc.net
+192.168.1.185 chathistoryv3.qlc.net www.chathistoryv3.qlc.net
+192.168.1.187 smsv3.qlc.net www.smsv3.qlc.net
+192.168.1.187 anywhere.latest.qlc.net www.anywhere.latest.qlc.net
+192.168.1.58 pop.amruta.qlc.net
+192.168.1.184 mailserve2.0start5.qlc.net www.mailserve2.0start5.qlc.net
+#192.168.1.188 example.com
+192.168.1.189 casebox.qlc.net
+#192.168.1.189 test.qlc.net
+#192.168.1.189 webdav.qlc.net
+192.168.1.185 pallavi.anywhere.qlc.net
+192.168.1.55 mailserve_acl.qlc.net
+192.168.1.185 dms_pallavi.qlc.net
+192.168.1.187 onlyoffice.qlc.net
+192.168.1.187 admin.timesgroup.qlc.net
+192.168.1.195 test.xyz.net www.test.xyz.net
+#192.168.1.188 mytest.qlc.net
+#192.168.1.196 docService.qlc.net
+192.168.1.188 onlyoffice.server.qlc.net www.onlyoffice.server.qlc.net
+192.168.1.188 doc.server.qlc.net www.doc.server.qlc.net
+192.168.1.184 kalyani.vtiger2.qlc.net www.kalyani.vtiger2.qlc.net
+192.168.1.184 kalyani.vtiger.qlc.net www.kalyani.vtiger.qlc.net
+192.168.1.186 mayankr.mailserve.qlc.net
+192.168.1.187 vtiger.crms.qlc.net www.vtiger.crms.qlc.net
+192.168.1.185 mmv3.qlc.net www.mmv3.qlc.net
+192.168.1.185 jagruti.manageservices.qlc.net
+192.168.1.187 office.qlc.net
+192.168.1.184 mailserve.vtiger.qlc.net
+192.168.1.184 vtiger.test.qlc.net
+192.168.1.185 pallavi.anywhere.qlc.net
+192.168.1.187 office.qlc.net www.office.qlc.net
+192.168.1.187 officesuit.qlc.net www.officesuit.qlc.net
+192.168.1.187 officeEditor.qlc.net www.officeEditor.qlc.net
+192.168.1.185 svn.amv.qlc.net www.svn.amv.qlc.net
+192.168.1.189  calendar.new.qlc.net
+192.168.1.184 vtiger.test.qlc.net
+192.168.1.187 calendar.qlc.net
+192.168.1.184 demo.vtiger.qlc.net
+192.168.1.184 online.mailserve.qlc.net
+192.168.1.55 nitin.osticket.qlc.net
+192.168.1.187 trimbak.mm.qlc.net www.trimbak.mm.qlc.net
+192.168.1.185 anywhere.pallu.qlc.net
+192.168.1.55 livechat.qlc.net
+192.168.1.184  mailserve.crm.traffic.qlc.net
+192.168.1.186 amv4.log.qlc.net www.amv4.log.qlc.net
+192.168.1.186 amv4.mayank.qlc.net www.amv4.mayank.qlc.net
+192.168.1.186 dms.pallu.qlc.net www.dms.pallu.qlc.net
+192.168.1.185 amv4.loginhistory.qlc.net
+192.168.1.185 dms.qlc.net
+192.168.1.55 livechat.svn.qlc.net
+192.168.1.187 dms.amv4.qlc.net www.dms.amv4.qlc.net
+192.168.1.184 testmail.qlc.net
+192.168.1.185 dms.newsvn.qlc.net
+#192.168.1.192 webmail.qlc.net
+#192.168.1.189 webmail2.qlc.net
+#192.168.1.191 webmail1.qlc.net
+#192.168.1.194 test.que.net amv4.qlc.net
+192.168.1.47 amv4.qlc.net
+192.168.1.184 mailserve.new.svn.qlc.net
+192.168.1.47 amv4.svnnew.qlc.net
+192.168.1.187 mytest.org
+192.168.1.188 webmail.org
+192.168.1.185 mmv4.qlc.net
+192.168.1.185 amv6.qlc.net
+192.168.1.200 single_sign_on_mailserve.qlc.net
+121.241.242.211 amv4.qlc.co.in
+192.168.1.191 redmine.qlc.net
+192.168.1.191 redmine1.qlc.net
+192.168.1.191 redmine2.qlc.net
+192.168.1.187 amv4s.qa.qlc.net
+192.168.1.194 agendav1.qlc.net
+192.168.1.192 agendav2.qlc.net
+192.168.1.192 davserve.qlc.net
+192.168.1.192 oldcal.qlc.net
+192.168.1.192 baikal.qlc.net
+192.168.1.192 baikal2.qlc.net
+192.168.1.184 mailserve.new3.svn.qlc.net
+192.168.1.187 blade7.qlc.co.in
+192.168.1.55 singlesignon.qlc.net
+192.168.1.184 mailserve.new3.svn.qlc.net
+192.168.1.187 dms.latest.qlc.net www.dms.latest.qlc.net
+192.168.1.187 dms.latest1.qlc.net www.dms.latest1.qlc.net
+#192.168.1.192 dms.new.qlc.net
+192.168.1.47 dms.latest2.qlc.net www.dms.latest2.qlc.net
+192.168.1.184 mailserve.new6.svn.qlc.net
+192.168.1.187 test_curl.kalyani.qlc.net www.test_curl.kalyani.qlc.net
+192.168.1.184 mailserve.new6.svn.qlc.net
+192.168.1.187 chat.api.qlc.net
+192.168.1.192 api.wh.qlc.net
+192.168.1.192 saml.qlc.net
+#115.112.229.237 dmanage-servicesv3.qlc.co.in
+192.168.1.187 autoticket@hd-version-1.10.com
+192.168.1.185 jagruti.manageservices.qlc.net www.jagruti.manageservices.qlc.net
+192.168.1.185 test.svn2.qlc.net www.test.svn2.qlc.net
+192.168.1.187 centos.qlc.net
+192.168.1.190 katana.qlc.net
+192.168.1.190 dav.example.net
+192.168.1.185 roundcube_1.0.10.qlc.net
+192.168.1.189 calendar.new10.qlc.net
+192.168.1.185 anywhere.svn.qlc.net
+#192.168.1.188 webmail.qlc.in
+#115.112.229.241 git.qlc.co.in www.git.qlc.co.in
+192.168.1.189 git.qlc.net
+192.168.1.55 jsxc.qlc.net
+#192.168.1.187 saml.qlc.net
+192.168.1.187 samldemo.qlc.net
+192.168.1.187 rainloop.qlc.net
+192.168.1.187 mmqa.test.qlc.net
+192.168.1.189 server189.qlc.net
+192.168.1.189 dms.new.qlc.net
+192.168.1.200 owncloudlatests9.qlc.net www.owncloudlatests9.qlc.net
+192.168.1.189 cal.new.qlc.net
+192.168.1.189 cal.new10.qlc.net
+192.168.1.200 accounts.qlc.co.net
+192.168.1.200 accounts.qlc.net
+192.168.1.184 owncloud.default.qlc.net
+192.168.1.200 mm.qlc.co.net
+192.168.1.184 dms.owncloud6.qlc.net
+192.168.1.185 mailserve.newlatest.qlc.net
+192.168.1.185 anywhere.svn.qlc.net
+192.168.1.7 inventory.qlc.net www.inventory.qlc.net
+115.112.230.148 stagecalendar.qlc.co.in
+#121.241.242.214 calendar.qlc.co.in
+192.168.1.200 dms.qlc.co.net
+192.168.1.185 amv6.qlc.net
+192.168.1.200 stagedms.qa.qlc.net
+192.168.1.187 roundcubemailsvn.1.3.0.qlc.net
+192.168.1.185 roundcubemail1.3.0.qlc.net
+192.168.1.7  inventory.qlc.net
+192.168.1.184 mailserve.new5.svn.qlc.net
+192.168.1.70 dms.owncloud9.qlc.net
+192.168.1.185 roundcubemail1.3.1.qlc.net
+192.168.1.185192.168.1.184 owncloud9.qlc.net
+192.168.1.187 calendar.qa.qlc.net
+192.168.1.184 mailserve.new9.qlc.net
+192.168.1.184  mailserve.new11.qlc.net
+192.168.1.185 amv1.0.9.qlc.net
+192.168.1.185 nextcloud.qlc.net

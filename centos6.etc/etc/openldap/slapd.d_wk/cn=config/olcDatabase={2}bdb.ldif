@@ -1,0 +1,47 @@
+dn: olcDatabase={2}bdb
+objectClass: olcDatabaseConfig
+objectClass: olcBdbConfig
+olcDatabase: {2}bdb
+olcSuffix: dc=qlc.in
+olcAccess: {0}to attrs=userPassword  by self write  by anonymous auth
+olcAccess: {1}to dn.regex="(o=[^,]+,dc=qlc.in)$"  by dn.subtree,expand="ou=peo
+ ple,$1" read
+olcAddContentAcl: FALSE
+olcLastMod: TRUE
+olcMaxDerefDepth: 15
+olcReadOnly: FALSE
+olcRootDN: cn=Manager,dc=qlc.in
+olcRootPW: {SSHA}BcGh89ymAZLcpUyKV6Irvn229YBlXY4r
+#olcRootPW: {SSHA}WgywWNoyHGcV38sQXQuHmbM2QOCEWs9c
+#olcRootPW: {SSHA}Mgl2QY5Zo25PFGMm/aGSKkBjZBFheJ3G
+#olcRootPW:: e1NTSEF9TVJ1QmdFMkhreGN3azdqUUNCYzlhOVVxMWc1TWlXVjE=
+olcSyncUseSubentry: FALSE
+olcMonitoring: TRUE
+olcDbDirectory: /var/lib/ldap
+olcDbCacheSize: 1000
+olcDbCheckpoint: 1024 15
+olcDbNoSync: FALSE
+olcDbDirtyRead: FALSE
+olcDbIDLcacheSize: 0
+olcDbIndex: objectClass pres,eq
+olcDbIndex: uid pres,eq,sub
+olcDbIndex: o eq
+olcDbIndex: mobile pres,eq
+olcDbIndex: ou pres,eq,sub
+olcDbIndex: sn pres,eq,sub
+olcDbIndex: givenName pres,eq,sub
+olcDbIndex: employeeType pres,eq
+olcDbIndex: mail pres,eq,sub
+olcDbLinearIndex: FALSE
+olcDbMode: 0600
+olcDbSearchStack: 16
+olcDbShmKey: 0
+olcDbCacheFree: 1
+olcDbDNcacheSize: 0
+structuralObjectClass: olcBdbConfig
+entryUUID: 66b41e4e-dca1-1031-81cf-830a139ddc04
+creatorsName: cn=config
+createTimestamp: 20121217142550Z
+entryCSN: 20121217142550.469890Z#000000#000#000000
+modifiersName: cn=config
+modifyTimestamp: 20121217142550Z

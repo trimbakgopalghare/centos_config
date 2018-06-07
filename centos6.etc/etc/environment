@@ -1,0 +1,6 @@
+## Added by Trimbak
+#export JAVA_HOME=/home/opt_storage/jdk1.8.0_131/
+
+#export JRE_HOME=/home/opt_storage/jdk1.8.0_131/jre
+
+#export PATH=$PATH:/home/opt_storage/jdk1.8.0_131/bin:/home/opt_storage/jdk1.8.0_131/jre/bin

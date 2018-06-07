@@ -1,0 +1,3 @@
+pidfile  /var/run/openldap/slapd.pid
+argsfile /var/run/ioenldap/spapd.args
+database bdb

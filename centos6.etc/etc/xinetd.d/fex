@@ -1,0 +1,21 @@
+# default: on
+# description: F*EX web server
+#
+service fex
+{
+	socket_type	= stream
+	wait		= no
+        type		= unlisted
+	protocol	= tcp
+        #flags		= IPv6
+        bind		= 192.168.1.187
+	port		= 8081
+        cps		= 10 2
+	user		= fex
+	groups		= yes
+	server		= /home/fex/bin/fexsrv
+	nice		= 0
+	disable		= no
+}
+# configuration for https/SSL see /home/fex/doc/SSL
+# configuration for IPv6 see /home/fex/doc/IPv6

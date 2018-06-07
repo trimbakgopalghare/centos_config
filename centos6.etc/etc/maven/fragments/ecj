@@ -1,0 +1,13 @@
+<dependency>
+    <maven>
+        <groupId>org.eclipse.jdt</groupId>
+        <artifactId>core</artifactId>
+        <version>4.5.2</version>
+    </maven>
+    <jpp>
+        <groupId>JPP</groupId>
+        <artifactId>jdtcore</artifactId>
+        <version>4.5.2</version>
+    </jpp>
+</dependency>
+

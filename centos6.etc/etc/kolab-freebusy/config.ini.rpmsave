@@ -1,0 +1,45 @@
+[directory "local-cache"]
+expires = 15m
+type = static
+fbsource = file:/var/cache/kolab-freebusy/%s.ifb
+
+[directory "kolab-resources"]
+cacheto = /var/cache/kolab-freebusy/%s.ifb
+loglevel = 300
+expires = 15m
+bind_dn = uid=kolab-service,ou=Special Users,dc=example,dc=org
+fbsource = imap://cyrus-admin:Welcome123@localhost:143/%kolabtargetfolder?acl=lrs
+filter = (&(objectClass=kolabsharedfolder)(kolabfoldertype=event)(mail=%s))
+host = ldap://localhost:389
+base_dn = ou=Resources,dc=example,dc=org
+bind_pw = wc18bqshFmifGtN
+attributes = mail, kolabtargetfolder
+type = ldap
+
+[directory "kolab-people"]
+lc_attributes[] = mail
+expires = 15m
+cacheto = /var/cache/kolab-freebusy/%s.ifb
+loglevel = 300
+attributes[] = mail
+bind_dn = uid=kolab-service,ou=Special Users,dc=example,dc=org
+fbsource = imap://%s:Welcome123@localhost:143/?proxy_auth=cyrus-admin
+filter = (&(objectClass=kolabInetOrgPerson)(|(mail=%s)(alias=%s)))
+host = ldap://localhost:389
+lc_attributes = mail
+base_dn = dc=example,dc=org
+bind_pw = wc18bqshFmifGtN
+attributes = mail
+type = ldap
+
+[log]
+level = 300
+driver = file
+name = freebusy
+path = ./logs
+
+[directory "local"]
+filter = "@example.org"
+type = static
+fbsource = file:/var/lib/kolab-freebusy/%s.ifb
+

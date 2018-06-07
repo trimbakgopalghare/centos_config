@@ -1,0 +1,45 @@
+# AUTO-GENERATED FILE - DO NOT EDIT!! Use ldapmodify.
+# CRC32 6601296d
+dn: cn=config
+objectClass: olcGlobal
+cn: config
+olcConfigFile: slapd.conf
+olcConfigDir: slapd.d
+olcAllows: bind_v2
+olcArgsFile: /var/run/openldap/slapd.args
+olcAttributeOptions: lang-
+olcAuthzPolicy: none
+olcConcurrency: 0
+olcConnMaxPending: 100
+olcConnMaxPendingAuth: 1000
+olcGentleHUP: FALSE
+olcIdleTimeout: 0
+olcIndexSubstrIfMaxLen: 4
+olcIndexSubstrIfMinLen: 2
+olcIndexSubstrAnyLen: 4
+olcIndexSubstrAnyStep: 2
+olcIndexIntLen: 4
+olcListenerThreads: 1
+olcLocalSSF: 71
+olcLogLevel: Any
+olcPidFile: /var/run/openldap/slapd.pid
+olcReadOnly: FALSE
+olcReverseLookup: FALSE
+olcSaslSecProps: noplain,noanonymous
+olcSockbufMaxIncoming: 262143
+olcSockbufMaxIncomingAuth: 16777215
+olcThreads: 16
+olcTLSCACertificatePath: /etc/openldap/certs
+olcTLSCertificateFile: "OpenLDAP Server"
+olcTLSCertificateKeyFile: /etc/openldap/certs/password
+olcTLSVerifyClient: never
+olcTLSProtocolMin: 0.0
+olcToolThreads: 1
+olcWriteTimeout: 0
+structuralObjectClass: olcGlobal
+entryUUID: ae4c2aca-75ae-1037-88af-4b5760687723
+creatorsName: cn=config
+createTimestamp: 20171215064110Z
+entryCSN: 20171215064110.307222Z#000000#000#000000
+modifiersName: cn=config
+modifyTimestamp: 20171215064110Z

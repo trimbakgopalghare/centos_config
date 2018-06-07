@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event>
+    <name>Submit anonymous crash report</name>
+    <description>Submit anonymous crash report - I do not want to be contacted by Red Hat Support</description>
+
+    <requires-items>analyzer,reason,executable,pkg_epoch,pkg_name,pkg_version,pkg_release,pkg_arch,os_release,architecture,core_backtrace</requires-items>
+    <gui-review-elements>no</gui-review-elements>
+    <minimal-rating>0</minimal-rating>
+
+    <options>
+        
+
+        <option type="text" name="uReport_URL">
+            <label>uReport Server URL</label>
+            <allow-empty>no</allow-empty>
+            <description>Address of uReport webservice</description>
+            <default-value>http://bug-report.itos.redhat.com</default-value>
+        </option>
+        
+        <option type="text" name="uReport_ContactEmail">
+            <label>Contact email address</label>
+            <allow-empty>yes</allow-empty>
+            <description>Email address that can be used by ABRT server to inform you about news and updates</description>
+        </option>
+        <advanced-options>
+            <option type="bool" name="uReport_SSLVerify">
+                <label>Verify SSL</label>
+                <label xml:lang="as">SSL সতাসত্য নিৰূপণ কৰক</label>
+                <label xml:lang="bn_IN">SSL যাচাই করুন</label>
+                <label xml:lang="cs">Ověřit SSL</label>
+                <label xml:lang="de">SSL überprüfen</label>
+                <label xml:lang="es">Verificar SSL </label>
+                <label xml:lang="fr">Vérifier SSL</label>
+                <label xml:lang="gu">SSL ને ચકાસો</label>
+                <label xml:lang="hi">SSL जाँचें</label>
+                <label xml:lang="it">Verifica SSL</label>
+                <label xml:lang="ja">SSL を照合する</label>
+                <label xml:lang="kn">SSL ಅನ್ನು ಪರಿಶೀಲಿಸು</label>
+                <label xml:lang="ko">SSL 확인 </label>
+                <label xml:lang="ml">എസ്എസ്എല്‍ ഉറപ്പാക്കുക</label>
+                <label xml:lang="mr">SSL ची तापसणी करा</label>
+                <label xml:lang="or">SSL କୁ ଯାଞ୍ଚ କରନ୍ତୁ</label>
+                <label xml:lang="pa">SSL ਦੀ ਜਾਂਚ ਕਰੋ</label>
+                <label xml:lang="pl">Sprawdzanie SSL</label>
+                <label xml:lang="pt_BR">Verificar o SSL</label>
+                <label xml:lang="ru">Проверить SSL</label>
+                <label xml:lang="sv">Verifiera SSL</label>
+                <label xml:lang="ta">SSL ஐ சரிபார்</label>
+                <label xml:lang="te">SSL నిర్థారించు</label>
+                <label xml:lang="uk">Перевірити SSL</label>
+                <label xml:lang="zh_CN">确认 SSL</label>
+                <label xml:lang="zh_TW">驗證 SSL</label>
+                <description>Check SSL key validity</description>
+                <description xml:lang="as">SSL কি বৈধতা নিৰীক্ষণ কৰক</description>
+                <description xml:lang="bn_IN">SSL-কির বৈধতা যাচাই করা হবে</description>
+                <description xml:lang="cs">Zkontrolujte platnost SSL klíče</description>
+                <description xml:lang="de">Gültigkeit des SSL-Schlüssels überprüfen</description>
+                <description xml:lang="es">Revisar la validez de la llave SSL</description>
+                <description xml:lang="fr">Vérifier la validité de la clé SSL</description>
+                <description xml:lang="gu">SSL કી યોગ્યતાને ચકાસો</description>
+                <description xml:lang="hi">SSL कुंजी वैधता जाँचें</description>
+                <description xml:lang="it">Controlla la validità della chiave SSL</description>
+                <description xml:lang="ja">SSL キーの妥当性をチェックする</description>
+                <description xml:lang="kn">SSL ಕೀಲಿಯ ಮಾನ್ಯತೆಯನ್ನು ಪರಿಶೀಲಿಸಿ</description>
+                <description xml:lang="ko">SSL 키 유효성 확인 </description>
+                <description xml:lang="ml">എസ്എസ്എല്‍ കീയുടെ സാധുത പരിശോധിയ്ക്കുക</description>
+                <description xml:lang="mr">SSL कि वैधता तपासा</description>
+                <description xml:lang="or">SSL କି ବୈଧତାକୁ ଯାଞ୍ଚ କରନ୍ତୁ</description>
+                <description xml:lang="pa">SSL ਕੁੰਜੀ ਯੋਗਤਾ ਚੈੱਕ ਕਰੋ</description>
+                <description xml:lang="pl">Sprawdzanie poprawności klucza SSL</description>
+                <description xml:lang="pt_BR">Verifique a validade da chave SSL</description>
+                <description xml:lang="ru">Проверить ключ SSL</description>
+                <description xml:lang="sv">Kontrollera SSL-nyckelns giltighet</description>
+                <description xml:lang="ta">SSL விசை சரிபார்த்தலுக்கு சரிபார்க்கிறது</description>
+                <description xml:lang="te">SSL కీ నిర్థారణ పరిశీలించు</description>
+                <description xml:lang="uk">Перевірити чинність ключа SSL</description>
+                <description xml:lang="zh_CN">查看 SSL 密钥是否可用</description>
+                <description xml:lang="zh_TW">檢查 SSL 金鑰是否有效</description>
+                <default-value>yes</default-value>
+            </option>
+            <option type="text" name="http_proxy">
+                <label>HTTP Proxy</label>
+                <allow-empty>yes</allow-empty>
+                <note-html>Sets the proxy server to use for HTTP</note-html>
+            </option>
+            <option type="text" name="HTTPS_PROXY">
+                <label>HTTPS Proxy</label>
+                <allow-empty>yes</allow-empty>
+                <note-html>Sets the proxy server to use for HTTPS</note-html>
+            </option>
+        </advanced-options>
+    </options>
+</event>

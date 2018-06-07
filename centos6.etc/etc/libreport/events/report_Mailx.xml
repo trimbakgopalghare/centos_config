@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<event>
+    <name>Mailx</name>
+    <name xml:lang="as">Mailx</name>
+    <name xml:lang="bn_IN">Mailx</name>
+    <name xml:lang="cs">Mailx</name>
+    <name xml:lang="de">Mailx</name>
+    <name xml:lang="es">Mailx</name>
+    <name xml:lang="fr">Mailx</name>
+    <name xml:lang="gu">Mailx</name>
+    <name xml:lang="hi">Mailx</name>
+    <name xml:lang="it">Mailx</name>
+    <name xml:lang="ja">Mailx</name>
+    <name xml:lang="kn">Mailx</name>
+    <name xml:lang="ko">Mailx </name>
+    <name xml:lang="ml">Mailx</name>
+    <name xml:lang="mr">मालिक्स्</name>
+    <name xml:lang="or">Mailx</name>
+    <name xml:lang="pa">Mailx</name>
+    <name xml:lang="pl">Mailx</name>
+    <name xml:lang="pt_BR">Mailx</name>
+    <name xml:lang="ru">Mailx</name>
+    <name xml:lang="sv">Mailx</name>
+    <name xml:lang="ta">Mailx</name>
+    <name xml:lang="te">Mailx</name>
+    <name xml:lang="uk">Mailx</name>
+    <name xml:lang="zh_CN">Mailx</name>
+    <name xml:lang="zh_TW">Mailx</name>
+    <description>Send via email</description>
+    <description xml:lang="as">ই-মেইলৰে পঠাওক</description>
+    <description xml:lang="bn_IN">ই-মেইলের মাধ্যমে পাঠানো হবে</description>
+    <description xml:lang="cs">Odeslat e-mailem</description>
+    <description xml:lang="de">Per E-Mail senden</description>
+    <description xml:lang="es">Enviar vía correo-e</description>
+    <description xml:lang="fr">Envoyer via email</description>
+    <description xml:lang="gu">ઇમેલ મારફતે મોકલો</description>
+    <description xml:lang="hi">ईमेल के द्वारा भेजें</description>
+    <description xml:lang="it">Invia tramite email</description>
+    <description xml:lang="ja">電子メールで送信</description>
+    <description xml:lang="kn">ಇಮೈಲ್ ಮುಖಾಂತರ ಕಳುಹಿಸು</description>
+    <description xml:lang="ko">이메일로 전송 </description>
+    <description xml:lang="ml">ഈമെയില്‍ വഴി അയയ്ക്കുക</description>
+    <description xml:lang="mr">ईमेल द्वारे पाठवा</description>
+    <description xml:lang="or">ଇମେଲ ମାଧ୍ଯମରେ ପଠାନ୍ତୁ</description>
+    <description xml:lang="pa">ਈਮੇਲ ਦੁਆਰਾ ਭੇਜੋ</description>
+    <description xml:lang="pl">Wysyłanie przez e-mail</description>
+    <description xml:lang="pt_BR">Enviar por email</description>
+    <description xml:lang="ru">Отправить по почте</description>
+    <description xml:lang="sv">Skicka via e-post</description>
+    <description xml:lang="ta">மின்னஞ்சல் வழியாக அனுப்பவும்</description>
+    <description xml:lang="te">ఈమెయిల్ ద్వారా పంపు</description>
+    <description xml:lang="uk">Надіслати електронною поштою</description>
+    <description xml:lang="zh_CN">通过电子邮件发送</description>
+    <description xml:lang="zh_TW">透過電子郵件傳送</description>
+
+    <requires-items/>
+    <exclude-items-by-default>count,event_log,reported_to,coredump,vmcore</exclude-items-by-default>
+    <exclude-items-always/>
+    <exclude-binary-items>no</exclude-binary-items>
+    <include-items-by-default/>
+    <minimal-rating>0</minimal-rating>
+
+    <options>
+        <option type="text" name="Mailx_Subject">
+            <label>Subject</label>
+            <label xml:lang="as">বিষয়</label>
+            <label xml:lang="bn_IN">প্রসঙ্গ</label>
+            <label xml:lang="cs">Předmět</label>
+            <label xml:lang="de">Betreff</label>
+            <label xml:lang="es">Asunto</label>
+            <label xml:lang="fr">Sujet</label>
+            <label xml:lang="gu">વિષય</label>
+            <label xml:lang="hi">विषय</label>
+            <label xml:lang="it">Soggetto</label>
+            <label xml:lang="ja">題目</label>
+            <label xml:lang="kn">ವಿಷಯ</label>
+            <label xml:lang="ko">제목 </label>
+            <label xml:lang="ml">വിഷയം</label>
+            <label xml:lang="mr">विषय</label>
+            <label xml:lang="or">ବିଷୟ</label>
+            <label xml:lang="pa">ਵਿਸ਼ਾ</label>
+            <label xml:lang="pl">Temat</label>
+            <label xml:lang="pt_BR">Assunto</label>
+            <label xml:lang="ru">Тема</label>
+            <label xml:lang="sv">Ämne</label>
+            <label xml:lang="ta">பொருள்</label>
+            <label xml:lang="te">సబ్జక్ట్/సంగతి</label>
+            <label xml:lang="uk">Тема</label>
+            <label xml:lang="zh_CN">标题</label>
+            <label xml:lang="zh_TW">主旨</label>
+            <allow-empty>no</allow-empty>
+            <description>Message subject</description>
+            <description xml:lang="as">বাৰ্তাৰ বিষয়</description>
+            <description xml:lang="bn_IN">বার্তার বিষয়</description>
+            <description xml:lang="cs">Předmět zprávy</description>
+            <description xml:lang="de">Nachrichtenbetreff</description>
+            <description xml:lang="es">Asunto del mensaje</description>
+            <description xml:lang="fr">Sujet du message</description>
+            <description xml:lang="gu">સંદેશા વિષય</description>
+            <description xml:lang="hi">संदेश वस्तु</description>
+            <description xml:lang="it">Soggeto del messaggio</description>
+            <description xml:lang="ja">メッセージの件名</description>
+            <description xml:lang="kn">ಸಂದೇಶದ ವಿಷಯ</description>
+            <description xml:lang="ko">메세지 제목 </description>
+            <description xml:lang="ml">സന്ദേശത്തിന്റെ വിഷയം</description>
+            <description xml:lang="mr">सेदंशचा विषय</description>
+            <description xml:lang="or">ସନ୍ଦେଶ ବିଷୟ</description>
+            <description xml:lang="pa">ਸੁਨੇਹਾ ਵਿਸ਼ਾ</description>
+            <description xml:lang="pl">Temat wiadomości</description>
+            <description xml:lang="pt_BR">Assunto da mensagem</description>
+            <description xml:lang="ru">Тема сообщения</description>
+            <description xml:lang="sv">Meddelandets ämne</description>
+            <description xml:lang="ta">செய்தி பொருள்</description>
+            <description xml:lang="te">సందేశం సబ్జక్ట్</description>
+            <description xml:lang="uk">Тема повідомлення</description>
+            <description xml:lang="zh_CN">信息标题</description>
+            <description xml:lang="zh_TW">訊息主旨</description>
+            <default-value>[abrt] detected a crash</default-value>
+        </option>
+        <option type="text" name="Mailx_EmailFrom">
+            <label>Sender</label>
+            <label xml:lang="as">পঠাওতা</label>
+            <label xml:lang="bn_IN">প্রেরক</label>
+            <label xml:lang="cs">Odesílatel</label>
+            <label xml:lang="de">Absender</label>
+            <label xml:lang="es">Remitente</label>
+            <label xml:lang="fr">Expéditeur</label>
+            <label xml:lang="gu">મોકલનાર</label>
+            <label xml:lang="hi">प्रेषक</label>
+            <label xml:lang="it">Mittente</label>
+            <label xml:lang="ja">送信者</label>
+            <label xml:lang="kn">ಕಳುಹಿಸುವವರು</label>
+            <label xml:lang="ko">보내는 사람 </label>
+            <label xml:lang="ml">മെയില്‍ അയച്ച വ്യക്തി</label>
+            <label xml:lang="mr">पाठणारा</label>
+            <label xml:lang="or">ପ୍ରେରକ</label>
+            <label xml:lang="pa">ਭੇਜਣ ਵਾਲਾ</label>
+            <label xml:lang="pl">Nadawca</label>
+            <label xml:lang="pt_BR">Remetente</label>
+            <label xml:lang="ru">Отправитель</label>
+            <label xml:lang="sv">Avsändare</label>
+            <label xml:lang="ta">அனுப்புநர்</label>
+            <label xml:lang="te">పంపువాడు</label>
+            <label xml:lang="uk">Відправник</label>
+            <label xml:lang="zh_CN">发送者</label>
+            <label xml:lang="zh_TW">寄件者</label>
+            <allow-empty>no</allow-empty>
+            <description>Sender's email</description>
+            <description xml:lang="as">পঠাওতাৰ ই-মেইল</description>
+            <description xml:lang="bn_IN">প্রেরকের ই-মেইল</description>
+            <description xml:lang="cs">E-mail odesílatele</description>
+            <description xml:lang="de">Absender E-Mail-Adresse</description>
+            <description xml:lang="es">Correo-e de remitente</description>
+            <description xml:lang="fr">Email de l'expéditeur</description>
+            <description xml:lang="gu">મોકલનારનો ઇમેલ</description>
+            <description xml:lang="hi">प्रेषक का ईमेल</description>
+            <description xml:lang="it">Email del mittente</description>
+            <description xml:lang="ja">送信者の電子メール</description>
+            <description xml:lang="kn">ಕಳುಹಿಸುವವರ ಇಮೈಲ್</description>
+            <description xml:lang="ko">보내는 사람의 이메일 </description>
+            <description xml:lang="ml">മെയില്‍ അയച്ച വ്യക്തിയുടെ ഈമെയില്‍</description>
+            <description xml:lang="mr">पाठवणाऱ्याचा इमेल</description>
+            <description xml:lang="or">ପ୍ରେରକ ଠିକଣା</description>
+            <description xml:lang="pa">ਭੇਜਣ ਵਾਲੇ ਦੀ ਈਮੇਲ</description>
+            <description xml:lang="pl">Adres e-mail nadawcy</description>
+            <description xml:lang="pt_BR">E-mail do remetente</description>
+            <description xml:lang="ru">Email отправителя</description>
+            <description xml:lang="sv">Avsändarens e-postadress</description>
+            <description xml:lang="ta">அனுப்புநரின் மின்னஞல்</description>
+            <description xml:lang="te">పంపువాని యీమెయిల్</description>
+            <description xml:lang="uk">Адреса відправника</description>
+            <description xml:lang="zh_CN">发送者电子邮件</description>
+            <description xml:lang="zh_TW">寄件者電子郵件地址</description>
+        </option>
+        <option type="text" name="Mailx_EmailTo">
+            <label>Recipient</label>
+            <label xml:lang="as">গ্ৰহণকাৰী</label>
+            <label xml:lang="bn_IN">প্রাপক</label>
+            <label xml:lang="cs">Příjemce</label>
+            <label xml:lang="de">Empfänger</label>
+            <label xml:lang="es">Destinatario</label>
+            <label xml:lang="fr">Destinataire</label>
+            <label xml:lang="gu">પ્રાપ્તિકર્તા</label>
+            <label xml:lang="hi">प्राप्तकर्ता</label>
+            <label xml:lang="it">Destinatario</label>
+            <label xml:lang="ja">受信者</label>
+            <label xml:lang="kn">ಸ್ವೀಕರಿಸುವವರು</label>
+            <label xml:lang="ko">받는 사람 </label>
+            <label xml:lang="ml">മെയില്‍ ലഭിയ്ക്കുന്ന വ്യക്തി</label>
+            <label xml:lang="mr">प्राप्तकर्ता</label>
+            <label xml:lang="or">ଗ୍ରାହକ</label>
+            <label xml:lang="pa">ਪ੍ਰਾਪਤ ਕਰਤਾ</label>
+            <label xml:lang="pl">Odbiorca</label>
+            <label xml:lang="pt_BR">Destinatário</label>
+            <label xml:lang="ru">Получатель</label>
+            <label xml:lang="sv">Mottagare</label>
+            <label xml:lang="ta">பெறுநர்</label>
+            <label xml:lang="te">స్వీకర్త</label>
+            <label xml:lang="uk">Отримувач</label>
+            <label xml:lang="zh_CN">收件人</label>
+            <label xml:lang="zh_TW">收件者</label>
+            <allow-empty>no</allow-empty>
+            <description>Recipient's email</description>
+            <description xml:lang="as">গ্ৰহণকাৰীৰ ই-মেইল</description>
+            <description xml:lang="bn_IN">প্রাপকের ই-মেইল</description>
+            <description xml:lang="cs">E-mal příjemce</description>
+            <description xml:lang="de">Empfänger E-Mail-Adresse</description>
+            <description xml:lang="es">Correo-e del destinatario</description>
+            <description xml:lang="fr">Email du destinataire</description>
+            <description xml:lang="gu">પ્રાપ્તિકર્તા નો મેઇલ</description>
+            <description xml:lang="hi">प्राप्तकर्ता ईमेल</description>
+            <description xml:lang="it">Email del destinatario</description>
+            <description xml:lang="ja">受信者の電子メール</description>
+            <description xml:lang="kn">ಸ್ವೀಕರಿಸುವವರ ಇಮೈಲ್</description>
+            <description xml:lang="ko">받는 사람의 이메일 </description>
+            <description xml:lang="ml">മെയില്‍ ലഭിയ്ക്കുന്ന വ്യക്തിയുടെ ഈമെയില്‍</description>
+            <description xml:lang="mr">प्राप्तकर्त्याचा इमेल</description>
+            <description xml:lang="or">ଗ୍ରାହକ ଇମେଲ</description>
+            <description xml:lang="pa">ਪ੍ਰਾਪਤ-ਕਰਤਾ ਦੀ ਈ-ਮੇਲ</description>
+            <description xml:lang="pl">Adres e-mail odbiorcy</description>
+            <description xml:lang="pt_BR">E-mail do destinatário</description>
+            <description xml:lang="ru">Email получателя</description>
+            <description xml:lang="sv">Mottagarens e-post</description>
+            <description xml:lang="ta">பெறுநரின் மின்னஞ்சல்</description>
+            <description xml:lang="te">స్వీకర్త యీమెయిల్</description>
+            <description xml:lang="uk">Ел. пошта отримувача</description>
+            <description xml:lang="zh_CN">收件人电子邮件</description>
+            <description xml:lang="zh_TW">收件者電子郵件地址</description>
+        </option>
+        <option type="bool" name="Mailx_SendBinaryData">
+            <label>Send Binary Data</label>
+            <label xml:lang="as">বাইনাৰি তথ্য পঠাওক</label>
+            <label xml:lang="bn_IN">বাইনারি  তথ্য পাঠানো হবে</label>
+            <label xml:lang="cs">Odeslat binární data</label>
+            <label xml:lang="de">Binärdaten senden</label>
+            <label xml:lang="es">Enviar datos binarios</label>
+            <label xml:lang="fr">Envoyer des données binaires</label>
+            <label xml:lang="gu">બાઇનરી માહિતીને મોકલો</label>
+            <label xml:lang="hi">द्विपदीय आँकड़ा भेजें</label>
+            <label xml:lang="it">Invia i dati binari</label>
+            <label xml:lang="ja">バイナリデータを送信する</label>
+            <label xml:lang="kn">ಬೈನರಿ ದತ್ತಾಂಶವನ್ನು ಕಳುಹಿಸು</label>
+            <label xml:lang="ko">바이너리 데이터 전송 </label>
+            <label xml:lang="ml">ബൈനറി ഡേറ്റാ അയയ്ക്കുക</label>
+            <label xml:lang="mr">बाइनरी डाटा पाठवा</label>
+            <label xml:lang="or">ଦ୍ୱିମିକ ତଥ୍ୟ ପଠାନ୍ତୁ</label>
+            <label xml:lang="pa">ਬਾਇਨਰੀ ਡਾਟਾ ਭੇਜੋ</label>
+            <label xml:lang="pl">Wysyłanie danych binarnych</label>
+            <label xml:lang="pt_BR">Enviar Dados Binários</label>
+            <label xml:lang="ru">Отправлять двоичные данные</label>
+            <label xml:lang="sv">Skicka binära data</label>
+            <label xml:lang="ta">பைனரி தரவை அனுப்பு</label>
+            <label xml:lang="te">బైనరీ డాటా పంపు</label>
+            <label xml:lang="uk">Надіслати бінарні дані</label>
+            <label xml:lang="zh_CN">发送二进制数据</label>
+            <label xml:lang="zh_TW">傳送二進位資料</label>
+            <description>Send binary files like coredump</description>
+            <description xml:lang="as">কৌৰডাম্পৰ দৰে বাইনাৰি ফাইলসমূহ পঠাওক</description>
+            <description xml:lang="bn_IN">coredump জাতীয় বাইনারি ফাইল পাঠানো হবে</description>
+            <description xml:lang="cs">Odeslat binární soubory, jako výpis jádra</description>
+            <description xml:lang="de">Binärdaten wie Coredump senden</description>
+            <description xml:lang="es">Enviar archivos binarios como coredump</description>
+            <description xml:lang="fr">Envoyer des fichiers binaires comme coredump</description>
+            <description xml:lang="gu">coredump જેવી બાઇનરી ફાઇલોને મોકલો</description>
+            <description xml:lang="hi">कोरडंप की तरह की द्विपदीय भेजें</description>
+            <description xml:lang="it">Invia i file binari come </description>
+            <description xml:lang="ja">coredump のようなバイナリファイルを送信する</description>
+            <description xml:lang="kn">ಕೋರ್ ಡಂಪ್‌ನಂತಹ ಬೈನರಿ ಕಡತಗಳನ್ನು ಕಳುಹಿಸು</description>
+            <description xml:lang="ko">코어덤프와 같은 바이너리 파일 전송 </description>
+            <description xml:lang="ml">coredump പോലുള്ള ബൈനറി ഫയലുകള്‍ അയയ്ക്കുക</description>
+            <description xml:lang="mr">बाइनरी फाइल्स् जसे कि coredump पाठवा</description>
+            <description xml:lang="or">coredump ପରି ଦ୍ୱିମିକ ଫାଇଲ ପଠାନ୍ତୁ</description>
+            <description xml:lang="pa">ਕੋਰਡੰਪ ਵਾਂਗ ਬਾਇਨਰੀ ਫਾਇਲਾਂ ਭੇਜੋ</description>
+            <description xml:lang="pl">Wysyła pliki binarne, takie jak zrzuty core</description>
+            <description xml:lang="pt_BR">Enviar arquivos binários como o coredump</description>
+            <description xml:lang="ru">Отправлять двоичные файлы как coredump</description>
+            <description xml:lang="sv">Skicka binära filer såsom en kärndump</description>
+            <description xml:lang="ta">coredump க்கு இரட்டை துணை கோப்புகளை அனுப்புகிறது</description>
+            <description xml:lang="te">కోర్‌డంప్ వంటి బైనరీ ఫైళ్ళు పంపు</description>
+            <description xml:lang="uk">Надіслати бінарні файли як дамп ядра (coredump)</description>
+            <description xml:lang="zh_CN">发送类似核转储的二进制文件</description>
+            <description xml:lang="zh_TW">傳送類似核心傾印的二進位檔案</description>
+            <default-value>no</default-value>
+        </option>
+    </options>
+</event>

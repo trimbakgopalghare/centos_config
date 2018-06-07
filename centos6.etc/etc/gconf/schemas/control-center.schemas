@@ -1,0 +1,161 @@
+<gconfschemafile>
+	<schemalist>
+		<schema>
+			<key>/schemas/apps/control-center/cc_actions_list</key>
+			<applyto>/apps/control-center/cc_actions_list</applyto>
+			<owner>control-center</owner>
+			<type>list</type>
+			<list_type>string</list_type>
+			<gettext_domain>gnome-control-center-2.0</gettext_domain>
+			<locale name="C">
+				<default>[Change Theme;gnome-appearance-properties.desktop,Set Preferred Applications;gnome-default-applications.desktop,Add Printer;system-config-printer.desktop]</default>
+				<short>Task names and associated .desktop files</short>
+				<long>The task name to be displayed in the control-center followed by a ";" separator then the filename of an associated .desktop file to launch for that task.</long>
+			</locale>
+
+			<locale name="as">
+				<default>[থিম সলনি কৰক;gnome-appearance-properties.desktop,পছন্দৰ অনুপ্ৰয়োগ নিৰ্ধাৰণ কৰক; gnome-default-applications.desktop,মূদ্ৰক যোগ কৰক;system-config-printer.desktop]</default>
+			</locale>
+
+			<locale name="bn_IN">
+				<default>[থিম পরিবর্তন;gnome-appearance-properties.desktop,পছন্দসই অ্যাপ্লিকেশন নির্ধারণ;gnome-default-applications.desktop,প্রিন্টার যোগ;system-config-printer.desktop]</default>
+			</locale>
+
+			<locale name="de">
+				<default>[Thema ändern;gnome-appearance-properties.desktop,Bevorzugte Anwendungen festlegen;gnome-default-applications.desktop,Drucker hinzufügen;system-config-printer.desktop]</default>
+			</locale>
+
+			<locale name="es">
+				<default>[Cambiar Tema;gnome-appearance-properties.desktop,Establecer Aplicaciones Preferidas;gnome-default-applications.desktop,Añadir Impresora;system-config-printer.desktop]</default>
+			</locale>
+
+			<locale name="fr">
+				<default>[Changer le thème;gnome-appearance-properties.desktop,Définir les applications préférées;gnome-default-applications.desktop,Ajouter une imprimante;system-config-printer.desktop]</default>
+			</locale>
+
+			<locale name="gu">
+				<default>[થીમને બદલો;gnome-appearance-properties.desktop,પસંદ થયેલ કાર્યક્રમોને સુયોજિત કરો;gnome-default-applications.desktop,પ્રિન્ટરને ઉમેરો;system-config-printer.desktop]</default>
+			</locale>
+
+			<locale name="hi">
+				<default>[प्रसंग बदलें;gnome-appearance-properties.desktop,वरीय अनुप्रयोग सेट करें;gnome-default-applications.desktop,मुद्रक जोड़ें;system-config-printer.desktop]</default>
+			</locale>
+
+			<locale name="it">
+				<default>[Cambia tema;gnome-appearance-properties.desktop, Imposta applicazioni preferite;gnome-default-applications.desktop,Aggiungi stampante;system-config-printer.desktop]</default>
+			</locale>
+
+			<locale name="ja">
+				<default>[テーマの変更;gnome-appearance-properties.desktop,希望のアプリケーションを設定;gnome-default-applications.desktop,プリンタを追加;system-config-printer.desktop]</default>
+			</locale>
+
+			<locale name="kn">
+				<default>[ಪರಿಸರವಿನ್ಯಾಸವನ್ನು ಬದಲಾಯಿಸು;gnome-appearance-properties.desktop,ಇಚ್ಛೆಯ ಅನ್ವಯವನ್ನು ಹೊಂದಿಸು;gnome-default-applications.desktop,ಮುದ್ರಕವನ್ನು ಸೇರಿಸು;system-config-printer.desktop]</default>
+			</locale>
+
+			<locale name="ko">
+				<default>[테마 바꾸기;gnome-appearance-properties.desktop,기본 프로그램 설정;gnome-default-applications.desktop,프린터 추가;system-config-printer.desktop]</default>
+			</locale>
+
+			<locale name="ml">
+				<default>[രംഗവിതാനം മാറ്റുക;gnome-appearance-properties.desktop,മുന്‍ഗണനാ പ്രയോഗങ്ങള്‍ സജ്ജമാക്കുക;gnome-default-applications.desktop,പ്രിന്റര്‍ ചേര്‍ക്കുക;system-config-printer.desktop]</default>
+			</locale>
+
+			<locale name="mr">
+				<default>[दृष्य कल्पना बदला;gnome-appearance-properties.desktop,पसंतीचे ऍप्लिकेशन्स् सेट करा;gnome-default-applications.desktop,छपाईयंत्र समावेश करा;system-config-printer.desktop]</default>
+			</locale>
+
+			<locale name="or">
+				<default>[ପ୍ରସଙ୍ଗ ପରିବର୍ତ୍ତନ କରନ୍ତୁ;gnome-appearance-properties.desktop,ମନପସନ୍ଦ ପ୍ରୟୋଗ ସେଟ କରନ୍ତୁ;gnome-default-applications.desktop,ମୁଦ୍ରଣୀ ଯୋଗ କରନ୍ତୁ;system-config-printer.desktop]</default>
+			</locale>
+
+			<locale name="pa">
+				<default>[ਥੀਮ ਬਦਲੋ;gnome-appearance-properties.desktop,ਪਸੰਦੀਦਾ ਐਪਲੀਕੇਸ਼ਨ ਸੈੱਟ ਕਰੋ;gnome-default-applications.desktop,ਪਰਿੰਟਰ ਸ਼ਾਮਲ;system-config-printer.desktop]</default>
+			</locale>
+
+			<locale name="pt_BR">
+				<default>[Alterar Tema;gnome-appearance-properties.desktop,Definir Aplicativos Preferidos;gnome-default-applications.desktop,Adicionar Impressora;system-config-printer.desktop]</default>
+			</locale>
+
+			<locale name="ru">
+				<default>[Изменить тему;gnome-appearance-properties.desktop,Установить предпочтительные приложения;gnome-default-applications.desktop,Добавить принтер;system-config-printer.desktop]</default>
+			</locale>
+
+			<locale name="ta">
+				<default>[தீம் மாற்றுதல்;gnome-appearance-properties.desktop,விருப்பப்பட்ட பயன்பாடுகள் அமைத்தல்;gnome-default-applications.desktop,அச்சடிப்பி சேர்த்தல்;system-config-printer.desktop]</default>
+			</locale>
+
+			<locale name="te">
+				<default>[థీమ్ ను మార్చుము;gnome-appearance-properties.desktop,అభీష్ట అనువర్తనంలను అమర్చుము; gnome-default-applications.desktop,ముద్రణాయంత్రంను జతచేయుము;system-config-printer.desktop]</default>
+			</locale>
+
+			<locale name="zh_CN">
+				<default>[更改主题;gnome-appearance-properties.desktop,设定首选应用程序;gnome-default-applications.desktop,添加打印机;system-config-printer.desktop]</default>
+			</locale>
+
+			<locale name="zh_TW">
+				<default>[更改佈景主題;gnome-appearance-properties.desktop,設定首選應用程式;gnome-default-applications.desktop,加入印表機;system-config-printer.desktop]</default>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/control-center/cc_exit_shell_on_static_action</key>
+			<applyto>/apps/control-center/cc_exit_shell_on_static_action</applyto>
+			<owner>control-center</owner>
+			<type>bool</type>
+			<default>false</default>
+			<gettext_domain>gnome-control-center-2.0</gettext_domain>
+			<locale name="C">
+				<short>Close the control-center when a task is activated</short>
+				<long>if true, the control-center will close when a "Common Task" is activated.</long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/control-center/cc_exit_shell_on_action_start</key>
+			<applyto>/apps/control-center/cc_exit_shell_on_action_start</applyto>
+			<owner>control-center</owner>
+			<type>bool</type>
+			<default>false</default>
+			<gettext_domain>gnome-control-center-2.0</gettext_domain>
+			<locale name="C">
+				<short>Exit shell on start action performed</short>
+				<long>Indicates whether to close the shell when a start action is performed.</long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/control-center/cc_exit_shell_on_action_help</key>
+			<applyto>/apps/control-center/cc_exit_shell_on_action_help</applyto>
+			<owner>control-center</owner>
+			<type>bool</type>
+			<default>false</default>
+			<gettext_domain>gnome-control-center-2.0</gettext_domain>
+			<locale name="C">
+				<short>Exit shell on help action performed</short>
+				<long>Indicates whether to close the shell when a help action is performed.</long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/control-center/cc_exit_shell_on_action_add_remove</key>
+			<applyto>/apps/control-center/cc_exit_shell_on_action_add_remove</applyto>
+			<owner>control-center</owner>
+			<type>bool</type>
+			<default>false</default>
+			<gettext_domain>gnome-control-center-2.0</gettext_domain>
+			<locale name="C">
+				<short>Exit shell on add or remove action performed</short>
+				<long>Indicates whether to close the shell when an add or remove action is performed.</long>
+			</locale>
+		</schema>
+		<schema>
+			<key>/schemas/apps/control-center/cc_exit_shell_on_action_upgrade_uninstall</key>
+			<applyto>/apps/control-center/cc_exit_shell_on_action_upgrade_uninstall</applyto>
+			<owner>control-center</owner>
+			<type>bool</type>
+			<default>false</default>
+			<gettext_domain>gnome-control-center-2.0</gettext_domain>
+			<locale name="C">
+				<short>Exit shell on upgrade or uninstall action performed</short>
+				<long>Indicates whether to close the shell when an upgrade or uninstall action is performed.</long>
+			</locale>
+		</schema>
+	</schemalist>
+</gconfschemafile>

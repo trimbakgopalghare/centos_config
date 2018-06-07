@@ -1,0 +1,94 @@
+# EPEL6-specific macros - autosetup
+#
+# Define some SCM locations which are not defined by default on EL6
+%__bzr /usr/bin/bzr
+%__git /usr/bin/git
+%__hg /usr/bin/hg
+%__quilt /usr/bin/quilt
+
+# These were copied verbatim from the Fedora 23 rpm macros on 2016-02-17.
+
+%patches %{lua: for i, p in ipairs(patches) do print(p.." ") end}
+%sources %{lua: for i, s in ipairs(sources) do print(s.." ") end}
+
+# Macros for further automated spec %setup and patch application
+# default to plain patch
+%__scm patch
+# meh, figure something saner
+%__scm_username rpm-build
+%__scm_usermail <rpm-build>
+%__scm_author %{__scm_username} %{__scm_usermail}
+
+# Plain patch (-m is unused)
+%__scm_setup_patch(q) %{nil}
+%__scm_apply_patch(qp:m:)\
+%{__patch} %{-p:-p%{-p*}} %{-q:-s}
+
+# Mercurial (aka hg)
+%__scm_setup_hg(q)\
+%{__hg} init %{-q} .\
+%{__hg} add %{-q} .\
+%{__hg} commit %{-q} --user "%{__scm_author}" -m "%{name}-%{version} base"
+
+%__scm_apply_hg(qp:m:)\
+%{__hg} import - %{-p:-p%{-p*}} %{-q} -m %{-m*} --user "%{__scm_author}"
+
+# Git
+%__scm_setup_git(q)\
+%{__git} init %{-q}\
+%{__git} config user.name "%{__scm_username}"\
+%{__git} config user.email "%{__scm_usermail}"\
+%{__git} add .\
+%{__git} commit %{-q} -a\\\
+	--author "%{__scm_author}" -m "%{name}-%{version} base"
+
+%__scm_apply_git(qp:m:)\
+%{__git} apply --index %{-p:-p%{-p*}} -\
+%{__git} commit %{-q} -m %{-m*} --author "%{__scm_author}"
+
+# Git, using "git am" (-m is unused)
+%__scm_setup_git_am(q)\
+%{expand:%__scm_setup_git %{-q}}
+
+%__scm_apply_git_am(qp:m:)\
+%{__git} am %{-q} %{-p:-p%{-p*}}
+
+# Quilt
+%__scm_setup_quilt(q) %{nil}
+%__scm_apply_quilt(qp:m:)\
+%{__quilt} import %{-p:-p%{-p*}} %{1} && %{__quilt} push
+
+# Bzr
+%__scm_setup_bzr(q)\
+%{__bzr} init %{-q}\
+%{__bzr} whoami --branch "%{__scm_author}"\
+%{__bzr} add .\
+%{__bzr} commit %{-q} -m "%{name}-%{version} base"
+
+# bzr doesn't seem to have its own command to apply patches?
+%__scm_apply_bzr(qp:m:)\
+%{__patch} %{-p:-p%{-p*}} %{-q:-s}\
+%{__bzr} commit %{-q} -m %{-m*}
+
+# Single patch application
+%apply_patch(qp:m:)\
+%{uncompress:%{1}} | %{expand:%__scm_apply_%{__scm} %{-q} %{-p:-p%{-p*}} %{-m:-m%{-m*}}}
+
+# Automatically apply all patches
+%autopatch(vp:)\
+%{lua:\
+local options = rpm.expand("%{!-v:-q} %{-p:-p%{-p*}} ")\
+for i, p in ipairs(patches) do\
+    print(rpm.expand("%apply_patch -m %{basename:"..p.."}  "..options..p.."\\n"))\
+end}
+
+# One macro to (optionally) do it all.
+# -S<scm name>	Sets the used patch application style, eg '-S git' enables
+#           	usage of git repository and per-patch commits.
+# -N		Disable automatic patch application
+# -p<num>	Use -p<num> for patch application
+%autosetup(a:b:cDn:TvNS:p:)\
+%setup %{-a} %{-b} %{-c} %{-D} %{-n} %{-T} %{!-v:-q}\
+%{-S:%global __scm %{-S*}}\
+%{-S:%{expand:%__scm_setup_%{-S*} %{!-v:-q}}}\
+%{!-N:%autopatch %{-v} %{-p:-p%{-p*}}}

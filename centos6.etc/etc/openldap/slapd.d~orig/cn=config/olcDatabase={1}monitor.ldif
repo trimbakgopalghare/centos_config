@@ -1,0 +1,18 @@
+dn: olcDatabase={1}monitor
+objectClass: olcDatabaseConfig
+olcDatabase: {1}monitor
+olcAccess: {0}to *  by dn.base="gidNumber=0+uidNumber=0,cn=peercred,cn=externa
+ l,cn=auth" read  by dn.base="cn=manager,dc=qlc.in" read  by * none
+olcAddContentAcl: FALSE
+olcLastMod: TRUE
+olcMaxDerefDepth: 15
+olcReadOnly: FALSE
+olcSyncUseSubentry: FALSE
+olcMonitoring: FALSE
+structuralObjectClass: olcDatabaseConfig
+entryUUID: 001ffa54-e7d0-1033-9140-63c01c184956
+creatorsName: cn=config
+createTimestamp: 20141014092702Z
+entryCSN: 20141014092702.850366Z#000000#000#000000
+modifiersName: cn=config
+modifyTimestamp: 20141014092702Z

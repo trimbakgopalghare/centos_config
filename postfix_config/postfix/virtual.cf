@@ -1,0 +1,8 @@
+
+sts = localhost
+user = mailserve
+password = mail1234
+dbname = mailserve_v03
+#query = select myfunction_gb_archive('%s') from dual where myfunction_gb_archive('%s') != ''
+#query = select get_virtual('%s') from dual where get_virtual('%s') != ''
+query = select ('%s')

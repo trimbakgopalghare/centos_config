@@ -1,0 +1,11 @@
+# Subscription configuration file for CUPS v1.4.2
+# Written by cupsd on 2016-12-12 18:09
+NextSubscriptionId 3
+<Subscription 1>
+Events printer-state-changed printer-restarted printer-shutdown printer-stopped printer-added printer-deleted
+Owner trimbak
+LeaseDuration 86400
+Interval 0
+ExpirationTime 1481632756
+NextEventId 1
+</Subscription>

@@ -1,0 +1,16 @@
+### Name: RPMforge RPM Repository for RHEL 6 - i386 - dag
+### URL: http://rpmforge.net/
+[rpmforge]
+name = Packages from RPMforge.net for RHEL 6 - i386 - dag
+baseurl = http://apt.sw.be/redhat/el6/en/i386/rpmforge
+type = rpm-md
+
+#[rpmforge-extras]
+#name = Extra packages from RPMforge.net for RHEL 6 - i386 - extras
+#baseurl = http://apt.sw.be/redhat/el6/en/i386/extras
+#type = rpm-md
+
+#[rpmforge-testing]
+#name = Test packages from RPMforge.net for RHEL 6 - i386 - testing
+#baseurl = http://apt.sw.be/redhat/el6/en/i386/testing
+#type = rpm-md

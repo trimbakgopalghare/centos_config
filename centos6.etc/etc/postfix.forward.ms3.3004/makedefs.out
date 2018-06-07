@@ -1,0 +1,15 @@
+# Do not edit -- this file documents how Postfix was built for your machine.
+SYSTYPE	= LINUX2
+AR	= ar
+ARFL	= rv
+RANLIB	= ranlib
+SYSLIBS	= -L/usr/lib/mysql -lmysqlclient -lz -lm -L/usr/lib -lsasl2 -ldb -lnsl -lresolv
+CC	= gcc $(WARN) -DHAS_MYSQL -I/usr/include/mysql -DUSE_SASL_AUTH -DUSE_CYRUS_SASL -I/usr/include/sasl
+OPT	= -O
+DEBUG	= -g
+AWK	= awk
+STRCASE = 
+EXPORT	= AUXLIBS='-L/usr/lib/mysql -lmysqlclient -lz -lm -L/usr/lib -lsasl2' CCARGS='-DHAS_MYSQL -I/usr/include/mysql -DUSE_SASL_AUTH -DUSE_CYRUS_SASL -I/usr/include/sasl' OPT='-O' DEBUG='-g'
+WARN	= -Wall -Wno-comment -Wformat -Wimplicit -Wmissing-prototypes \
+	-Wparentheses -Wstrict-prototypes -Wswitch -Wuninitialized \
+	-Wunused

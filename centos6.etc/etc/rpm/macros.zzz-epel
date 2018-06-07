@@ -1,0 +1,39 @@
+# EPEL6-specific macros
+%epel 6
+
+# This file is named such that it appears alphabetically after other macro
+# files in /etc/rpm.
+
+# This macro defines %%license to work like %%doc.  It hangs off of a
+# redefinition of %%description.  It's not possible to have a simple definition
+# because RPM will overwrite %license as soon as it parses a License: tag.
+#
+# There are bugs in the SCL macros which cause them to interact poorly with
+# previous attempts at this macro.  The current implementation is guarded so as
+# to not call into lua (and not do the %%license magic) if the %%scl_debug macro
+# is present.
+#
+# Note that this is ugly because we have to be very careful of whitespace
+# outside of lua.
+%description %{?scl_debug:%%description}%{!?scl_debug:%{lua:
+    rpm.define("license %doc")
+    print("%description")
+}}
+
+# Add nodejs_arches - in redhat-rpm-config in EL7
+%nodejs_arches %{ix86} x86_64 %{arm}
+
+# Valid GHC architectures, moved from epel-release-6
+%ghc_arches %{ix86} x86_64 ppc64
+%ghc_arches_with_ghci %{ix86} x86_64
+
+# Add a directory for RPM macros that can be used consistently across Fedora and EPEL
+%rpmmacrodir %{_sysconfdir}/rpm
+
+# The useful make_build macro
+%make_build %{__make} %{?_smp_mflags}
+
+# Bash completions.
+%bash_completion_dir /usr/share/bash-completion/
+
+%_pkgdocdir     %{_docdir}/%{name}-%{version}

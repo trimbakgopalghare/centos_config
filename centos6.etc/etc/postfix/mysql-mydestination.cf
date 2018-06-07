@@ -1,0 +1,5 @@
+hosts = localhost
+user = mailserve
+password = mail1234
+dbname = mailserve_v03
+query =  SELECT DISTINCT 'OK' FROM client_domains, client_services, pop_services WHERE client_services.client_id = client_domains.client_id AND pop_services.client_service_id = client_services.id and client_domains.name = '%s'

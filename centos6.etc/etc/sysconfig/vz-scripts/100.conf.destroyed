@@ -1,0 +1,1 @@
+NETIF="ifname=eth0,mac=00:18:51:1E:23:30,host_ifname=veth100.0,host_mac=00:18:51:21:C1:1D"

@@ -1,0 +1,28 @@
+<VirtualHost 192.168.1.187:80>
+        ServerAdmin server-team@qlc.net
+        DocumentRoot /var/www/html 
+        ServerName mytest.org 
+        ServerAlias www.mytest.org  trimbak.mytest.org	 
+        ErrorLog /var/log/httpd/error_log-doc.qlc.net
+        #TransferLog /var/log/httpd/access_log-doc.qlc.net
+        #LogFormat "%h|%l|%u|%t|\"%r\"|%s|%b|\"%{Referer}i\"|\"%{User-Agent}i\"|%v"
+        LogFormat "%h %l %{USERID}e %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" envuid_combined
+        CustomLog /var/log/httpd/access_log-doc.qlc.net envuid_combined
+        ScriptAlias /cgi-bin/ /web/qlc/m.qlc.net/
+        DirectoryIndex index.htm index.html index.phtml index.phtm index.php3 index.php
+        AddType application/x-httpd-php .htm
+        AddType application/x-httpd-php .php
+        AddType application/x-httpd-php .php3
+        AddType application/x-httpd-php .phtml
+        AddType application/x-httpd-php .htx
+        AddType application/x-httpd-php .inc
+        AddType application/x-httpd-php .wml
+
+        #SetEnvIf Referer www\.amv4\.qlc\.net/ intra_site_referral
+        <Directory "/var/www/html">
+                Options Indexes MultiViews FollowSymLinks
+                AllowOverride All
+                Order allow,deny
+                Allow from all
+        </Directory>
+</VirtualHost>

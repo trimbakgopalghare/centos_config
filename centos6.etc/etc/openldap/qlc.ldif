@@ -1,0 +1,7 @@
+dn: dc=qlc.in
+objectClass: top
+objectClass: dcObject
+objectClass: organization
+description: mailserve_v03 address book
+o: QLC
+dc: qlc.in

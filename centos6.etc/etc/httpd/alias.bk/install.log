@@ -1,0 +1,179 @@
+
+#####################################################################
+Generating new server certificate and key database.
+#####################################################################
+
+#####################################################################
+Generating self-signed client CA certificate
+#####################################################################
+
+
+Generating key.  This may take a few moments...
+
+		0 - Digital Signature
+		1 - Non-repudiation
+		2 - Key encipherment
+		3 - Data encipherment
+		4 - Key agreement
+		5 - Cert signing key
+		6 - CRL signing key
+		Other to finish
+ > 		0 - Digital Signature
+		1 - Non-repudiation
+		2 - Key encipherment
+		3 - Data encipherment
+		4 - Key agreement
+		5 - Cert signing key
+		6 - CRL signing key
+		Other to finish
+ > Is this a critical extension [y/N]?
+Is this a CA certificate [y/N]?
+Enter the path length constraint, enter to skip [<0 for unlimited path]: > Is this a critical extension [y/N]?
+		0 - SSL Client
+		1 - SSL Server
+		2 - S/MIME
+		3 - Object Signing
+		4 - Reserved for future use
+		5 - SSL CA
+		6 - S/MIME CA
+		7 - Object Signing CA
+		Other to finish
+ > 		0 - SSL Client
+		1 - SSL Server
+		2 - S/MIME
+		3 - Object Signing
+		4 - Reserved for future use
+		5 - SSL CA
+		6 - S/MIME CA
+		7 - Object Signing CA
+		Other to finish
+ > 		0 - SSL Client
+		1 - SSL Server
+		2 - S/MIME
+		3 - Object Signing
+		4 - Reserved for future use
+		5 - SSL CA
+		6 - S/MIME CA
+		7 - Object Signing CA
+		Other to finish
+ > 		0 - SSL Client
+		1 - SSL Server
+		2 - S/MIME
+		3 - Object Signing
+		4 - Reserved for future use
+		5 - SSL CA
+		6 - S/MIME CA
+		7 - Object Signing CA
+		Other to finish
+ > Notice: Trust flag u is set automatically if the private key is present.
+Is this a critical extension [y/N]?
+
+#####################################################################
+Generating user certificate for "alpha".
+#####################################################################
+
+
+Generating key.  This may take a few moments...
+
+		0 - Digital Signature
+		1 - Non-repudiation
+		2 - Key encipherment
+		3 - Data encipherment
+		4 - Key agreement
+		5 - Cert signing key
+		6 - CRL signing key
+		Other to finish
+ > 		0 - Digital Signature
+		1 - Non-repudiation
+		2 - Key encipherment
+		3 - Data encipherment
+		4 - Key agreement
+		5 - Cert signing key
+		6 - CRL signing key
+		Other to finish
+ > 		0 - Digital Signature
+		1 - Non-repudiation
+		2 - Key encipherment
+		3 - Data encipherment
+		4 - Key agreement
+		5 - Cert signing key
+		6 - CRL signing key
+		Other to finish
+ > Is this a critical extension [y/N]?
+		0 - SSL Client
+		1 - SSL Server
+		2 - S/MIME
+		3 - Object Signing
+		4 - Reserved for future use
+		5 - SSL CA
+		6 - S/MIME CA
+		7 - Object Signing CA
+		Other to finish
+ > 		0 - SSL Client
+		1 - SSL Server
+		2 - S/MIME
+		3 - Object Signing
+		4 - Reserved for future use
+		5 - SSL CA
+		6 - S/MIME CA
+		7 - Object Signing CA
+		Other to finish
+ > Notice: Trust flag u is set automatically if the private key is present.
+Is this a critical extension [y/N]?
+
+#####################################################################
+Generating server certificate request
+#####################################################################
+
+
+Generating key.  This may take a few moments...
+
+
+#####################################################################
+Generating server certificate
+#####################################################################
+		0 - Digital Signature
+		1 - Non-repudiation
+		2 - Key encipherment
+		3 - Data encipherment
+		4 - Key agreement
+		5 - Cert signing key
+		6 - CRL signing key
+		Other to finish
+ > 		0 - Digital Signature
+		1 - Non-repudiation
+		2 - Key encipherment
+		3 - Data encipherment
+		4 - Key agreement
+		5 - Cert signing key
+		6 - CRL signing key
+		Other to finish
+ > Is this a critical extension [y/N]?
+		0 - SSL Client
+		1 - SSL Server
+		2 - S/MIME
+		3 - Object Signing
+		4 - Reserved for future use
+		5 - SSL CA
+		6 - S/MIME CA
+		7 - Object Signing CA
+		Other to finish
+ > 		0 - SSL Client
+		1 - SSL Server
+		2 - S/MIME
+		3 - Object Signing
+		4 - Reserved for future use
+		5 - SSL CA
+		6 - S/MIME CA
+		7 - Object Signing CA
+		Other to finish
+ > Is this a critical extension [y/N]?
+
+#####################################################################
+Importing server certificate into server cert DB
+#####################################################################
+Notice: Trust flag u is set automatically if the private key is present.
+
+#####################################################################
+Cleaning up
+#####################################################################

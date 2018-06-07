@@ -1,0 +1,19 @@
+# Logrotate file for psacct RPM
+ 
+/var/account/pacct {
+#prerotate loses accounting records, let's no
+#   prerotate
+#       /usr/sbin/accton
+#   endscript
+    compress
+    delaycompress
+    notifempty
+    daily
+    rotate 31
+    create 0600 root root
+    postrotate
+       if [ -f /var/lock/subsys/psacct ]; then
+         /usr/sbin/accton /var/account/pacct
+       fi
+    endscript
+}     

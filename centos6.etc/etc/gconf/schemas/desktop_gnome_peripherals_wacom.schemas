@@ -1,0 +1,220 @@
+<?xml version="1.0"?>
+<gconfschemafile>
+
+  <schemalist>
+    <schema>
+      <key>/schemas/desktop/gnome/peripherals/wacom/active</key>
+      <owner>gnome</owner>
+      <type>bool</type>
+      <default>TRUE</default>
+      <gettext_domain>gnome-settings-daemon</gettext_domain>
+      <locale name="C">
+        <short>Activation of this plugin</short>
+        <long>Whether this plugin would be activated by gnome-settings-daemon or not.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/desktop/gnome/peripherals/wacom/is-absolute</key>
+      <owner>gnome</owner>
+      <type>bool</type>
+      <default>TRUE</default>
+      <gettext_domain>gnome-settings-daemon</gettext_domain>
+      <locale name="C">
+        <short>Wacom stylus absolute mode</short>
+        <long>Enable this to set the stylus to absolute mode.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/desktop/gnome/peripherals/wacom/area</key>
+      <owner>gnome</owner>
+      <type>list</type>
+      <list_type>int</list_type>
+      <default>[-1, -1, -1, -1]</default>
+      <gettext_domain>gnome-settings-daemon</gettext_domain>
+      <locale name="C">
+        <short>Wacom tablet area</short>
+        <long>Set this to x1, y1 and x2, y2 of the area usable by the tools.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/desktop/gnome/peripherals/wacom/rotation</key>
+      <owner>gnome</owner>
+      <type>string</type>
+      <default>none</default>
+      <gettext_domain>gnome-settings-daemon</gettext_domain>
+      <locale name="C">
+        <short>Wacom tablet rotation</short>
+        <long>Set this to 'none', 'cw' for 90 degree clockwise, 'half' for 180 degree, and 'ccw' for 90 degree counterclockwise.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/desktop/gnome/peripherals/wacom/touch</key>
+      <owner>gnome</owner>
+      <type>bool</type>
+      <default>TRUE</default>
+      <gettext_domain>gnome-settings-daemon</gettext_domain>
+      <locale name="C">
+        <short>Wacom touch feature</short>
+        <long>Enable this to only move the cursor when the user touches the tablet.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/desktop/gnome/peripherals/wacom/tablet-pc-button</key>
+      <owner>gnome</owner>
+      <type>bool</type>
+      <default>FALSE</default>
+      <gettext_domain>gnome-settings-daemon</gettext_domain>
+      <locale name="C">
+        <short>Wacom tablet PC feature</short>
+        <long>Enable this to only report stylus events when the tip is pressed.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/desktop/gnome/peripherals/wacom/display</key>
+      <owner>gnome</owner>
+      <type>list</type>
+      <list_type>string</list_type>
+      <default>[,,]</default>
+      <gettext_domain>gnome-settings-daemon</gettext_domain>
+      <locale name="C">
+        <short>Wacom display mapping</short>
+        <long>EDID information of monitor to map tablet to. Must be in the format [vendor, product, serial]. ["","",""] disables mapping.</long>
+      </locale>
+    </schema>
+
+    <!-- Applies only to the PAD tool -->
+
+    <schema>
+      <key>/schemas/desktop/gnome/peripherals/wacom/pad-buttonmapping</key>
+      <owner>gnome</owner>
+      <type>list</type>
+      <list_type>int</list_type>
+      <default>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]</default>
+      <gettext_domain>gnome-settings-daemon</gettext_domain>
+      <locale name="C">
+        <short>Wacom pad button mapping</short>
+        <long>Set this to the logical button mapping.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/desktop/gnome/peripherals/wacom/stylus/pressurecurve</key>
+      <owner>gnome</owner>
+      <type>list</type>
+      <list_type>int</list_type>
+      <default>[0, 0, 100, 100]</default>
+      <gettext_domain>gnome-settings-daemon</gettext_domain>
+      <locale name="C">
+        <short>Wacom stylus pressure curve</short>
+        <long>Set this to x1, y1 and x2, y2 of the pressure curve applied to the stylus.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/desktop/gnome/peripherals/wacom/stylus/buttonmapping</key>
+      <owner>gnome</owner>
+      <type>list</type>
+      <list_type>int</list_type>
+      <default>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]</default>
+      <gettext_domain>gnome-settings-daemon</gettext_domain>
+      <locale name="C">
+        <short>Wacom stylus button mapping</short>
+        <long>Set this to the logical button mapping.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/desktop/gnome/peripherals/wacom/stylus/pressurethreshold</key>
+      <owner>gnome</owner>
+      <type>int</type>
+      <default>-1</default>
+      <gettext_domain>gnome-settings-daemon</gettext_domain>
+      <locale name="C">
+        <short>Wacom stylus pressure threshold</short>
+        <long>Set this to the pressure value at which a stylus click event is generated.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/desktop/gnome/peripherals/wacom/eraser/pressurecurve</key>
+      <owner>gnome</owner>
+      <type>list</type>
+      <list_type>int</list_type>
+      <default>[0, 0, 100, 100]</default>
+      <gettext_domain>gnome-settings-daemon</gettext_domain>
+      <locale name="C">
+        <short>Wacom eraser pressure curve</short>
+        <long>Set this to x1, y1 and x2, y2 of the pressure curve applied to the eraser.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/desktop/gnome/peripherals/wacom/eraser/buttonmapping</key>
+      <owner>gnome</owner>
+      <type>list</type>
+      <list_type>int</list_type>
+      <default>[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]</default>
+      <gettext_domain>gnome-settings-daemon</gettext_domain>
+      <locale name="C">
+        <short>Wacom eraser button mapping</short>
+        <long>Set this to the logical button mapping.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/desktop/gnome/peripherals/wacom/eraser/pressurethreshold</key>
+      <owner>gnome</owner>
+      <type>int</type>
+      <default>-1</default>
+      <gettext_domain>gnome-settings-daemon</gettext_domain>
+      <locale name="C">
+        <short>Wacom eraser pressure threshold</short>
+        <long>Set this to the pressure value at which a eraser click event is generated.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/desktop/gnome/peripherals/wacom/tablet-button/action-type</key>
+      <owner>gnome</owner>
+      <type>string</type>
+      <default>none</default>
+      <gettext_domain>gnome-settings-daemon</gettext_domain>
+      <locale name="C">
+        <short>Wacom button action type</short>
+        <long>The type of action triggered by the button being pressed, current valid options are 'none' or 'custom'.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/desktop/gnome/peripherals/wacom/tablet-button/custom-action</key>
+      <owner>gnome</owner>
+      <type>string</type>
+      <default></default>
+      <gettext_domain>gnome-settings-daemon</gettext_domain>
+      <locale name="C">
+        <short>Key combination for the custom action</short>
+        <long>The keyboard shortcut generated when the button is pressed for custom actions.</long>
+      </locale>
+    </schema>
+
+    <schema>
+      <key>/schemas/desktop/gnome/peripherals/wacom/tablet-button/custom-elevator-action</key>
+      <owner>gnome</owner>
+      <type>list</type>
+      <list_type>string</list_type>
+      <default>[,]</default>
+      <gettext_domain>gnome-settings-daemon</gettext_domain>
+      <locale name="C">
+        <short>Key combinations for an elevator custom action</short>
+        <long>The keyboard shortcuts generated when a touchring or touchstrip is used for custom actions (up followed by down).</long>
+      </locale>
+    </schema>
+
+  </schemalist>
+</gconfschemafile>

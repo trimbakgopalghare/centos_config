@@ -1,0 +1,21 @@
+### START 2.10 install_chrome.sh modifications
+old_line="exec cat"
+for eachtype in "" -beta -unstable
+do
+   chrome_wrapper="/opt/google/chrome$eachtype/google-chrome$eachtype"
+   if [ -s "$chrome_wrapper" ]
+   then
+      if [ "`grep \"$old_line\" \"$chrome_wrapper\"`" != "" ]
+      then
+         new_wrapper="$chrome_wrapper.new"
+         sed -e "s#>(exec cat)#/dev/null#g" -e "s#>(exec cat >&2)#/dev/null#g" <"$chrome_wrapper" >"$new_wrapper"
+         if [ -s "$new_wrapper" ]
+         then
+            mv -f "$new_wrapper" "$chrome_wrapper"
+            chmod a+rx "$chrome_wrapper"
+         fi
+      fi
+   fi
+done
+### END 2.10 install_chrome.sh modifications
+repo_add_once="false"

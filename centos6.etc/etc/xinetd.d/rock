@@ -1,0 +1,14 @@
+#description: This is a demo for Code Monk application
+service rock 
+{
+ port = 12220
+ socket_type = stream
+ protocol = tcp
+ wait = no
+ user = trimbak
+ server = /home/trimbak/perl-cgi/rock.pl
+ instances = UNLIMITED
+ log_type = SYSLOG authpriv
+ log_on_failure = HOST
+ log_on_success = PID HOST DURATION EXIT
+}

@@ -1,0 +1,13 @@
+<dependency>
+    <maven>
+        <groupId>postgresql</groupId>
+        <artifactId>postgresql</artifactId>
+        <version>8.4.704</version>
+    </maven>
+    <jpp>
+        <groupId>JPP</groupId>
+        <artifactId>postgresql-jdbc</artifactId>
+        <version>8.4.704</version>
+    </jpp>
+</dependency>
+

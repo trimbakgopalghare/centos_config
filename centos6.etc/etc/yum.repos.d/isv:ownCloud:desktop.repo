@@ -1,0 +1,7 @@
+[isv_ownCloud_desktop]
+name=isv:ownCloud:desktop (CentOS_6)
+type=rpm-md
+baseurl=http://download.opensuse.org/repositories/isv:/ownCloud:/desktop/CentOS_6/
+gpgcheck=1
+gpgkey=http://download.opensuse.org/repositories/isv:/ownCloud:/desktop/CentOS_6/repodata/repomd.xml.key
+enabled=1

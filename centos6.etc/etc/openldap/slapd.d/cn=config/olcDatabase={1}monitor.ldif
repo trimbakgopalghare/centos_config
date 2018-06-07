@@ -1,0 +1,20 @@
+# AUTO-GENERATED FILE - DO NOT EDIT!! Use ldapmodify.
+# CRC32 fba6466a
+dn: olcDatabase={1}monitor
+objectClass: olcDatabaseConfig
+olcDatabase: {1}monitor
+olcAccess: {0}to *  by dn.base="gidNumber=0+uidNumber=0,cn=peercred,cn=exter
+ nal,cn=auth" read  by dn.base="cn=manager,dc=qlc.in" read  by * none
+olcAddContentAcl: FALSE
+olcLastMod: TRUE
+olcMaxDerefDepth: 15
+olcReadOnly: FALSE
+olcSyncUseSubentry: FALSE
+olcMonitoring: FALSE
+structuralObjectClass: olcDatabaseConfig
+entryUUID: ae4d088c-75ae-1037-88bf-4b5760687723
+creatorsName: cn=config
+createTimestamp: 20171215064110Z
+entryCSN: 20171215064110.307222Z#000000#000#000000
+modifiersName: cn=config
+modifyTimestamp: 20171215064110Z

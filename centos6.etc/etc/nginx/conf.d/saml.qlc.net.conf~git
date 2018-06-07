@@ -1,0 +1,34 @@
+server {
+	listen 192.168.1.187:80;
+	
+	# listen 443 ssl;
+	
+	server_name saml.qlc.net;
+	
+	# ssl info
+	# ssl_certificate /etc/nginx/ssl/your.domain.name.crt;
+	# ssl_certificate_key /etc/nginx/ssl/your.domain.name.key;
+	
+	# site root path
+	root /var/www/simplesamlphp/www;
+	
+		
+	# laravel url config 
+	location / {
+		index index.php;
+	        fastcgi_param  SIMPLESAMLPHP_CONFIG_DIR /var/www/simplesamlphp/config;	
+		try_files $uri $uri/ /index.php?q=$uri&$args;
+	}
+	
+	# laravel php config
+	# based on : http://laravel-recipes.com/recipes/26/creating-a-nginx-virtualhost
+	location ~ \.php$ {
+		fastcgi_split_path_info ^(.+?\.php)(/.+)$;
+		fastcgi_param PATH_INFO $fastcgi_path_info;
+		fastcgi_param PATH_TRANSLATED $document_root$fastcgi_path_info;
+		fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+		fastcgi_pass unix:/var/run/php5-fpm.sock;
+		fastcgi_index index.php;
+		include fastcgi_params;
+	}
+}
